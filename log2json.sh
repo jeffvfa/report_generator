@@ -1,4 +1,4 @@
-git log --name-status --max-count=1000 --date=short --author=$1 \
+git log --author=$1 --name-status --max-count=1000 --date=short  \
     --pretty=format:'%n{%n  "commit": "%H",%n  "author": "%an <%ae>",%n  "date": "%ad",%n  "message": "%f":FILES:' \
     $@ | \
     perl -ne '
