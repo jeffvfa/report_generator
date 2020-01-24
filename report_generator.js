@@ -1,6 +1,10 @@
 console.log("Iniciando Report Generator");
 
 const projectName = '/gat-monitoracao/';
+const css_complexity = require('./css_complexity').default;
+console.log(css_complexity);
+
+
 const fs = require('fs');
 
 console.log("Iniciando Parse Arquivo gitlog.json");
