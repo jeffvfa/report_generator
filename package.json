@@ -1,0 +1,19 @@
+{
+  "name": "report_generator",
+  "version": "1.0.0",
+  "description": "Generates the monthly work reposts for the company Stefanini ",
+  "main": "report_generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igorsodre/report_generator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igorsodre/report_generator/issues"
+  },
+  "homepage": "https://github.com/igorsodre/report_generator#readme"
+}
