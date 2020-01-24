@@ -15,19 +15,25 @@ console.log("Parse realizado com sucesso!!!");
 
 function retrieveCategoryFromFile(filePath) {
     if (!filePath) return null;
+    let category, complexity = null;
 
     // recupera somente o nome e a extensão do arquivo.
     const fileName = filePath.split('\\').pop().split('/').pop();
 
     // Categorias possiveis: test, js, html, css, java, key-value, scala
-    if (fileName.includes('spec') || fileName.includes('Test')) return 'TEST';
+    if (fileName.includes('spec') || fileName.includes('Test')) category = 'TEST';
     else if (fileName.includes('.java')) return 'JAVA';
-    else if (fileName.includes('.js') || fileName.includes('.ts')) return 'JAVASCRIPT';
-    else if (fileName.includes('.xml') || fileName.includes('.json')) return 'KEY-VALUE';
-    else if (fileName.includes('.css')) return 'CSS';
-    else if (fileName.includes('.html')) return 'HTML';
-    else if (fileName.includes('.scala')) return 'scala';
-    return 'OUTTRO';
+    else if (fileName.includes('.js') || fileName.includes('.ts')) category = 'JAVASCRIPT';
+    else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY-VALUE';
+    else if (fileName.includes('.css')) {
+        category = 'CSS';
+        complexity = 'TESTE;'//css_complexity(filePath);
+    }
+    else if (fileName.includes('.html')) category = 'HTML';
+    else if (fileName.includes('.scala')) category = 'scala';
+    else category = 'OUTTRO';
+
+    return { category, complexity };
 }
 
 commitsByTask = commits.reduce((acc, y) => {
@@ -44,12 +50,10 @@ function buildFileObjects(y) {
         // build file object
         .map(el => {
             let elSplited = el.split(' ');
-            return {
+            return Object.assign({
                 diffType: elSplited[0],
-                filePath: projectName + elSplited[1],
-                complexity: null,
-                category: retrieveCategoryFromFile(projectName + elSplited[1])
-            }
+                filePath: projectName + elSplited[1]
+            }, retrieveCategoryFromFile(projectName + elSplited[1]))
         });
 }
 
