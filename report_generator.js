@@ -27,11 +27,11 @@ function retrieveCategoryFromFile(filePath) {
     else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY-VALUE';
     else if (fileName.includes('.css')) {
         category = 'CSS';
-        complexity = 'TESTE;'//css_complexity(filePath);
+        complexity = 'TEST;'//css_complexity(filePath);
     }
     else if (fileName.includes('.html')) category = 'HTML';
     else if (fileName.includes('.scala')) category = 'scala';
-    else category = 'OUTTRO';
+    else category = 'OUTRO';
 
     return { category, complexity };
 }
