@@ -1,0 +1,30 @@
+[
+{
+  "commit": "c3b48405c0f8bc6a10fede0cec8ad4976bab5e2e",
+  "author": "Igor Sodre <igorcuei@yahoo.com.br>",
+  "date": "2020-01-23",
+  "message": "Add-package.json-to-project",
+  "files": [
+    "M	.gitignore",
+    "A	package.json"
+  ]
+},
+{
+  "commit": "e03c146629a3d5307951e8cad67af031b8f04da0",
+  "author": "Igor Sodre <igorcuei@yahoo.com.br>",
+  "date": "2020-01-23",
+  "message": "issue-6-adiciona-categorias-restantes-ao-metodo-retrieveCategoryFromFile",
+  "files": [
+    "M	report_generator.js"
+  ]
+},
+{
+  "commit": "a0c803adb099b840af50fb0b111c33dd8752651a",
+  "author": "Igor <igorcuei@yahoo.com.br>",
+  "date": "2020-01-23",
+  "message": "Initial-commit",
+  "files": [
+    "A	LICENSE",
+    "A	README.md"
+  ]
+}]
