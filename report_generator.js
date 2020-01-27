@@ -2,6 +2,7 @@ console.log("Iniciando Report Generator");
 
 const projectName = '/gat-monitoracao/';
 const css_complexity = require('./css_complexity').default;
+const karma_complexity = require('./karma_complexity').default;
 console.log(css_complexity);
 
 
