@@ -22,7 +22,13 @@ function retrieveCategoryFromFile(filePath) {
     const fileName = filePath.split('\\').pop().split('/').pop();
 
     // Categorias possiveis: test, js, html, css, java, key-value, scala
-    if (fileName.includes('spec') || fileName.includes('Test')) category = 'TEST';
+    if (fileName.includes('spec') && (fileName.includes('.js') || fileName.includes('.ts'))) {
+        category = 'TEST';
+        complexity = 'TEST;'//karma_complexity(filePath);
+    }
+    else if (fileName.includes('Test')) {
+        category = 'TEST';
+    }
     else if (fileName.includes('.java')) return 'JAVA';
     else if (fileName.includes('.js') || fileName.includes('.ts')) category = 'JAVASCRIPT';
     else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY-VALUE';
