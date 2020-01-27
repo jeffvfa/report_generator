@@ -1,0 +1,1175 @@
+[
+{
+  "commit": "f2886c18f5f66b8194f2a70569f5f796194b63a9",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-20",
+  "message": "task-1227478-merge-senhas-remanejadas-desenvolvimento"
+},
+{
+  "commit": "c1ead1984b10b4843c17ae1789b3d37b41d75b1a",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-20",
+  "message": "task-1227478-novas-criacoes-de-testes-de-metodos-do-controller",
+  "files": [
+    "M	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts"
+  ]
+},
+{
+  "commit": "d0ddb6ab4317ee3e8792410867d30444a5362fee",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-20",
+  "message": "task-1227478-novas-criacoes-de-testes-de-metodos-do-controller",
+  "files": [
+    "M	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts"
+  ]
+},
+{
+  "commit": "e30a5659dfbda4fb335c9fb1aa50cb35032fe082",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-20",
+  "message": "task-1227478-novas-criacoes-de-testes-de-metodos-do-controller",
+  "files": [
+    "M	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts"
+  ]
+},
+{
+  "commit": "3b38a9a8680f92e6a282766e35f9762c918ef4ba",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-19",
+  "message": "task-1227478-novas-criacoes-de-testes-de-metodos-do-controller",
+  "files": [
+    "M	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.ts"
+  ]
+},
+{
+  "commit": "4342165a30b4e30d5bb711da76a1ebbd1534f4c6",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-19",
+  "message": "task-1227478-criacao-de-testes-de-metodos-do-controller",
+  "files": [
+    "M	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts"
+  ]
+},
+{
+  "commit": "31a420f2393979b3453dab073649a91dcf8c2c9f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-19",
+  "message": "task-1227478-criacao-de-spec.-Teste-inicial.-Ajuste-de-configuracao-karma-conf",
+  "files": [
+    "M	karma.conf.js",
+    "A	spec/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.spec.ts",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.ts"
+  ]
+},
+{
+  "commit": "af7a5503535cb742379824631068a263ab53fcbc",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-18",
+  "message": "task-1225507-ajuste-das-telas-de-listar-e-editar.-Ajuste-no-service",
+  "files": [
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.ts",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.service.ts"
+  ]
+},
+{
+  "commit": "aa69e4043a6c469abfe16b548df6a9cb0637a43e",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-18",
+  "message": "task-1226939-atualizacao-dos-paths-de-acordo-com-novas-operacoes",
+  "files": [
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.service.ts"
+  ]
+},
+{
+  "commit": "f7e9487cac41efe3495437f776fab6ef0962bd29",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-17",
+  "message": "task-1225507-adicao-do-novo-campo-na-tela-de-tempo-adicional",
+  "files": [
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento-cadastro.html",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.controller.ts"
+  ]
+},
+{
+  "commit": "8af1933959bec924419f9af4c92c3db22821873c",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-13",
+  "message": "task-1224370-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "f28861e75a3ac7f261e5d89f839e38381d48913c",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-13",
+  "message": "task-1224370-correcao-de-bug-causado-por-alteracao-no-nome-da-operacao",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "26474ec8c089ab80003082beb58a77493a18e164",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-13",
+  "message": "task-1224370-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "66f62f8314eb91c81dc8b89ed24a0ef9f177e4f3",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-13",
+  "message": "task-1224370-correcao-de-bug-causado-por-alteracao-no-nome-da-operacao",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "d495da6863a96510163d75f759886c0fd939a80a",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1222618-merge-tela-delay-desenvolvimento"
+},
+{
+  "commit": "2c20ca745f63477636b4dbfe2cf6098d9525d3af",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1222618-merge-tela-delay-producao"
+},
+{
+  "commit": "feb79a7a3cdf5ff6ba2ca736fbd7efcb1b860717",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1222618-correcao-de-bug",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts"
+  ]
+},
+{
+  "commit": "3387eeee55c477e157a38fa578f42695b6298ee2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1222832-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "e8da916b063a8fbf3c9e3de4b701d6c601a40007",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1222832-Correcao-minor-issue-do-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "7df0685d68f799c5906f19856fc91e0d721ea634",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-12",
+  "message": "task-1217963-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "ddbd61b981c6cb712547fc02276f12d283504fb2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1222618-adicao-dos-testes"
+},
+{
+  "commit": "aa21d1c420698383d9dd95feeba55f16ca9d5267",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1220203-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "ed4cdc1f93750e9143c7b7c3c50e739dd26932d9",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1220203-implementacao-dos-testes",
+  "files": [
+    "M	spec/spas/delay-campanha/delay-campanha.controller.spec.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts"
+  ]
+},
+{
+  "commit": "a99a68bd97c3768e6327c00f026cdfdabb23c6f2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1222618-ajuste-de-texto-na-tela",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.tpl.html"
+  ]
+},
+{
+  "commit": "8345bb2a70e00d0ecc681be1726b939b8723d189",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1222618-versionamento",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "911293ff4ecbf65f168282be543ee6d92541ee16",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1222618-merge-tela-delay-desenvolvimento"
+},
+{
+  "commit": "7efc1f3660c840d6ad53bc9596b753bf4b5b93da",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1222618-merge-tela-delay-desenvolvimento"
+},
+{
+  "commit": "512bc49c2ff6c8cdd59f83e58e662c98375a48bb",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1217963-merge-tela-delay-desenvolvimento"
+},
+{
+  "commit": "600f400ad075b10c533bd2012183b3104ebda36d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1217963-Ajuste-para-exclusao-de-delays-de-campanha",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts"
+  ]
+},
+{
+  "commit": "8a4d6e27a12d4c9c0833949bcfd60262b5d1d3f7",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1217963-Ajuste-nas-funcionalidades-de-inclusao-e-alteracao",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts"
+  ]
+},
+{
+  "commit": "e68bf28ac6c0d4f5c14848ccb5c99f1ea7d91d80",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-11",
+  "message": "task-1217963-ajuste-no-consultarDelayCampanha-e-no-template",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.tpl.html"
+  ]
+},
+{
+  "commit": "661d62cb3c31740dea9ee9ca9f273dd6c527fa99",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-10",
+  "message": "task-1217963-Atualizacao-De-controller-e-template",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.tpl.html"
+  ]
+},
+{
+  "commit": "f70765b3b028a7f7ae7101fd3e34eda146915a9d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-10",
+  "message": "task-1217963-Nova-atualizacao-do-Service",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "ad10740f11d508ac35a3c121c7936b50bcb41265",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-10",
+  "message": "task-1217963-Atualizacao-do-Service",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "c7d9e6e31c57a7f9562c93b3cbe5b91218abe1be",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-10",
+  "message": "task-1220203-inicio-dos-testes",
+  "files": [
+    "M	karma.conf.js",
+    "A	spec/spas/delay-campanha/delay-campanha.controller.spec.ts"
+  ]
+},
+{
+  "commit": "8545a86ed88ca0beb9b23825a3c3690954278e4f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-10",
+  "message": "task-1217963-Atualizacao-na-tela-controller-e-service",
+  "files": [
+    "M	src/app/spas/delay-campanha/delay-campanha.controller.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.service.ts",
+    "M	src/app/spas/delay-campanha/delay-campanha.tpl.html"
+  ]
+},
+{
+  "commit": "f1354a617547ce868ca1b32acde076bbb44af1a2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-09",
+  "message": "task-1217963-merge-para-corrigir-problema-de-branches"
+},
+{
+  "commit": "89abd2ecb3adb4a53c1255fb89a37b867bacd714",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-09",
+  "message": "Task-1217963-Criacao-do-app-controller-e-do-service",
+  "files": [
+    "A	src/app/spas/delay-campanha/delay-campanha.app.ts",
+    "A	src/app/spas/delay-campanha/delay-campanha.controller.ts",
+    "A	src/app/spas/delay-campanha/delay-campanha.service.ts"
+  ]
+},
+{
+  "commit": "4f4bb81d334c865969020f02fae96f2ffe118f30",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-12-06",
+  "message": "task-1217936-Criacao-de-template-e-app",
+  "files": [
+    "A	src/app/spas/delay-campanha/delay-campanha.app.html",
+    "A	src/app/spas/delay-campanha/delay-campanha.tpl.html"
+  ]
+},
+{
+  "commit": "7edc251a3a4db0c17ad4e3cd9d31150cbda47b0b",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-26",
+  "message": "task-1209984-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "03b73a84dd5523a62cf8f7422485a5951fcc3fb8",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-26",
+  "message": "task-1209984-correcao-to-tamanho-dos-campos",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.tpl.html"
+  ]
+},
+{
+  "commit": "4775d2a346ddf3074a7ddaf3a6dd66df6fc2cee4",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-26",
+  "message": "task-1209469-correcao-de-bug-na-tela-de-abandonar-cliente",
+  "files": [
+    "M	package.json",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona-app.js",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona.app.html"
+  ]
+},
+{
+  "commit": "aa82a15dcc5445751a7bdeb259f9c2e5830a49d2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-25",
+  "message": "task-1208165-criacao-dos-testes-para-o-controller-da-funcionalidade-de-informacoes-obrigatorias",
+  "files": [
+    "M	package.json",
+    "A	spec/spas/informacoes-obrigatorias/informacoes-obrigatorias.controller.spec.ts",
+    "D	spec/spas/informacoes-obrigatorias/informacoes-obrigatorias.spec.ts"
+  ]
+},
+{
+  "commit": "e6640078120f026dfaf7e2dd56fe6528bfb619d8",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-25",
+  "message": "task-1204185-ajuste-do-tamanho-limite-dos-campos",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.tpl.html"
+  ]
+},
+{
+  "commit": "7cfbd25414b665bcec6c9e86681b81f70a889a94",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-25",
+  "message": "task-1208053-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "0b1c6762098837e359eaab3c7f68a5d1da59b00b",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-25",
+  "message": "task-1208053-atualizacao-da-nomenclatura-da-funcionalidade-nova",
+  "files": [
+    "M	karma.conf.js",
+    "D	spec/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.spec.ts",
+    "A	spec/spas/informacoes-obrigatorias/informacoes-obrigatorias.spec.ts",
+    "R059	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.app.html	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.app.html",
+    "R078	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.app.ts	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.app.ts",
+    "R065	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.controller.ts",
+    "R072	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.service.ts	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.service.ts",
+    "R056	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.tpl.html	src/app/spas/informacoes-obrigatorias/informacoes-obrigatorias.tpl.html"
+  ]
+},
+{
+  "commit": "5cacf2959664919a1faf7fc048695a236b48db6b",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-22",
+  "message": "task-1207825-Criacao-de-testes-da-funcionalidade-orgao-protecao",
+  "files": [
+    "M	karma.conf.js",
+    "M	package.json",
+    "A	spec/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.spec.ts"
+  ]
+},
+{
+  "commit": "a1105139db7586609275b42751558b4bc3535d59",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-21",
+  "message": "task-1204185-Correcao-de-bug-da-funcionalidade-de-orgao-protecao",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts"
+  ]
+},
+{
+  "commit": "ac704ce51b3db6d7af8b5297519c6f07e240ce93",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-21",
+  "message": "task-1204185-Correcao-de-bug-da-funcionalidade-de-rogao-protecao",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts"
+  ]
+},
+{
+  "commit": "38d2aa17ccdacccf6b4678b9169de171b23c3469",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-21",
+  "message": "task-1204185-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "59635bb9ed1a44f13a19170ea1671f3ba3d62210",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-21",
+  "message": "task-1204185-Adicao-de-metodo-de-exclusao",
+  "files": [
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.tpl.html"
+  ]
+},
+{
+  "commit": "b0b98dc29863e876ac6d7196a7f6316368beadd5",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-21",
+  "message": "task-1204185-Correcao-de-diversos-bugs-impeditivos-para-funcionalidade-de-configuracao-do-orgao-de-protecao",
+  "files": [
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.app.html",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.app.ts",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.tpl.html"
+  ]
+},
+{
+  "commit": "bc1875e91ce11cecd4d1735de7d02f80060618a7",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-20",
+  "message": "task-1204185-correcao-de-tela-do-campanhaCadastro",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.app.html"
+  ]
+},
+{
+  "commit": "8334fd6ffe3251b2f7a81abe09dc8ae2988ad49a",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-19",
+  "message": "task-1204185-correcao-de-major-issue-code-smell-do-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.controller.ts"
+  ]
+},
+{
+  "commit": "f641b061a84dad4c4b9cd47e44b939b8e55d91be",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-19",
+  "message": "task-1196139-criacao-dos-testes-para-filtro-atendimento-do-fila-telefonica-lista-app",
+  "files": [
+    "M	package.json",
+    "M	spec/atendimento/fila-negocial-lista/fila-negocial-lista-app.spec.ts",
+    "M	spec/telefone/fila-telefonica-lista/fila-telefonica-lista-app.spec.ts",
+    "M	src/app/spas/configuracao-orgao-protecao/configuracao-orgao-protecao.service.ts"
+  ]
+},
+{
+  "commit": "6b76ef8f2445dbfcf30476f706f65d421b2fd24d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-19",
+  "message": "task-1196139-Merge-branch-refactorTestes-into-producao"
+},
+{
+  "commit": "cd2e5d443ff8ebd8a300d7bd745a6fe216c4ec41",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-19",
+  "message": "task-1196139-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "cd3b8b05652a644602770bd1d9703602a326a7fd",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-19",
+  "message": "task-1196139-Criacao-dos-testes-de-fila-telefonica-lista-app",
+  "files": [
+    "A	spec/telefone/fila-telefonica-lista/fila-telefonica-lista-app.spec.ts",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.ts"
+  ]
+},
+{
+  "commit": "13a9db7af073f2d985e1032caa94655cab08e76d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-18",
+  "message": "task-1196139-alteracao-de-arquivo-fila-telefonica-lista-app-de-js-para-ts",
+  "files": [
+    "R097	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.ts"
+  ]
+},
+{
+  "commit": "2b4a3df3f9ea6f4c4c628ce9c61e4acac3ced3cf",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-14",
+  "message": "task-1196139-correcao-de-major-bug-do-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.ts"
+  ]
+},
+{
+  "commit": "a408b879f2f7162843e764d374423793786cc079",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-14",
+  "message": "task-1196139-versionamento-para-geracao-de-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "9bd90ce7c765097a6940f34cad06c5c23354425b",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-14",
+  "message": "task-1196139-Criacao-de-testes-para-fila-telefonica-cadastra-app",
+  "files": [
+    "M	karma.conf.js",
+    "A	spec/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.spec.ts",
+    "R096	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.ts"
+  ]
+},
+{
+  "commit": "0d8d4d4a49b791782953c85a4704d185f2b8b505",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-13",
+  "message": "task-1196139-correcao-de-codesmell-codigo-duplicado",
+  "files": [
+    "M	package.json",
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.app.ts"
+  ]
+},
+{
+  "commit": "be514db85ea11b2732835c1ce8d9371df7300d4f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-13",
+  "message": "task-1196139-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "84b4ffee209516926518ac7e4f73de57c03b95a6",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-13",
+  "message": "task-1196139-correcao-de-teste-que-estava-quebrado",
+  "files": [
+    "M	spec/spas/campanha-cadastro/campanha-cadastro.app.spec.ts"
+  ]
+},
+{
+  "commit": "b2d878a3c5064d9c84d53b9627b02a7c23e4eccd",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-13",
+  "message": "task-1196139-Merge-refactorTestes-into-producao"
+},
+{
+  "commit": "0e735811b2bb6944ffa01fd78858391af131b925",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-12",
+  "message": "task-1196139-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "63265d263524e60c394029c4dba33bac5bbd74dd",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-12",
+  "message": "task-1196139-criacao-de-testes-para-escolha-titular-app",
+  "files": [
+    "A	spec/atendimento/escolha-titular/escolha-titular.app.spec.ts",
+    "M	spec/atendimento/fila-negocial-lista/fila-negocial-lista-app.spec.ts",
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.ts"
+  ]
+},
+{
+  "commit": "f7db44ea124aa6fb180ff50195b34326f9883863",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-12",
+  "message": "task-1196139-testes-do-filtro-filtrarAtendimentos",
+  "files": [
+    "M	package.json",
+    "M	spec/atendimento/fila-negocial-lista/fila-negocial-lista-app.spec.ts"
+  ]
+},
+{
+  "commit": "1beac5126cf45dca7daf1c5a34ee5da3e8fcf9de",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-12",
+  "message": "task-1196139-finalizacao-dos-testes-do-fila-negocial-lista-app",
+  "files": [
+    "M	package.json",
+    "M	spec/atendimento/fila-negocial-lista/fila-negocial-lista-app.spec.ts"
+  ]
+},
+{
+  "commit": "d78f7c3820d6fb43cbca854e7af7a839e14d55f8",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-11",
+  "message": "task-1196139-versionamento-para-criacao-de-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "f95ea89269b154a68603cafae22601e18c8566b5",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-11",
+  "message": "task-1199783-Correcao-de-bug-na-tela-de-campanha",
+  "files": [
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.app.ts"
+  ]
+},
+{
+  "commit": "db30970b1ea5b28262337d7355b1b3a8bd43d343",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-11",
+  "message": "task-1196139-Atualiza-ao-do-karma.conf",
+  "files": [
+    "M	karma.conf.js"
+  ]
+},
+{
+  "commit": "e4120dfca264ffac18babe183d106b40b8d71fc6",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-11",
+  "message": "task-1196139-Criacao-de-testes-do-fila-negocial-lista-app",
+  "files": [
+    "M	package.json",
+    "A	spec/atendimento/fila-negocial-lista/fila-negocial-lista-app.spec.ts",
+    "R081	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.ts",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.app.html"
+  ]
+},
+{
+  "commit": "603aa4edf8910b44145a87d38e2923dfb1cd926e",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-Ajuste-de-metodos-que-n-o-estavam-retornando-vm",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente-app.js",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente-app.js",
+    "M	src/app/gat-gaw-services.js",
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe-app.js",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js"
+  ]
+},
+{
+  "commit": "8ee501e1199eb3ba642c082165a7ab921c3e6f1d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-Ajustes-de-metodos-que-comecam-com-letras-minusculas",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente-servico.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente-app.js",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente-app.js",
+    "M	src/app/gat-api-util.js",
+    "M	src/app/gat-app-constants.js",
+    "M	src/app/gat-app-util.js",
+    "M	src/app/gat-auxiliar-services.js",
+    "M	src/app/gat-gaw-services.js",
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona-app.js",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe-app.js",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js"
+  ]
+},
+{
+  "commit": "2a76ca2aba7fbfa4fe6b22057bda8514fd691de6",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-Correcao-de-minor-issues",
+  "files": [
+    "M	package.json",
+    "M	src/app/gat-app-constants.js",
+    "M	src/app/gat-app-util.js",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona-app.js",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "f380ec80f6e07bbe8c917781dedf290155449f8c",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "68ce16abda7e80b36fe93ab02d8fe2869c68cb5f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-Remo-o-de-parametros-n-o-usados",
+  "files": [
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js"
+  ]
+},
+{
+  "commit": "b353af981768c5637cb6223feb52b7c014b34f48",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-07",
+  "message": "task-1196139-Ajuste-de-complexidade-de-m-todo",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js"
+  ]
+},
+{
+  "commit": "001e2e08a2c86c757daa6feb5119f23f287612fb",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-Correcao-de-bug-para-subir-versao",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js"
+  ]
+},
+{
+  "commit": "da2adebed71ffb8a135a6b951b732587ceadebc7",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-Correcao-de-metodos-muito-complexos",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js"
+  ]
+},
+{
+  "commit": "4f7bd8ae9fa48df077cd580b3a8942e6080a0603",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-Correcao-de-codigos-duplicados-com-criacao-de-metodos-a-serem-reutilizados",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.ts",
+    "M	src/app/atendimento/fila-negocial-lista-servico.ts",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.controller.ts",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.service.ts",
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.service.ts",
+    "M	src/app/spas/desvio-carteira/desvio-carteira.controller.ts",
+    "M	src/app/spas/desvio-carteira/desvio-carteira.service.ts",
+    "M	src/app/spas/sonorizacao-painel/sonorizacao-painel.service.ts",
+    "M	src/app/telefone/atendimento-telefonico-service.ts",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "3ad90b467993636193520eb1fc46da8bdb0dbb1d",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-diversas-correcoes-de-issues-do-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente-app.js",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente-app.js",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.app.html",
+    "M	src/app/monitoracao-detalhe/monitoracao-detalhe.app.html",
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/spas/remanejar-atendimento/remanejar-atendimento.tpl.html",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "3bb0421735d2f0acdcbd00cd2f4be5d669de1d1f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-Versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "8f41ebd2085b6c154a030aecaba8df05e71e77f1",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-Correcao-de-ifs-desnecessariamente-aninhados",
+  "files": [
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js"
+  ]
+},
+{
+  "commit": "65ce456f2d37454b4078dc5439a744fe35030ebc",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-remocao-de-codigos-comentados.-Remocao-de-variavel-nao-usada",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente-app.js",
+    "M	src/app/gat-gaw-services.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento-routes.js",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "3877ec32f6fc6455ff082be22169fbee96e7db4e",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-remocao-de-atribuicoes-variaveis-que-nao-estavam-sendo-utilizadas",
+  "files": [
+    "M	package.json",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-cadastro/fila-regras-atendimento-cadastro.controller.ts",
+    "M	src/app/spas/tds-web/tds-web.interfaces.ts",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "8c06cb25c8cbcb56e9b55192614400347adbe909",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "8278e43f43840e9adaafa230a5155df46d7fb43c",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1196139-remocao-de-codigos-comentados-e-de-arquivo-vazio",
+  "files": [
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.html",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.app.html",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.tpl.html",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente.app.html",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.app.html",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.tpl.html",
+    "M	src/app/monitoracao-detalhe/monitoracao-detalhe.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-cadastro/fila-regras-atendimento-cadastro.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-cadastro/fila-regras-atendimento-cadastro.tpl.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-detalhe/fila-regras-atendimento-detalhe.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-detalhe/fila-regras-atendimento-detalhe.tpl.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento.tpl.html",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.app.html",
+    "M	src/app/parametrizacao/modelo-regra-atendimento/modelo-regra-atendimento.app.html",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.app.html",
+    "M	src/app/parametrizacao/regra-atendimento-uor/regra-atendimento-uor.app.html",
+    "M	src/app/parametrizacao/servico-regra-atendimento/servico-regra-atendimento.app.html",
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.app.html",
+    "M	src/app/spas/desvio-carteira/desvio-carteira.app.html",
+    "M	src/app/spas/desvio-carteira/views/desvio-carteira.tpl.html",
+    "M	src/app/spas/proxima-solicitacao-atendimento-regra/proxima-solicitacao-atendimento-regra.app.html",
+    "D	src/app/spas/proxima-solicitacao-atendimento-regra/proxima-solicitacao-atendimento-regra.css",
+    "M	src/app/spas/remanejar-atendimento/remanejar-atendimento.app.html",
+    "M	src/app/spas/sonorizacao-painel/sonorizacao-painel.app.html",
+    "M	src/app/spas/tds-web/telas/tds-web.prioridades.tpl.html",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona.app.html",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra.app.html",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe.app.html",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista.app.html",
+    "M	src/app/widget-atendimento/widget-atendimento.app.html",
+    "M	src/index.html"
+  ]
+},
+{
+  "commit": "82b80624425f9e3c42abbc397cf0c3fb4b133582",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-06",
+  "message": "task-1193134-Criacao-e-ajuste-de-testes-de-escolha-titular-servico.-Remocao-de-codigos-inutilizados",
+  "files": [
+    "M	package.json",
+    "M	spec/atendimento/escolha-titular/escolha-titular-servico.spec.ts",
+    "M	src/app/atendimento/escolha-titular/escolha-titular-servico.ts",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "e12db9317c6ce72130698b6a3f86c653bbdbe1af",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-05",
+  "message": "task-1193134-Atualizacao-da-versao",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "1867069308dba02b69323fd8893e4bf6d6ec0a9c",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-05",
+  "message": "task-1193134-Criacao-de-testes-para-AtendimentoTelefonicoService",
+  "files": [
+    "M	.jshintrc",
+    "M	karma.conf.js",
+    "A	spec/telefone/atendimento-telefonico-service.spec.js",
+    "M	src/app/telefone/atendimento-telefonico-service.js"
+  ]
+},
+{
+  "commit": "e4150d6a44fdf75585643b44e45d3aa77c0ba355",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Removido-arquivo-spec-da-src",
+  "files": [
+    "M	package.json",
+    "D	src/app/widget-atendimento/gaw-filters.spec.ts"
+  ]
+},
+{
+  "commit": "45c10060288b9b481a8f30184fe8af7500157221",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Versionamento-para-novo-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "fb9e012534205272f68149adac00cdc74a58148a",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Correcao-de-bugs-apontados-pelo-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.html",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.app.html",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente.app.html",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-cadastro/fila-regras-atendimento-cadastro.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-detalhe/fila-regras-atendimento-detalhe.app.html",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento.app.html",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.app.html",
+    "M	src/app/parametrizacao/modelo-regra-atendimento/modelo-regra-atendimento.app.html",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.app.html",
+    "M	src/app/parametrizacao/regra-atendimento-uor/regra-atendimento-uor.app.html",
+    "M	src/app/parametrizacao/servico-regra-atendimento/servico-regra-atendimento.app.html",
+    "M	src/app/spas/tds-web/tds-web.app.html",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona.app.html",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra.app.html",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe.app.html",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista.app.html",
+    "M	src/index.html"
+  ]
+},
+{
+  "commit": "bc07bcb6f2d06c4d426a94da4fee3ca8bba799d3",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Atualizacao-da-versao-novamente-para-tentar-dar-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "7ec270e0e58912e8024a5414011db49975c9d0d2",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "4ce71769b46569aa65b351c9d7ff704cefb0c4fc",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-11-01",
+  "message": "task-1190348-Resolucao-de-bugs-do-sonar",
+  "files": [
+    "M	package.json",
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.html",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.app.html",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista.tpl.html",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente.app.html",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente.app.html",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.css",
+    "M	src/app/parametrizacao/regra-atendimento-cadastra/regra-atendimento-cadastro.controller.js",
+    "D	src/app/spas/remanejar-atendimento/remanejar-atendimento.spec.ts",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona.app.html",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra.app.html",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe.app.html",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista.app.html"
+  ]
+},
+{
+  "commit": "a4e851c5c935a3ccc9e1dc825309e984e235c357",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Versionamento-para-build",
+  "files": [
+    "M	package.json"
+  ]
+},
+{
+  "commit": "e509221ad8dd60146a85d7819d9cf01e70c13d5f",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Correcao-de-teste-que-estava-quebrado",
+  "files": [
+    "M	spec/atendimento/escolha-titular/escolha-titular-servico.spec.ts"
+  ]
+},
+{
+  "commit": "1160f29b15cee018d28015985a7cf78135051e9a",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Remocao-de-arquivo-de-teste-que-era-totalmente-comentado",
+  "files": [
+    "D	spec/telefone/atendimento-telefonico-service.spec.js"
+  ]
+},
+{
+  "commit": "cb19af60b7f649974b0273a899ab19ff5d1cc525",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Atualizacao-do-arquivo-de-configuracao-tsconfig",
+  "files": [
+    "M	tsconfig.json"
+  ]
+},
+{
+  "commit": "023d43efa79d586e34e7b38327550ab67b2aa36e",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Remocao-de-consolo.log-e-debugs-inuteis",
+  "files": [
+    "M	src/app/atendimento/escolha-titular/escolha-titular.app.ts",
+    "M	src/app/atendimento/fila-negocial-lista/fila-negocial-lista-app.js",
+    "M	src/app/configuracao/config-fila-negocial-atendente/config-fila-negocial-atendente-app.js",
+    "M	src/app/configuracao/desativar-filas-atendente/desativar-filas-atendente-app.js",
+    "M	src/app/gat-gaw-services.js",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.controller.ts",
+    "M	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.service.ts",
+    "M	src/app/monitoracao-detalhe/monitoracao-detalhe.controller.ts",
+    "M	src/app/monitoracao-detalhe/monitoracao-detalhe.service.ts",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-cadastro/fila-regras-atendimento-cadastro.controller.ts",
+    "M	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-detalhe/fila-regras-atendimento-detalhe.controller.ts",
+    "M	src/app/parametrizacao/intervalo-atendimento/intervalo-atendimento.service.ts",
+    "M	src/app/parametrizacao/modelo-regra-atendimento/modelo-regra-atendimento.routes.ts",
+    "M	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento.controller.js",
+    "M	src/app/parametrizacao/regra-atendimento-uor/regra-atendimento-uor.controller.ts",
+    "M	src/app/spas/campanha-cadastro/campanha-cadastro.app.ts",
+    "M	src/app/spas/desvio-carteira/desvio-carteira.controller.ts",
+    "M	src/app/spas/proxima-solicitacao-atendimento-regra/proxima-solicitacao-atendimento-regra.app.ts",
+    "M	src/app/spas/remanejar-atendimento/remanejar-atendimento.app.ts",
+    "M	src/app/spas/sonorizacao-painel/sonorizacao-painel.controller.ts",
+    "M	src/app/telefone/fila-telefonica-abandona/fila-telefonica-abandona-app.js",
+    "M	src/app/telefone/fila-telefonica-cadastra/fila-telefonica-cadastra-app.js",
+    "M	src/app/telefone/fila-telefonica-detalhe/fila-telefonica-detalhe-app.js",
+    "M	src/app/telefone/fila-telefonica-lista/fila-telefonica-lista-app.js",
+    "M	src/app/widget-atendimento/widget-atendimento-controllers.ts"
+  ]
+},
+{
+  "commit": "95715ede7657359537f0bde15f192e357d949a67",
+  "author": "Kilmer Luiz <kilmerluizale@gmail.com>",
+  "date": "2019-10-31",
+  "message": "task-1190348-Atualizacao-do-karma-conf.-Remocao-de-arquivos-de-teste-da-pasta-src.-Adicao-dos-arquivos-de-teste-para-pasta-spec.-Remocao-de-consolo.log-inuteis.-Remocao-de-comentarios-inuteis",
+  "files": [
+    "M	karma.conf.js",
+    "R085	src/app/atendimento/escolha-titular/escolha-titular-servico.spec.ts	spec/atendimento/escolha-titular/escolha-titular-servico.spec.ts",
+    "R100	src/app/atendimento/fila-negocial-lista-servico.spec.ts	spec/atendimento/fila-negocial-lista-servico.spec.ts",
+    "R100	src/app/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.service.spec.ts	spec/monitoracao-detalhe-caixa/monitoracao-detalhe-caixa.service.spec.ts",
+    "R100	src/app/monitoracao-detalhe/monitoracao-detalhe.controller.spec.ts	spec/monitoracao-detalhe/monitoracao-detalhe.controller.spec.ts",
+    "R100	src/app/monitoracao-detalhe/monitoracao-detalhe.service.spec.ts	spec/monitoracao-detalhe/monitoracao-detalhe.service.spec.ts",
+    "R100	src/app/spas/campanha-cadastro/campanha-cadastro.app.spec.ts	spec/spas/campanha-cadastro/campanha-cadastro.app.spec.ts",
+    "R100	src/app/spas/campanha-cadastro/testes/campanha-cadastro.ctrl.spec.ts	spec/spas/campanha-cadastro/campanha-cadastro.ctrl.spec.ts",
+    "R100	src/app/spas/campanha-cadastro/testes/campanha-cadastro.service-spec.ts	spec/spas/campanha-cadastro/campanha-cadastro.service.spec.ts",
+    "A	spec/spas/desvio-carteira/desvio-carteira-spec.ts",
+    "R089	src/app/spas/desvio-carteira/desvio-carteira.controller-spec.ts	spec/spas/desvio-carteira/desvio-carteira.controller-spec.ts",
+    "R100	src/app/spas/desvio-carteira/desvio-carteira.service-spec.ts	spec/spas/desvio-carteira/desvio-carteira.service-spec.ts",
+    "R095	src/app/spas/remanejar-atendimento/remanejar-atendimento.app.spec.ts	spec/spas/remanejar-atendimento/remanejar-atendimento.app.spec.ts",
+    "R100	src/app/spas/remanejar-atendimento/remanejar-atendimento.service-spec.ts	spec/spas/remanejar-atendimento/remanejar-atendimento.service.spec.ts",
+    "A	spec/spas/remanejar-atendimento/remanejar-atendimento.spec.ts",
+    "R100	src/app/spas/sonorizacao-painel/sonorizacao-painel.controller.spec.ts	spec/spas/sonorizacao-painel/sonorizacao-painel.controller.spec.ts",
+    "R100	src/app/spas/sonorizacao-painel/sonorizacao-painel.service.spec.ts	spec/spas/sonorizacao-painel/sonorizacao-painel.service.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.atendimento.spec.ts	spec/spas/tds-web/tds-web.ctrl.atendimento.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.cpf.spec.ts	spec/spas/tds-web/tds-web.ctrl.cpf.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.emissao.spec.ts	spec/spas/tds-web/tds-web.ctrl.emissao.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.identificacao.spec.ts	spec/spas/tds-web/tds-web.ctrl.identificacao.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.naoidentificado.spec.ts	spec/spas/tds-web/tds-web.ctrl.naoidentificado.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.rodape.spec.ts	spec/spas/tds-web/tds-web.ctrl.rodape.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.ctrl.sucesso.spec.ts	spec/spas/tds-web/tds-web.ctrl.sucesso.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.srv.atendimento.spec.ts	spec/spas/tds-web/tds-web.srv.atendimento.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.srv.emissao.spec.ts	spec/spas/tds-web/tds-web.srv.emissao.spec.ts",
+    "R071	src/app/spas/tds-web/testes/tds-web.srv.gsl.spec.ts	spec/spas/tds-web/tds-web.srv.gsl.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.srv.identificacao.spec.ts	spec/spas/tds-web/tds-web.srv.identificacao.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.srv.menu.spec.ts	spec/spas/tds-web/tds-web.srv.menu.spec.ts",
+    "R100	src/app/spas/tds-web/testes/tds-web.srv.prioridade.spec.ts	spec/spas/tds-web/tds-web.srv.prioridade.spec.ts",
+    "R100	src/app/telefone/atendimento-telefonico-service.spec.js	spec/telefone/atendimento-telefonico-service.spec.js",
+    "A	spec/widget-atendimento/gaw-filters.spec.ts",
+    "R077	src/app/widget-atendimento/widget-atendimento-controllers.spec.ts	spec/widget-atendimento/widget-atendimento-controllers.spec.ts",
+    "R099	src/app/widget-atendimento/widget-atendimento-service.spec.ts	spec/widget-atendimento/widget-atendimento-service.spec.ts",
+    "D	src/app/parametrizacao/fila-regras-atendimento/fila-regras-atendimento-app-spec.js",
+    "D	src/app/parametrizacao/modelo-regra-atendimento/modelo-regra-atendimento-app-spec.js",
+    "D	src/app/parametrizacao/regra-atendimento-lista/regra-atendimento-app-spec.js",
+    "D	src/app/parametrizacao/regra-atendimento-uor/regra-atendimento-uor-app-spec.js",
+    "D	src/app/parametrizacao/servico-regra-atendimento/servico-regra-atendimento-app-spec.js",
+    "D	src/app/spas/campanha-cadastro/campanha-cadastro.service-spec.ts",
+    "D	src/app/spas/desvio-carteira/desvio-carteira-spec.ts",
+    "D	src/app/spas/remanejar-atendimento/testes/remanejar-atendimento.app.spec.ts",
+    "D	src/app/spas/remanejar-atendimento/testes/remanejar-atendimento.service-spec.ts",
+    "D	src/app/spas/tds-web/tds-web.util.spec.ts"
+  ]
+}]
