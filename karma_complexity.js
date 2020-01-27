@@ -8,7 +8,7 @@ const calculateKarmaComplexity = function (FILE_PATH) {
 
     let quantity_of_var = karma_file.split('var ').length - 1;
     let quantity_of_let = karma_file.split('let ').length - 1;
-    let quantity_of_const = karma_file.split('let ').length - 1;
+    let quantity_of_const = karma_file.split('const ').length - 1;
 
     let groups_of_5_variables = Math.floor((quantity_of_var + quantity_of_let + quantity_of_const) / 5);
 
