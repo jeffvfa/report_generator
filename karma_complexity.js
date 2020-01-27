@@ -20,10 +20,10 @@ const calculateKarmaComplexity = function (FILE_PATH) {
 
 
 
-    if ((quantity_of_test_cases || groups_of_5_variables || quantity_of_requests) > 60) {
+    if (quantity_of_test_cases > 60 || groups_of_5_variables > 60 || quantity_of_requests > 60) {
         return 'ALTA';
     }
-    else if ((quantity_of_test_cases || groups_of_5_variables || quantity_of_requests) > 30 && (quantity_of_test_cases || groups_of_5_variables || quantity_of_requests) < 60) {
+    else if ((quantity_of_test_cases > 30 || groups_of_5_variables > 30 || quantity_of_requests > 30) && (quantity_of_test_cases < 60 || groups_of_5_variables < 60 || quantity_of_requests < 60)) {
         return 'MÉDIA';
     }
     else {
