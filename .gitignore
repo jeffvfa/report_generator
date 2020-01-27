@@ -1,5 +1,6 @@
 gitlog.json
 .idea/
 node_modules/
+/output
 npm-debug.log
 /test.sh

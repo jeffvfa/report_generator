@@ -45,7 +45,7 @@ for arg in "$@"; do
     ;;
   esac
 done
-#################### Fim do codigo de recuperacao dos parametros
+#################### Fim do codigo de recuperacao dos parametros #############################
 
 # Verifica se o diretorio fornecido
 isPathAGitRepo() {
@@ -115,10 +115,19 @@ getLogsFromDirectory() {
           sub json_escape { $_ = shift; s/([\\"])/\\\1/g; return $_; }' >"${output_directory}/gitlog${file_suxfix}.json"
 }
 
+# funcao que gera os logs json para todos os repositorios dentro do diretorio passado
 getLogsFromAllDirectories() {
   local directory_with_git_repos=$1
   local author_name=$2
   local output_directory=$3
+  local counter=0
+  for dir in $directory_with_git_repos*; do
+    if [ -d "$dir" ] && [ "$(isPathAGitRepo "$dir")" -eq 1 ]; then
+      echo "$dir"
+      getLogsFromDirectory "$dir" "$author_name" "$output_directory" "$counter"
+      counter=$((counter + 1))
+    fi
+  done
 }
 
-getLogsFromDirectory "$default_directory" "$author_name" "$WORK_DIR"/output "0"
+getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output
