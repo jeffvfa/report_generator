@@ -129,5 +129,11 @@ getLogsFromAllDirectories() {
     fi
   done
 }
+# remove arquivos antigos que estejam no diretorio de output
+rm -rf "$WORK_DIR"/output/*
 
-getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output
+if [[ $multiple_directories -eq 1 ]]; then
+  getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output
+else
+  getLogsFromDirectory "$default_directory" "$author_name" "$WORK_DIR"/output "0"
+fi
