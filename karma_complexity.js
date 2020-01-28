@@ -17,13 +17,13 @@ const calculateKarmaComplexity = function (FILE_PATH) {
 
     let quantity_of_requests = quantity_of_get + quantity_of_post;
 
+    let complexity = quantity_of_test_cases + groups_of_5_variables + quantity_of_requests;
 
 
-
-    if (quantity_of_test_cases > 60 || groups_of_5_variables > 60 || quantity_of_requests > 60) {
+    if (complexity > 60) {
         return 'ALTA';
     }
-    else if ((quantity_of_test_cases > 30 || groups_of_5_variables > 30 || quantity_of_requests > 30) && (quantity_of_test_cases < 60 || groups_of_5_variables < 60 || quantity_of_requests < 60)) {
+    else if (complexity > 30) {
         return 'MÉDIA';
     }
     else {
