@@ -85,8 +85,10 @@ getLogsFromDirectory() {
 
   # shellcheck disable=SC2164
   cd "$log_directory"
+  log_format_string="%n{%n \"commit\": \"%H\",%n \"directory\":\"$(pwd)\",%n \"author\": \"%an <%ae>\",%n \"date\": \"%ad\",%n \"message\": \"%f\":FILES:"
+ 
   git log --name-status --max-count=1000 --author="$author_name" --date=short \
-    --pretty=format:'%n{%n  "commit": "%H",%n  "author": "%an <%ae>",%n  "date": "%ad",%n  "message": "%f":FILES:' |
+    --pretty=format:"$log_format_string"|
     perl -ne '
           BEGIN{print "["};
           if ($i = (/:FILES:[\n\r]*$/../^$/)) {

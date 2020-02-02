@@ -1,3 +1,4 @@
+"user strict";
 console.log("Iniciando Report Generator");
 
 const projectName = '/gat-monitoracao/';
@@ -24,26 +25,26 @@ function retrieveCategoryFromFile(filePath) {
     // Categorias possiveis: test, js, html, css, java, key-value, scala
     if (fileName.includes('spec') && (fileName.includes('.js') || fileName.includes('.ts'))) {
         category = 'TEST';
-        complexity = 'TEST;'//karma_complexity(filePath);
-    }
-    else if (fileName.includes('Test')) {
+        complexity = 'TEST;' //karma_complexity(filePath);
+    } else if (fileName.includes('Test')) {
         category = 'TEST';
-    }
-    else if (fileName.includes('.java')) return 'JAVA';
+    } else if (fileName.includes('.java')) return 'JAVA';
     else if (fileName.includes('.js') || fileName.includes('.ts')) category = 'JAVASCRIPT';
     else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY-VALUE';
     else if (fileName.includes('.css')) {
         category = 'CSS';
-        complexity = 'TEST;'//css_complexity(filePath);
-    }
-    else if (fileName.includes('.html')) category = 'HTML';
+        complexity = 'TEST;' //css_complexity(filePath);
+    } else if (fileName.includes('.html')) category = 'HTML';
     else if (fileName.includes('.scala')) category = 'scala';
     else category = 'OUTRO';
 
-    return { category, complexity };
+    return {
+        category,
+        complexity
+    };
 }
 
-commitsByTask = commits.reduce((acc, y) => {
+let commitsByTask = commits.reduce((acc, y) => {
     let task = y.message.substr(5, 7);
     acc[task] = acc[task] || [];
     acc[task] = [...new Set(acc[task].concat(buildFileObjects(y)))];
