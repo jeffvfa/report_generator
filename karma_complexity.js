@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs');
 
-const calculateKarmaComplexity = function (FILE_PATH) {
+const calculateKarmaComplexity = function(FILE_PATH) {
     let karma_file = fs.readFileSync(FILE_PATH, 'utf8');
 
     let quantity_of_test_cases = karma_file.split('it(').length - 1;
@@ -22,16 +22,12 @@ const calculateKarmaComplexity = function (FILE_PATH) {
 
     if (complexity > 60) {
         return 'ALTA';
-    }
-    else if (complexity > 30) {
+    } else if (complexity > 30) {
         return 'MÉDIA';
-    }
-    else {
+    } else {
         return 'BAIXA';
     }
 };
 
 // it receives a path to a karma Jasmine file and calculate the file's complexity
 exports.default = calculateKarmaComplexity;
-
-
