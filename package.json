@@ -1,9 +1,10 @@
 {
   "name": "report_generator",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Generates the monthly work reposts for the company Stefanini ",
-  "main": "report_generator.js",
+  "main": "dist/report_generator.js",
   "scripts": {
+    "start": "tsc && node dist/report_generator.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/igorsodre/report_generator/issues"
   },
-  "homepage": "https://github.com/igorsodre/report_generator#readme"
+  "homepage": "https://github.com/igorsodre/report_generator#readme",
+  "devDependencies": {
+    "tslint": "^6.0.0",
+    "typescript": "^3.8.2"
+  }
 }

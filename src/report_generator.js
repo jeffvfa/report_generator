@@ -1,7 +1,7 @@
-"user strict";
+"use strict";
 console.log("Iniciando Report Generator");
-const css_complexity = require('./css_complexity').default;
-const karma_complexity = require('./karma_complexity').default;
+const css_complexity = require('./complexity_functions/css_complexity').default;
+const karma_complexity = require('./complexity_functions/karma_complexity').default;
 
 const fs = require('fs');
 
