@@ -2,7 +2,7 @@ import calculateCSSComplexity from './css_complexity';
 import calculateKarmaComplexity from './karma_complexity';
 
 export default (function (): TComplexityCalculator {
-    const unimplementedComplexity = (str: string): TFileComplexity => null;
+    const unimplementedComplexity = (str: string): TFileComplexity => 'BAIXA';
     let complexityCalculator: TComplexityCalculator = {};
 
     complexityCalculator['TEST'] = calculateKarmaComplexity;

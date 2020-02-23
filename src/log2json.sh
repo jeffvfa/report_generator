@@ -7,6 +7,7 @@ WORK_DIR=$(pwd)
 # --directory-start ou -D : especifica o diretório git a ser 'escaneado'. Este argumento eh obrigatorio
 # --author-name ou -A : serao somente recuperados os commits do autor passado como paramentro. Este argumento eh obrigatorio
 # --multiple-directories ou -M : boolean flag que especifica se o diretorio a ser escaneado contem multiplos diretorios git. O valor default = 0
+# Example: $ ./log2json.sh -D="/home/user/Documents/Projects/nome-projeto" -A="c0000000"
 
 #####################  Codigo adaptado de: https://pretzelhands.com/posts/command-line-flags   ###################################
 # Valores padrao para as variaveis

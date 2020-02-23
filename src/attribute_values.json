@@ -61,18 +61,18 @@
         "M": "Alteração de arquivo chave/valor ou tipo xml",
         "BAIXA": {
             "description": "Até 100 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 2,
-            "USTBB_M": 1
+            "USTBB_A": 2.0,
+            "USTBB_M": 1.0
         },
         "MEDIA": {
             "description": "De 101 até 300 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 4,
-            "USTBB_M": 2
+            "USTBB_A": 4.0,
+            "USTBB_M": 2.0
         },
         "ALTA": {
             "description": "Acima de 300 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 6,
-            "USTBB_M": 3
+            "USTBB_A": 6.0,
+            "USTBB_M": 3.0
         }
     },
     "JAVA": {
@@ -94,23 +94,42 @@
             "USTBB_M": 0
         }
     },
-    "TESTE": {
+    "TEST": {
         "A": "Criação de objeto de teste automatizado (não considerar o teste unitário previsto no PDSTI)",
         "M": "Alteração de objeto de teste automatizado (não considerar o teste unitário previsto no PDSTI)",
         "BAIXA": {
             "description": "Quantidade de até 30 itens de complexidade abaixo:\n\t- Cenários de teste (por cenário);\n\t- Grupo de até 5 variáveis (por grupo de variável);\n\t- Configurações a fontes de dados externos (por configuração).",
-            "USTBB_A": 4,
-            "USTBB_M": 2
+            "USTBB_A": 4.0,
+            "USTBB_M": 2.0
         },
         "MEDIA": {
             "description": "Quantidade acima 60 itens de complexidade abaixo:\n\t- Cenários de teste (por cenário);\n\t- Grupo de até 5 variáveis (por grupo de variável);\n\t- Configurações a fontes de dados externos (por configuração).",
-            "USTBB_A": 12,
-            "USTBB_M": 6
+            "USTBB_A": 12.0,
+            "USTBB_M": 6.0
         },
         "ALTA": {
             "description": "",
-            "USTBB_A": 20,
-            "USTBB_M": 10
+            "USTBB_A": 20.0,
+            "USTBB_M": 10.0
+        }
+    },
+    "OUTRO": {
+        "A": "Criacao de arquivo",
+        "M": "Alteração de arquivo",
+        "BAIXA": {
+            "description": "Quantidade de até 50 linhas",
+            "USTBB_A": 1,
+            "USTBB_M": 0.5
+        },
+        "MEDIA": {
+            "description": "Quantidade entre 51 até 100 linhas",
+            "USTBB_A": 2.0,
+            "USTBB_M": 1.0
+        },
+        "ALTA": {
+            "description": "Quantidade acima de 100 linhas",
+            "USTBB_A": 3.0,
+            "USTBB_M": 1.5
         }
     }
 }

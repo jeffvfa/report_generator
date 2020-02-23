@@ -26,6 +26,25 @@ type TWorksheetCell = {
 type TWorksheetAttributes = {
     [key in TFileCategory]?: TWorksheetCell;
 };
+type TWorksheetHeader =
+    'index'
+    | 'Tarefa'
+    | 'Disciplina'
+    | 'Atividade'
+    | 'Descricao/Artefato'
+    | 'Plataforma'
+    | 'Complexidade'
+    | 'Componente/Item'
+    | 'Unidade de medida'
+    | 'Descricao da complexidade'
+    | 'Qtd'
+    | 'Nome do Artefato/Objeto'
+    | 'USTIBB'
+    | 'USTIBB Total';
+type TWorksheetRow = {
+    [key in TWorksheetHeader]: any;
+};
+
 type TComplexityCalculator = {
     [key in TFileCategory]?: (arg0: string) => TFileComplexity;
 }
