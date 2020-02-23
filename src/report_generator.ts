@@ -33,8 +33,12 @@ namespace report_generator {
         const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
         console.log('Rule Appliance complete');
         fs.writeFile('output/saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
+
+        const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
+        let worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
+        generate_report(calculatedTaskList, worksheetAttributes);
     };
 
     main();
-    generate_report();
+
 }

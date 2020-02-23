@@ -31,15 +31,15 @@ type TWorksheetHeader =
     | 'Tarefa'
     | 'Disciplina'
     | 'Atividade'
-    | 'Descrição/Artefato'
+    | 'Descricao/Artefato'
+    | 'Plataforma'
     | 'Complexidade'
     | 'Componente/Item'
     | 'Unidade de medida'
-    | 'Descrição da complexidade'
+    | 'Descricao da complexidade'
     | 'Qtd'
     | 'Nome do Artefato/Objeto'
     | 'USTIBB'
-    | 'Unitário'
     | 'USTIBB Total';
 type TWorksheetRow = {
     [key in TWorksheetHeader]: any;
