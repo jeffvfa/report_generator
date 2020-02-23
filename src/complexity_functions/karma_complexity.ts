@@ -32,6 +32,3 @@ export default function calculateKarmaComplexity(FILE_PATH: string): TFileComple
         return 'BAIXA';
     }
 };
-
-// it receives a path to a karma Jasmine file and calculate the file's complexity
-
