@@ -1,5 +1,6 @@
 interface IGitLogOutput {
     commit: string;
+    directory: string;
     author: string;
     date: string;
     message: string;
@@ -8,6 +9,7 @@ interface IGitLogOutput {
 
 type TFileComplexity = 'BAIXA' | 'MEDIA' | 'ALTA' | null;
 type TFileCategory = 'TEST' | 'JAVA' | 'JAVASCRIPT' | 'KEY_VALUE' | 'CSS' | 'HTML' | 'SCALA' | 'OUTRO';
+type TDiffType = 'M' | 'A';
 
 type TWorksheetComplexityCell = {
     description: string;
@@ -23,4 +25,14 @@ type TWorksheetCell = {
 };
 type TWorksheetAttributes = {
     [key in TFileCategory]?: TWorksheetCell;
+};
+
+type TFileProperties = {
+    diffType: TDiffType;
+    filePath: string;
+    category: TFileCategory;
+    complexity: TFileComplexity;
+};
+type TTaskProperties = {
+    [key: string]: TFileProperties[];
 };
