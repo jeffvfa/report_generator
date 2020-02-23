@@ -1,7 +1,7 @@
 import calculateCSSComplexity from './complexity_functions/css_complexity';
 import karma_complexity from './complexity_functions/karma_complexity';
 import fs from 'fs';
-import {arrayUnique} from './helpers/Array.helper';
+import {arrayUnique, arrayRemoveItem} from './helpers/Array.helper';
 
 'use strict';
 namespace report_generator {
@@ -42,27 +42,66 @@ namespace report_generator {
             });
     };
 
+
     const formatCommitsToTaskList = (commits: IGitLogOutput[]) => {
         return commits.reduce<TTaskProperties>((acc, y) => {
             let task = y.message.substr(5, 7);
-            const projectPath = y.directory;
+            const projectPath = y.directory || '';
             acc[task] = acc[task] || [];
-            acc[task] = arrayUnique(acc[task].concat(buildFileObjects(y, projectPath)));
+            acc[task] = arrayUnique(acc[task].concat(buildFileObjects(y, projectPath)), (el1, el2) => {
+                return el1.diffType === el2.diffType &&
+                    el1.filePath === el2.filePath &&
+                    el1.complexity === el2.complexity &&
+                    el1.category === el2.category
+            });
             return acc
         }, {});
     };
+
+    const removeFileDuplicates = (filePropertiesList: TFileProperties[]): TFileProperties[] => {
+        const filesList = filePropertiesList.map(el => {
+            return {filePath: el.filePath, diffType: el.diffType};
+        });
+        let contructedList = filePropertiesList.map(el => el);
+        filesList.forEach(el => {
+            if (el.diffType === 'A') contructedList.filter(el2 => el2.filePath === el.filePath).forEach(el3 => el3.diffType = 'A');
+        });
+
+        return arrayUnique(contructedList, (el1, el2) => {
+            return el1.diffType === el2.diffType &&
+                el1.filePath === el2.filePath &&
+                el1.complexity === el2.complexity &&
+                el1.category === el2.category
+        });
+    };
+
+    const applyAddedVersusModifiedRuleToTaskList = (taskList: TTaskProperties): TTaskProperties => {
+        let ruledTaskList: TTaskProperties = {};
+        Object.keys(taskList).forEach(k => {
+            ruledTaskList[k] = removeFileDuplicates(taskList[k]);
+        });
+        return ruledTaskList;
+    };
+
 
     const main = (): void => {
         console.log("Iniciando Report Generator");
 
         // let rawdata = fs.readFileSync('output/gitlog0.json', 'utf8');
-        console.log("Iniciando Parse Arquivo gitlog.json");
+        console.log("\n\nIniciando Parse Arquivo gitlog.json");
         let rawdata = fs.readFileSync('gitlog.json', 'utf8');
         rawdata = rawdata.replace(/\s/g, ' ');
         const commits: IGitLogOutput[] = JSON.parse(rawdata);
         console.log("Parse realizado com sucesso!!!");
 
-        console.log(JSON.stringify(formatCommitsToTaskList(commits), null, '\t'));
+        console.log('\n\nbuilding task list');
+        const taskList = formatCommitsToTaskList(commits);
+        console.log('building Complete');
+
+        console.log('\n\nAppying AddedVersusModified Rule to tasklist');
+        const ruledTaskList = applyAddedVersusModifiedRuleToTaskList(taskList);
+        console.log('Rule Appliance complete');
+        fs.writeFile('saida1.json', JSON.stringify(ruledTaskList, null, '\t'), err => console.log(err));
     };
 
     main();
