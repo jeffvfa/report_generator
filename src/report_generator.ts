@@ -1,9 +1,9 @@
-import calculateCSSComplexity from './complexity_functions/css_complexity';
-import karma_complexity from './complexity_functions/karma_complexity';
-import fs from 'fs';
-import {arrayUnique, arrayRemoveItem} from './helpers/Array.helper';
-
 'use strict';
+
+import fs from 'fs';
+import {arrayUnique} from './helpers/Array.helper';
+import complexityCalculator from './complexity_functions/all_complexities_calculator';
+
 namespace report_generator {
 
     const retrieveCategoryFromFile = (filePath: string): TFileCategory | undefined => {
@@ -83,6 +83,15 @@ namespace report_generator {
         return ruledTaskList;
     };
 
+    const calculateComplexityForTaskList = (taskList: TTaskProperties): TTaskProperties => {
+        const calculatedTaskList = Object.assign<{}, TTaskProperties>({}, taskList);
+        Object.keys(calculatedTaskList).forEach(k => {
+            calculatedTaskList[k].forEach(fileprops => {
+                fileprops.complexity = complexityCalculator[fileprops.category]!(fileprops.filePath);
+            });
+        });
+        return calculatedTaskList;
+    };
 
     const main = (): void => {
         console.log("Iniciando Report Generator");
@@ -101,7 +110,11 @@ namespace report_generator {
         console.log('\n\nAppying AddedVersusModified Rule to tasklist');
         const ruledTaskList = applyAddedVersusModifiedRuleToTaskList(taskList);
         console.log('Rule Appliance complete');
-        fs.writeFile('saida1.json', JSON.stringify(ruledTaskList, null, '\t'), err => console.log(err));
+
+        console.log('\n\nAppying Complexity calculation to tasklist');
+        const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList);
+        console.log('Rule Appliance complete');
+        fs.writeFile('saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
     };
 
     main();

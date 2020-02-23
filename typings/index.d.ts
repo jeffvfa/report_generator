@@ -26,6 +26,9 @@ type TWorksheetCell = {
 type TWorksheetAttributes = {
     [key in TFileCategory]?: TWorksheetCell;
 };
+type TComplexityCalculator = {
+    [key in TFileCategory]?: (arg0: string) => TFileComplexity;
+}
 
 type TFileProperties = {
     diffType: TDiffType;
