@@ -26,7 +26,7 @@ function retrieveCategoryFromFile(filePath) {
         category = 'TEST';
     } else if (fileName.includes('.java')) return 'JAVA';
     else if (fileName.includes('.js') || fileName.includes('.ts')) category = 'JAVASCRIPT';
-    else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY-VALUE';
+    else if (fileName.includes('.xml') || fileName.includes('.json')) category = 'KEY_VALUE';
     else if (fileName.includes('.css')) {
         category = 'CSS';
         complexity = 'TEST;' //css_complexity(filePath);

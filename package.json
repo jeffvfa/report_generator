@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/igorsodre/report_generator#readme",
   "devDependencies": {
+    "@types/node": "^13.7.4",
     "tslint": "^6.0.0",
     "typescript": "^3.8.2"
   }
