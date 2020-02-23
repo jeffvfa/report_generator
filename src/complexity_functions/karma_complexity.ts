@@ -1,7 +1,11 @@
 'use strict';
-const fs = require('fs');
+import fs from 'fs';
 
-const calculateKarmaComplexity = function(FILE_PATH) {
+/**
+ * it receives a path to a karma Jasmine file and calculate the file's complexity
+ * @param FILE_PATH A path to a file
+ */
+export default function calculateKarmaComplexity(FILE_PATH: string): TFileComplexity {
     let karma_file = fs.readFileSync(FILE_PATH, 'utf8');
 
     let quantity_of_test_cases = karma_file.split('it(').length - 1;
@@ -23,11 +27,11 @@ const calculateKarmaComplexity = function(FILE_PATH) {
     if (complexity > 60) {
         return 'ALTA';
     } else if (complexity > 30) {
-        return 'MÉDIA';
+        return 'MEDIA';
     } else {
         return 'BAIXA';
     }
 };
 
 // it receives a path to a karma Jasmine file and calculate the file's complexity
-exports.default = calculateKarmaComplexity;
+
