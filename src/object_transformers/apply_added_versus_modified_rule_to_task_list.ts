@@ -6,7 +6,8 @@ const removeFileDuplicates = (filePropertiesList: TFileProperties[]): TFilePrope
     const filesList = filePropertiesList.map(el => {
         return {filePath: el.filePath, diffType: el.diffType};
     });
-    let contructedList = filePropertiesList.map(el => el);
+    let contructedList = filePropertiesList.map(el => Object.assign({}, el));
+
     filesList.forEach(el => {
         if (el.diffType === 'A') contructedList.filter(el2 => el2.filePath === el.filePath).forEach(el3 => el3.diffType = 'A');
     });
