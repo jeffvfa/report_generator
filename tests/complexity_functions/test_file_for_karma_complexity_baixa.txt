@@ -1,0 +1,72 @@
+'use strict';
+
+describe('fila-caixa-controllers Suite', function () {
+
+    var $controller, filaCaixaController, scope, mockGAWHubClient, mockFilaCaixaService, mockPLTParamsService;
+
+    beforeEach(function () {
+        angular.mock.module('filaCaixaControllers');
+        angular.mock.module('gawHubServices');
+        angular.mock.module('filaCaixaServices');
+    });
+
+    // criando servicos fake
+    beforeEach(function () {
+        angular.mock.module(function ($provide) {
+            $provide.value('PLTParamsService', {
+                'get': function () { return '' },
+                'add': function () { return '' }
+            });
+            $provide.value('GAWHubClient', {});
+        });
+    });
+
+    beforeEach(inject(function (_$controller_, _$rootScope_, _GAWHubClient_, _filaCaixaService_, _PLTParamsService_) {
+        $controller = _$controller_;
+        scope = _$rootScope_.$new();
+        mockGAWHubClient = _GAWHubClient_;
+        mockFilaCaixaService = _filaCaixaService_;
+        mockPLTParamsService = _PLTParamsService_;
+
+        mockGAWHubClient.getAmbiente = function (event, opt) { return true; };
+        mockGAWHubClient.receberDados = function (event, opt) { return true; };
+
+
+
+        filaCaixaController = $controller('filaCaixaController', {
+            '$scope': scope,
+            'GAWHubClient': mockGAWHubClient,
+            'filaCaixaService': mockFilaCaixaService,
+            'PLTParamsService': mockPLTParamsService
+        });
+
+    }));
+
+    it('Deve definir o controller', function () {
+        expect(filaCaixaController).toBeDefined();
+    });
+
+    describe('#retornaNomeIconeCodigoEstadoRadar', function () {
+        it('Deve retornar codigo estado do radar verde', function () {
+
+            var indicador = 1;
+            var estado = filaCaixaController.retornaNomeIconeCodigoEstadoRadar(indicador);
+            // verify
+            expect('g-1-verde.png').toEqual(estado);
+
+        });
+
+    });
+
+    describe('#iniciar', function () {
+        it('Deve carregar as operacoes iniciais', function () {
+
+            var indicador = 1;
+            var estado = filaCaixaController.iniciar();
+            // verify
+
+        }); 
+  
+    });
+
+});
