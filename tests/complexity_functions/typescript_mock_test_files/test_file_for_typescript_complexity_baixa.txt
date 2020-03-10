@@ -1,0 +1,60 @@
+namespace bb.gat {
+    'use strict';
+
+    export type IAmbiente = bb.gaw.IAmbiente;
+
+    export class CorrespondenteBancarioController {
+        static $inject = ['$rootScope', '$scope', '$location', 'CorrespondenteBancarioService', 'GAWHubClient', 'GATUtil'];
+        public ativado: boolean = true;
+        public seExisteConfiguracaoPriorizacao: boolean;
+        public ambiente: IAmbiente;
+
+        constructor(
+            private $rootScope: ng.IRootScopeService,
+            private $scope: ng.IScope,
+            private $location: any,
+            private CorrespondenteBancarioService: CorrespondenteBancarioService,
+            private GawHubClient: any,
+            private GATUtil: any
+        ) {
+            this.GawHubClient.getAmbiente((dados: IAmbiente) => {
+                this.ambiente = dados;
+                this.recuperaPriorizacaoCorrespondenteParaAgenciaAtual();
+            });
+        }
+
+        public recuperaPriorizacaoCorrespondenteParaAgenciaAtual(): void {
+            this.CorrespondenteBancarioService.recuperaPriorizacaoCorrespondenteParaAgenciaAtual(this.ambiente.dependenciaTMF)
+                .then((response: ICorrespondeteBancarioResponseData) => {
+                    this.ativado = (!response.indicadorPriorizacaoCorrespondenteBancario) || response.indicadorPriorizacaoCorrespondenteBancario === 'S';
+                    this.seExisteConfiguracaoPriorizacao = Boolean(response.indicadorPriorizacaoCorrespondenteBancario);
+                });
+        }
+
+        public alteraConfiguracaoDePrioridade() {
+            this.CorrespondenteBancarioService.alteraConfiguracaoDePrioridade(this.ambiente.dependenciaTMF, this.answer)
+                .then(() => {
+                    this.GATUtil.exibirMensagem('Prioridade alterada com sucesso.', 'SUCCESS');
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.GATUtil.exibirMensagem('Falha na alteracao de prioridade.', 'ERROR');
+                });
+        }
+
+        public incluiConfiguracaoDePrioridade() {
+            this.CorrespondenteBancarioService.incluiConfiguracaoDePrioridade(this.ambiente.dependenciaTMF, this.answer)
+                .then(() => {
+                    this.seExisteConfiguracaoPriorizacao = true;
+                    this.GATUtil.exibirMensagem('Prioridade incluída com sucesso.', 'SUCCESS');
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.GATUtil.exibirMensagem('Falha na inclusão de prioridade.', 'ERROR');
+                });
+        }
+    }
+
+    angular.module('gatCorrespondenteBancario')
+        .controller('CorrespondenteBancarioController', CorrespondenteBancarioController);
+}
