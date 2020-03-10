@@ -1,5 +1,6 @@
 import calculateCSSComplexity from './css_complexity';
 import calculateKarmaComplexity from './karma_complexity';
+import calculateTypescriptComplexity from './typescript_complexity';
 
 export default (function (): TComplexityCalculator {
     const unimplementedComplexity = (str: string): TFileComplexity => 'BAIXA';

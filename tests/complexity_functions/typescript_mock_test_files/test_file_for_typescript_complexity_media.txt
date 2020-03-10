@@ -1,0 +1,145 @@
+namespace bb.gat {
+    'use strict';
+    type IAmbiente = bb.gaw.IAmbiente;
+    type  IUnidadeOrganizacional = IAgenciaCompartilhada;
+    if ('padStart' in String) String.prototype.padStart = bb.gat.helpers.padStart;
+
+    export class AtendimentoCompartilhadoController {
+        static $inject = ['$rootScope', '$scope', '$location', 'AtendimentoCompartilhadoService', 'GAWHubClient', 'GATUtil', '$bbModal'];
+        // Informacoes Pada unidade definida no painel de configuracao
+        public ambiente: IAmbiente;
+        public unidadeAtual: IUnidadeOrganizacinalCompleta;
+        public unidadeSubordinadaSelecionada: IUnidadeOrganizacional;
+        public listaUnidadesCompartilhadas: IAgenciaCompartilhada[];
+        public listaUnidadesSubordinadas: IUnidadeOrganizacional[];
+
+        public checkboxNegocial: boolean = true;
+
+        public get seCheckBoxCaixaEhConfiguravel(): boolean {
+            if (this.unidadeAtual && this.unidadeASeCompartilhar) {
+                return this.unidadeAtual.numeroOrdemDependenciaSubordinado === 0
+                    && this.unidadeASeCompartilhar.codigoSubordinada === 0;
+            }
+            return false;
+        }
+
+        private _checkBoxCaixa: boolean = false;
+
+        public get checkboxCaixa(): boolean {
+            // Implementa a regra de negocio: Opcao de caixa soh eh habilitada quando ambas as unidades tiverem o codigo de subordinaca 00
+            if (this.seCheckBoxCaixaEhConfiguravel) return this._checkBoxCaixa;
+            return false;
+        };
+
+        public set checkboxCaixa(value: boolean) {
+            this._checkBoxCaixa = value;
+        }
+
+
+        public get nomeENumeroSubordinacaoUnidadeAtual(): string {
+            if (this.unidadeAtual)
+                return this.unidadeAtual.nomeUorReduzido + ' - ' + this.unidadeAtual.numeroOrdemDependenciaSubordinado.toString().padStart(2, '0');
+            return '';
+        }
+
+        // Informacoes Da Unidade a Ser vinculada a unidade do painel de configuracoes
+        public unidadeASeCompartilhar: IUnidadeOrganizacional;
+        public prefixoASeCompartilhar: number;
+        public listaUnidadesSubordinadasASeCompartilhar: IUnidadeOrganizacional[];
+
+        constructor(
+            private $rootScope: ng.IRootScopeService,
+            private $scope: ng.IScope,
+            private $location: ng.ILocationService,
+            private AtendimentoCompartilhadoService: AtendimentoCompartilhadoService,
+            private GawHubClient: any,
+            private GATUtil: any,
+            private $bbModal
+        ) {
+        }
+
+        public iniciar(): void {
+            this.resetControllerState();
+            this.GawHubClient.getAmbiente((dados: IAmbiente) => {
+                this.ambiente = dados;
+                this.consultarUnidadeAtual();
+                this.listarAgenciasSubordinadas();
+                this.listarAgenciasCompartilhadas();
+            });
+        }
+
+        public resetControllerState(): void {
+            this.unidadeAtual = null;
+            this.unidadeSubordinadaSelecionada = null;
+            this.listaUnidadesCompartilhadas = [];
+            this.listaUnidadesSubordinadas = [];
+
+            this.unidadeASeCompartilhar = null;
+            this.prefixoASeCompartilhar = null;
+            this.listaUnidadesSubordinadasASeCompartilhar = [];
+        }
+
+        public consultarUnidadeAtual(): void {
+            this.AtendimentoCompartilhadoService.consultarUnidadeOrganizacional(this.ambiente.agenciaTMF, 0)
+                .then(unidade => {
+                    this.unidadeAtual = unidade;
+                });
+        }
+
+        public listarAgenciasCompartilhadas(): void {
+            this.AtendimentoCompartilhadoService.listarAgenciasCompartilhadas(this.ambiente.dependenciaTMF)
+                .then(response => {
+                    this.listaUnidadesCompartilhadas = response.listaAgenciasCompartilhadas;
+                });
+        }
+
+        public listarAgenciasSubordinadas(): void {
+            this.AtendimentoCompartilhadoService.listarAgenciasSubordinadas(this.ambiente.dependenciaTMF)
+                .then(listaUnidades => {
+                    if (this.unidadeAtual) {
+                        this.listaUnidadesSubordinadas = [{
+                            codigoUor: this.unidadeAtual.codigoUor,
+                            codigoDependencia: this.unidadeAtual.codigoDependenciaUor,
+                            codigoSubordinada: this.unidadeAtual.numeroOrdemDependenciaSubordinado,
+                            nomeReduzido: this.unidadeAtual.nomeUorReduzido
+                        } as IUnidadeOrganizacional].concat(listaUnidades);
+                    } else {
+                        this.listaUnidadesCompartilhadas = listaUnidades;
+                    }
+                });
+        }
+
+        public pesquisaUnidadesASeCompartilhar(): void {
+            this.prefixoASeCompartilhar && this.AtendimentoCompartilhadoService.consultarUnidadeOrganizacional(this.prefixoASeCompartilhar, 0)
+                .then(unidade => {
+                    if (unidade && unidade.codigoUor && unidade.codigoDependenciaUor) {
+                        this.preencheUnidadesSubordinadasASeCompartihar(unidade);
+                    }
+                });
+        }
+
+        public preencheUnidadesSubordinadasASeCompartihar(unidade: IUnidadeOrganizacinalCompleta): void {
+            this.AtendimentoCompartilhadoService.listarAgenciasSubordinadas(unidade.codigoUor)
+                .then(listaUnidades => {
+                    this.listaUnidadesSubordinadasASeCompartilhar = [{
+                        codigoUor: unidade.codigoUor,
+                        codigoDependencia: unidade.codigoDependenciaUor,
+                        codigoSubordinada: unidade.numeroOrdemDependenciaSubordinado,
+                        nomeReduzido: unidade.nomeUorReduzido
+                    } as IUnidadeOrganizacional].concat(listaUnidades);
+                });
+        }
+
+        public formataNomeUnidade(unidade: IUnidadeOrganizacional): string {
+            return unidade.nomeReduzido + ' - ' + unidade.codigoSubordinada.toString().padStart(2, '0');
+        }
+
+        this.dummyMethod1 = function(unidade: IUnidadeOrganizacional): string {
+            return unidade.nomeReduzido + ' - ' + unidade.codigoSubordinada.toString().padStart(2, '0');
+        }
+
+    }
+
+    angular.module('gatAtendimentoCompartilhado')
+        .controller('AtendimentoCompartilhadoController', AtendimentoCompartilhadoController);
+}
