@@ -208,4 +208,19 @@ describe('=> Module Test Suite', function () {
         // Verify
         expect(result).toBe(knownValue);
     });
+
+    // Media threshold
+    it('-> Method Test Suite', function () {
+        // Setup
+        var variable1;
+        var variable2;
+        var variable3;
+        var variable4;
+    
+        // Action
+        var result = controller.method(parameters);
+        
+        // Verify
+        expect(result).toBe(knownValue);
+    });
 });
