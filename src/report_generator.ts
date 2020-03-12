@@ -1,6 +1,7 @@
 'use strict';
 
 import fs from 'fs';
+import fse from 'fs-extra';
 import complexityCalculator from './complexity_functions/all_complexities_calculator';
 import retrieveCategoryFromFile from "./object_transformers/retrieve_category_from_file";
 import formatCommitsToTaskList from './object_transformers/format_commits_to_task_list';
@@ -32,7 +33,7 @@ namespace report_generator {
         console.log('\n\nAppying Complexity calculation to tasklist');
         const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
         console.log('Rule Appliance complete');
-        fs.writeFile('output/saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
+        fse.outputFile('output/saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
 
         const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
         let worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);

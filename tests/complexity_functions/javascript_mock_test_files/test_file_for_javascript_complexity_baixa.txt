@@ -1,0 +1,87 @@
+(function (angular) {
+
+    angular
+        .module('filaCaixaControllers', ['gawHubServices'])
+        .controller('filaCaixaController', filaCaixaController);
+
+    filaCaixaController.$inject = ['$scope', 'GAWHubClient', 'filaCaixaService', '$location', 'PLTParamsService'];
+
+    function filaCaixaController($scope, GAWHubClient, filaCaixaService, $location, PLTParamsService) {
+
+        var vm = this;
+        vm.iniciar = iniciar;
+        vm.consultarFilasAtendimento = consultarFilasAtendimento;
+        vm.voltarTelaInicial = voltarTelaInicial;
+        vm.horaAtualizacaoTela = moment().format('HH:mm');
+        vm.atualizarTela = atualizarTela;
+        vm.retornaNomeIconeCodigoEstadoRadar = retornaNomeIconeCodigoEstadoRadar;
+        vm.listaCarteira = [];
+
+        function iniciar() {
+            vm.numeroDependencia = PLTParamsService.get('numeroDependencia');
+            vm.nomeUorReduzido = PLTParamsService.get('nomeUorReduzido');
+            vm.numeroMaiorTempoEsperaAtendimento = PLTParamsService.get('numeroMaiorTempoEsperaAtendimento');
+            vm.codigoSubordinada = PLTParamsService.get('codigoSubordinada');
+            vm.codigoDependencia = PLTParamsService.get('numeroDependencia');
+            vm.codigoUnidadeOrganizacional = PLTParamsService.get('codigoUor');
+            vm.redirecionarTelaDetalhamentoFila = redirecionarTelaDetalhamentoFila;
+
+            if (vm.codigoUnidadeOrganizacional) {
+                consultarFilasAtendimento(vm.codigoUnidadeOrganizacional);
+            }
+        }
+
+        function atualizarTela() {
+            consultarFilasAtendimento(vm.codigoUnidadeOrganizacional);
+            vm.horaAtualizacaoTela = moment().format('HH:mm');
+        }
+
+        function consultarFilasAtendimento(numeroDependencia) {
+            filaCaixaService.consultarFilasAtendimento(numeroDependencia).then(function (response) {
+                if (response) {
+                    vm.numeroTempoMedioEsperaAtendimento = response.numeroTempoMedioEsperaAtendimento;
+                    vm.textoMaiorTempoEsperaAtendimento = response.textoMaiorTempoEsperaAtendimento;
+                    vm.numeroTempoMaximoLeiFila = parseInt(response.numeroTempoMaximoLeiFila);
+                    vm.listaFilas = response.listaOcorrencia;
+                    vm.quantidadeSolicitacaoEsperaAtendimento = response.quantidadeSolicitacaoEsperaAtendimento;
+                    vm.textoDiaMaximoAtendimento = response.textoDiaMaximoAtendimento;
+                }
+            });
+        }
+
+        function retornaNomeIconeCodigoEstadoRadar(indicador) {
+            switch (indicador) {
+                case 1:
+                    return "g-1-verde.png";
+                case 2:
+                    return "g-2-amarelo.png";
+                case 3:
+                    return "g-3-vermelho.png";
+                default:
+                    return "g-3-vermelho.png";
+            }
+        }
+
+        function voltarTelaInicial() {
+            $location.path('atendimento');
+        }
+
+        function redirecionarTelaDetalhamentoFila(fila) {
+            GAWHubClient.mostrarApp(
+                'gatMonitoracaoDetalheCaixa',
+                {
+                    conteudo: JSON.stringify({
+                        fila: fila,
+                        prefixo: vm.codigoDependencia,
+                        uor: vm.codigoUnidadeOrganizacional,
+                        subordinada: vm.codigoSubordinada || 0
+                    })
+                }, {}
+            );
+            GAWHubClient.getDependencia(function(dependencia) {
+                console.log(dependencia);
+            });
+        }
+
+    }
+})(angular);

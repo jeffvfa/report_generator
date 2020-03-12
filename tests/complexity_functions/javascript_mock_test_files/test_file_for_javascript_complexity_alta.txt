@@ -1,0 +1,114 @@
+(function (angular) {
+
+    'use strict';
+
+    /* Filters */
+    angular.module('gatFilters', [])
+        .filter('formatSeconds', formatSeconds)
+        .filter('formatSecondsLabel', formatSecondsLabel)
+        .filter('converterSegundosMinutos', converterSegundosMinutos)
+        .filter('filtrarLista', filtrarLista)
+        .filter('iconeRadar', iconeRadar)
+        .filter('iconeRadarIndicador', iconeRadarIndicador);
+
+
+    function formatSeconds() {
+        return function (secs) {
+            if (secs <= 0) {
+                return '--';
+            }
+            var secNum = parseInt(secs, 10);
+            var hours = Math.floor(secNum / 3600) || 0;
+            var minutes = Math.floor(secNum / 60) % 60;
+            var seconds = secNum % 60;
+
+            return [hours, minutes, seconds]
+                .map(function (v) {
+                    return v < 10 ? '0' + v : v;
+                }).join(':');
+        };
+    }
+
+    function formatSecondsLabel() {
+        return function (secs) {
+            if (secs <= 0) {
+                return '--';
+            }
+            var secNum = parseInt(secs, 10);
+            var hours = Math.floor(secNum / 3600) || 0;
+            var minutes = Math.floor(secNum / 60) % 60;
+            var seconds = secNum % 60;
+
+            return [hours, minutes, seconds]
+                .map(function (v, i) {
+                    var l = ['h ', 'm ', 's'];
+                    return v > 0 ? v + l[i] : '';
+                }).join('');
+        };
+    }
+
+    function filtrarLista() {
+        return function (list, filterField, selectedField) {
+            return selectedField ? filtrar(list, filterField, selectedField) : list;
+        };
+
+        function filtrar(list, filterField, selectedField) {
+            return list.filter(function (item) {
+                return String(item[filterField]) === String(selectedField);
+            });
+        }
+    }
+
+    function converterSegundosMinutos() {
+        return function (segundos) {
+            return segundos ? parseInt(segundos / 60) : 0;
+        };
+    }
+
+    function iconeRadar() {
+        return function (maiorTempoFila, tempoLeiFila) {
+            var tempoMedio = tempoLeiFila / 2;
+
+            if (maiorTempoFila < tempoMedio) {
+                return 'g-1-verde.png';
+            } else {
+                if (maiorTempoFila < tempoLeiFila) {
+                    return 'g-2-amarelo.png';
+                } else {
+                    return 'g-3-vermelho.png';
+                }
+            }
+        };
+    }
+
+    function iconeRadarIndicador() {
+        return function (maiorTempoFila, diaPico) {
+            var tempoMaxFila = 20;
+            var tempoMedio = 10;
+            if (diaPico) {
+                tempoMaxFila = 30;
+                tempoMedio = 15;
+            }
+
+            if (maiorTempoFila < tempoMedio) {
+                return 'g-1-verde.png';
+            } else {
+                if (maiorTempoFila < tempoMaxFila) {
+                    return 'g-2-amarelo.png';
+                } else {
+                    return 'g-3-vermelho.png';
+                }
+            }
+        };
+    }
+
+    function dummyFunction() {
+        someCode.anotherCode(function(params){
+            console.log(params);
+        }).then(function(response){
+            console.log(response);
+        }).then(function(response2){
+            console.log(response2);
+        });
+    }
+})(angular);
