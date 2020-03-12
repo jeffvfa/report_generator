@@ -2,25 +2,24 @@ import calculateCSSComplexity from './css_complexity';
 import calculateKarmaComplexity from './karma_complexity';
 import calculateTypescriptComplexity from './typescript_complexity';
 
-export default (function (): TComplexityCalculator {
-    const unimplementedComplexity = (str: string): TFileComplexity => 'BAIXA';
-    let complexityCalculator: TComplexityCalculator = {};
+const unimplementedComplexity = (_: string): TFileComplexity => 'BAIXA';
 
-    complexityCalculator['TEST'] = calculateKarmaComplexity;
+let complexityCalculator: TComplexityCalculator = {};
 
-    complexityCalculator['JAVA'] = unimplementedComplexity;
+complexityCalculator['TEST'] = calculateKarmaComplexity; // TODO: TEST can be either karma or java, so this line is incomplete
 
-    complexityCalculator['JAVASCRIPT'] = unimplementedComplexity;
+complexityCalculator['JAVA'] = unimplementedComplexity;
 
-    complexityCalculator['KEY_VALUE'] = unimplementedComplexity;
+complexityCalculator['JAVASCRIPT'] = calculateTypescriptComplexity; // Works for both typescript and javascript
 
-    complexityCalculator['CSS'] = calculateCSSComplexity;
+complexityCalculator['KEY_VALUE'] = unimplementedComplexity;
 
-    complexityCalculator['HTML'] = unimplementedComplexity;
+complexityCalculator['CSS'] = calculateCSSComplexity;
 
-    complexityCalculator['SCALA'] = unimplementedComplexity;
+complexityCalculator['HTML'] = unimplementedComplexity;
 
-    complexityCalculator['OUTRO'] = unimplementedComplexity;
+complexityCalculator['SCALA'] = unimplementedComplexity;
 
-    return complexityCalculator;
-})();
+complexityCalculator['OUTRO'] = unimplementedComplexity;
+
+export default complexityCalculator;

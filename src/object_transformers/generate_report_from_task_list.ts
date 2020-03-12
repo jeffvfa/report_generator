@@ -1,9 +1,10 @@
 'use strict';
 
 import fs from "fs";
+import fse from 'fs-extra';
 import * as buffer from "buffer";
-import ExcelJS, {Alignment, Border, Column, Fill, Workbook, Worksheet} from "exceljs";
-import {arrayUnique} from "../helpers/Array.helper";
+import ExcelJS, { Alignment, Border, Column, Fill, Workbook, Worksheet } from "exceljs";
+import { arrayUnique } from "../helpers/Array.helper";
 
 const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet => {
     workbook.creator = 'report_generator';
@@ -18,7 +19,7 @@ const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet =
         }
     ];
     let sheet = workbook.addWorksheet('Planilha OF/Orcamento ', {
-        pageSetup: {paperSize: 9, orientation: 'landscape'}
+        pageSetup: { paperSize: 9, orientation: 'landscape' }
     });
     const keysToExtract: TWorksheetHeader[] = [
         'index',
@@ -47,21 +48,21 @@ const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet =
 };
 
 const setDefaultStyleForWorkSheet = (sheet: Worksheet): void => {
-    const defaultAlignment: Partial<Alignment> = {vertical: 'middle', horizontal: 'center'};
-    const defaultBlueCell: Fill = {type: 'pattern', pattern: 'solid', fgColor: {argb: '205696'}};
+    const defaultAlignment: Partial<Alignment> = { vertical: 'middle', horizontal: 'center' };
+    const defaultBlueCell: Fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '205696' } };
     const columnsWithBlueCells = ['index', 'Tarefa'];
-    const defaultBorder: Partial<Border> = {color: {argb: '000000'}, style: 'thin'};
-    sheet.eachRow({includeEmpty: true}, (row, rowNumber) => {
+    const defaultBorder: Partial<Border> = { color: { argb: '000000' }, style: 'thin' };
+    sheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
 
         row.eachCell((cell, colNumber) => {
             if (rowNumber === 1) {
-                cell.font = {size: 15, color: {argb: 'FFFFFF'}};
+                cell.font = { size: 15, color: { argb: 'FFFFFF' } };
                 cell.fill = defaultBlueCell;
             } else if (columnsWithBlueCells.includes(sheet.getColumn(colNumber).key!)) {
-                cell.font = {size: 13, color: {argb: 'FFFFFF'}};
+                cell.font = { size: 13, color: { argb: 'FFFFFF' } };
                 cell.fill = defaultBlueCell;
             }
-            cell.border = {bottom: defaultBorder, top: defaultBorder, left: defaultBorder, right: defaultBorder};
+            cell.border = { bottom: defaultBorder, top: defaultBorder, left: defaultBorder, right: defaultBorder };
             cell.alignment = defaultAlignment;
         });
 
@@ -137,7 +138,7 @@ const generate_report = (calculatedTaskList: TTaskProperties, worksheetAttribute
 
     setDefaultStyleForWorkSheet(sheet);
     workbook.xlsx.writeBuffer().then((buffer) => {
-        fs.writeFile('output/saida3.xlsx', buffer, err => console.log(err));
+        fse.outputFile('output/saida3.xlsx', buffer, err => console.log(err));
     });
 };
 
