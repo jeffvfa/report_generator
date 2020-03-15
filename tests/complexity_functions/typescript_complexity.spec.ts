@@ -1,3 +1,5 @@
+'use strict';
+
 import calculateTypescriptComplexity from '../../src/complexity_functions/typescript_complexity';
 
 describe('=> Typescript Complexity Test Suite', () => {

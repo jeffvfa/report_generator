@@ -1,3 +1,6 @@
+'use strict';
+
+
 import calculateKarmaComplexity from '../../src/complexity_functions/karma_complexity';
 
 describe('=> Karma Complexity Test Suite', () => {
