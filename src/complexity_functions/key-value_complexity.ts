@@ -11,20 +11,23 @@ export const calculateXmlComplexity = (filepath: string, verbose: boolean = fals
     if (!fs.existsSync(filepath)) return 'BAIXA';
 
     const xmlFileString = fs.readFileSync(filepath, 'utf8');
-    verbose && console.log('File Parsed: ' + xmlFileString);
+    verbose && console.log('File Parsed:\n ' + xmlFileString);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlFileString, 'text/xml');
-    
+
 
     let numOfKeys = 0;
-    const coutNodes = (node?: Node): void => {
-        verbose && console.log(node?.textContent);
-        if (node && node.textContent?.trim().length !== 0) numOfKeys += 1;
-        if (node && Array.isArray(node.childNodes))
-            node.childNodes.forEach(coutNodes);
+    const countNodes = (node?: Node): void => {
+        // nodeType: 1 -> tags
+        if (node && node.nodeType === 1 && node.childNodes?.length > 0) {
+            numOfKeys += 1;
+            for (let i = 0; i < node.childNodes.length; i++)
+                countNodes(node.childNodes.item(i));
+        }
     }
-    coutNodes(xmlDoc as Node);
+    countNodes(xmlDoc.documentElement);
 
+    verbose && console.log('\nNumber of node: ' + numOfKeys);
     if (numOfKeys > 300) return 'ALTA';
     if (numOfKeys > 100) return 'MEDIA';
 
