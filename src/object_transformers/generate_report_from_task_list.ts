@@ -1,9 +1,7 @@
 'use strict';
 
-import fs from "fs";
 import fse from 'fs-extra';
-import * as buffer from "buffer";
-import ExcelJS, { Alignment, Border, Column, Fill, Workbook, Worksheet } from "exceljs";
+import ExcelJS, { Alignment, Border, Fill, Workbook, Worksheet } from "exceljs";
 import { arrayUnique } from "../helpers/Array.helper";
 
 const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet => {
@@ -48,13 +46,18 @@ const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet =
 };
 
 const setDefaultStyleForWorkSheet = (sheet: Worksheet): void => {
-    const defaultAlignment: Partial<Alignment> = { vertical: 'middle', horizontal: 'center' };
+    const defaultAlignment: Partial<Alignment> = { vertical: 'middle', horizontal: 'center', wrapText: true };
     const defaultBlueCell: Fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '205696' } };
     const columnsWithBlueCells = ['index', 'Tarefa'];
     const defaultBorder: Partial<Border> = { color: { argb: '000000' }, style: 'thin' };
+
+    const maxFontSize = 16
     sheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
 
+        let maxCellHeight = maxFontSize;
         row.eachCell((cell, colNumber) => {
+            if (typeof cell.value === 'string')
+                maxCellHeight = Math.max(maxCellHeight, (cell.value.length / (sheet.getColumn(colNumber).width || 35)) * (cell.font?.size || 16));
             if (rowNumber === 1) {
                 cell.font = { size: 15, color: { argb: 'FFFFFF' } };
                 cell.fill = defaultBlueCell;
@@ -65,7 +68,7 @@ const setDefaultStyleForWorkSheet = (sheet: Worksheet): void => {
             cell.border = { bottom: defaultBorder, top: defaultBorder, left: defaultBorder, right: defaultBorder };
             cell.alignment = defaultAlignment;
         });
-
+        row.height = maxCellHeight + 16;
     })
 };
 
