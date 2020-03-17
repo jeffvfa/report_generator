@@ -30,6 +30,7 @@
     "tslint": "^6.0.0"
   },
   "dependencies": {
+    "dom-parser": "^0.1.6",
     "exceljs": "^3.8.0",
     "fs-extra": "^8.1.0",
     "typescript": "^3.8.3",
