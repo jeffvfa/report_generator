@@ -6,7 +6,7 @@ import ts from 'typescript';
  * it receives a path to a typescript file and calculate the file's complexity
  * @param filepath A path to a file
  */
-const calculateTypescriptComplexity = (filepath: string, verbose: boolean = false): TFileComplexity => {
+const calculateTypescriptComplexity = (filepath: string): TFileComplexity => {
 
     let numOfFunctions = 0;
     const delintNode = (node: ts.Node) => {
@@ -35,7 +35,7 @@ const calculateTypescriptComplexity = (filepath: string, verbose: boolean = fals
     );
 
     delintNode(sourceFile);
-    verbose && console.log('** Total Number Of Functions: ' + numOfFunctions + ' **');
+
     if(numOfFunctions > 20) return 'ALTA';
     if(numOfFunctions > 10) return 'MEDIA';
     return 'BAIXA';

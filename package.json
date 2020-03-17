@@ -5,8 +5,8 @@
   "main": "dist/report_generator.js",
   "scripts": {
     "start": "tsc && node dist/report_generator.js",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "jest --verbose",
+    "coverage": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
