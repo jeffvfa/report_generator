@@ -4,6 +4,7 @@
   "description": "Generates the monthly work reposts for the company Stefanini ",
   "main": "dist/report_generator.js",
   "scripts": {
+    "build": "tsc",
     "start": "tsc && node dist/report_generator.js",
     "test": "jest --verbose",
     "coverage": "jest --coverage --verbose"

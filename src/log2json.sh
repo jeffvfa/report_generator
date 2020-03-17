@@ -7,13 +7,14 @@ WORK_DIR=$(pwd)
 # --directory-start ou -D : especifica o diretório git a ser 'escaneado'. Este argumento eh obrigatorio
 # --author-name ou -A : serao somente recuperados os commits do autor passado como paramentro. Este argumento eh obrigatorio
 # --multiple-directories ou -M : boolean flag que especifica se o diretorio a ser escaneado contem multiplos diretorios git. O valor default = 0
-# Example: $ ./log2json.sh -D="/home/user/Documents/Projects/nome-projeto" -A="c0000000"
+# Example: $ ./log2json.sh -D="/home/user/Documents/Projects/nome-projeto" -A="c0000000" -T="1277756, 1277761, 1277762, 1278121, 1281780"
 
 #####################  Codigo adaptado de: https://pretzelhands.com/posts/command-line-flags   ###################################
 # Valores padrao para as variaveis
 author_name=''
 default_directory=''
 multiple_directories=0
+task_list=''
 output=gitlog.js
 OTHER_ARGUMENTS=()
 
@@ -35,6 +36,10 @@ for arg in "$@"; do
   -A=* | --author-name=*)
     author_name="${arg#*=}"
     shift # Remove --author-name= from processing
+    ;;
+  -T=* | --task-list=*)
+    task_list="${arg#*=}"
+    shift
     ;;
   -o=* | --output=*)
     output="${arg#*=}"
@@ -86,7 +91,7 @@ getLogsFromDirectory() {
 
   # shellcheck disable=SC2164
   cd "$log_directory"
-  log_format_string="%n{%n \"commit\": \"%H\",%n \"directory\":\"$(pwd)\",%n \"author\": \"%an <%ae>\",%n \"date\": \"%ad\",%n \"message\": \"%f\":FILES:"
+  log_format_string="%n{%n \"commit\": \"%H\",%n \"directory\":\"$(pwd)/\",%n \"author\": \"%an <%ae>\",%n \"date\": \"%ad\",%n \"message\": \"%f\":FILES:"
  
   git log --name-status --max-count=1000 --author="$author_name" --date=short \
     --pretty=format:"$log_format_string"|
@@ -132,11 +137,23 @@ getLogsFromAllDirectories() {
     fi
   done
 }
+
+runReportGenerator() {
+  local WORK_DIR=$1
+  local task_list=$2
+  cd "$WORK_DIR"
+  npm run build
+  node ./dist/report_generator.js "$task_list"
+}
+
 # remove arquivos antigos que estejam no diretorio de output
 rm -rf "$WORK_DIR"/output/*
+# task_list=\"$task_list\"
 
 if [[ $multiple_directories -eq 1 ]]; then
   getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output
+  runReportGenerator $WORK_DIR "$task_list"
 else
   getLogsFromDirectory "$default_directory" "$author_name" "$WORK_DIR"/output "0"
+  runReportGenerator $WORK_DIR "$task_list"
 fi

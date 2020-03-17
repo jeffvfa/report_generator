@@ -38,12 +38,24 @@ export const calculateXmlComplexity = (filepath: string, verbose: boolean = fals
  * @param filepath path of the file to calculate the complexity
  * @param verbose flag enable some logging
  */
-export const calculateJsonComplexity = (filepath: string, verbose: boolean = false): TFileComplexity => {
+export const calculateJsonComplexity = (filepath: string): TFileComplexity => {
 
     if (!fs.existsSync(filepath)) return 'BAIXA';
 
     const jsonFileString = fs.readFileSync(filepath, 'utf8');
-    const jsonFileObject = JSON.parse(jsonFileString);
+
+    let jsonFileObject: any = null;
+    try {
+        jsonFileObject = JSON.parse(jsonFileString);
+    } catch (err) {
+        console.log(err);
+        console.log('filepath: ' + filepath);
+        console.log('================================================================\n\n');
+        console.log(jsonFileString);
+        console.log('================================================================\n\n');
+        return 'BAIXA';
+    }
+
 
     let count: number[] = [];
     const getCount = (data: any, level: number): void => {
@@ -69,12 +81,12 @@ export const calculateJsonComplexity = (filepath: string, verbose: boolean = fal
  * @param filepath path of the file to calculate the complexity
  * @param verbose flag enable some logging
  */
-export const calculateKeyValueComplexity = (filepath: string, verbose: boolean = false): TFileComplexity => {
+export const calculateKeyValueComplexity = (filepath: string): TFileComplexity => {
 
     if (!filepath) return 'BAIXA';
-    const fileExtension = filepath.split('.').pop();
-    if (fileExtension?.toUpperCase() === 'JSON') return calculateJsonComplexity(filepath, verbose);
-    else if (fileExtension?.toUpperCase().includes('XML')) return calculateXmlComplexity(filepath, verbose);
+    const fileExtension = filepath.split('.')?.pop();
+    if (fileExtension?.toUpperCase() === 'JSON') return calculateJsonComplexity(filepath);
+    else if (fileExtension?.toUpperCase().includes('XML')) return calculateXmlComplexity(filepath);
 
     return 'BAIXA';
 };
