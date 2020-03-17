@@ -3,14 +3,14 @@ import fs from 'fs';
 
 /**
  * it receives a path to a karma Jasmine file and calculate the file's complexity
- * @param FILE_PATH A path to a file
+ * @param filepath A path to a file
  */
-export default function calculateKarmaComplexity(FILE_PATH: string): TFileComplexity {
+const calculateKarmaComplexity = (filepath: string): TFileComplexity => {
     // if (!fs.existsSync(FILE_PATH)) return null;
 
     // Esta linha eh somente para propositos de teste
-    if (!fs.existsSync(FILE_PATH)) return 'BAIXA';
-    let karma_file = fs.readFileSync(FILE_PATH, 'utf8');
+    if (!fs.existsSync(filepath)) return 'BAIXA';
+    let karma_file = fs.readFileSync(filepath, 'utf8');
 
     let quantity_of_test_cases = karma_file.split('it(').length - 1;
 
@@ -36,3 +36,5 @@ export default function calculateKarmaComplexity(FILE_PATH: string): TFileComple
         return 'BAIXA';
     }
 };
+
+export default calculateKarmaComplexity;

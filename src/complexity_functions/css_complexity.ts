@@ -1,15 +1,16 @@
+'use strict';
 import fs from 'fs';
 
 /**
  * it receives a path to a css file and calculate the file's complexity
- * @param FILE_PATH A path to a file
+ * @param filepath A path to a file
  */
-export default function calculateCSSComplexity(FILE_PATH: string): TFileComplexity {
+const calculateCSSComplexity = (filepath: string): TFileComplexity => {
     // if (!fs.existsSync(FILE_PATH)) return null;
 
     // Esta linha eh somente para propositos de teste
-    if (!fs.existsSync(FILE_PATH)) return 'BAIXA';
-    let css_file = fs.readFileSync(FILE_PATH, 'utf8');
+    if (!fs.existsSync(filepath)) return 'BAIXA';
+    let css_file = fs.readFileSync(filepath, 'utf8');
 
     let quantity_of_objects = css_file.split('}').length - 1;
 
@@ -20,4 +21,6 @@ export default function calculateCSSComplexity(FILE_PATH: string): TFileComplexi
     } else {
         return 'ALTA';
     }
-}
+};
+
+export default calculateCSSComplexity;

@@ -1,6 +1,7 @@
 import calculateCSSComplexity from './css_complexity';
 import calculateKarmaComplexity from './karma_complexity';
 import calculateTypescriptComplexity from './typescript_complexity';
+import calculateKeyValueComplexity from './key-value_complexity';
 
 const unimplementedComplexity = (_: string): TFileComplexity => 'BAIXA';
 
@@ -12,7 +13,7 @@ complexityCalculator['JAVA'] = unimplementedComplexity;
 
 complexityCalculator['JAVASCRIPT'] = calculateTypescriptComplexity; // Works for both typescript and javascript
 
-complexityCalculator['KEY_VALUE'] = unimplementedComplexity;
+complexityCalculator['KEY_VALUE'] = calculateKeyValueComplexity; // Workd for both XML and JSON
 
 complexityCalculator['CSS'] = calculateCSSComplexity;
 

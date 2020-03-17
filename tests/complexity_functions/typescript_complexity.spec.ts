@@ -1,8 +1,21 @@
+'use strict';
+
 import calculateTypescriptComplexity from '../../src/complexity_functions/typescript_complexity';
 
 describe('=> Typescript Complexity Test Suite', () => {
     it('-> Import Should be defined', () => {
         expect(calculateTypescriptComplexity).toBeDefined();
+    });
+
+    it('-> Complexity Should Be BAIXA (Inexistent file, any case)', () => {
+        // Setup
+        const filename = './tests/complexity_functions/typescript_mock_test_files/nonExistentFile.txt';
+        
+        // Action
+        const complexity = calculateTypescriptComplexity(filename);
+        
+        // Verify
+        expect(complexity).toBe('BAIXA');
     });
 
     it('-> Complexity Should Be BAIXA (typescript)', () => {

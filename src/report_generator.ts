@@ -38,6 +38,7 @@ namespace report_generator {
         const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
         let worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
         generate_report(calculatedTaskList, worksheetAttributes);
+        
     };
 
     main();
