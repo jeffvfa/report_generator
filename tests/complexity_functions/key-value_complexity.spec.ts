@@ -141,22 +141,16 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Should not call any function (JSON and XML cases)', () => {
             // Setup
-            let jsonFlag = false;
-            let xmlFlag = false;
-            spyOn(calculator, 'calculateJsonComplexity').and.callFake(() => {
-                jsonFlag = true;
-            });
-            spyOn(calculator, 'calculateXmlComplexity').and.callFake(() => {
-                xmlFlag = true;
-            });
+            spyOn(calculator, 'calculateJsonComplexity').and.callThrough();
+            spyOn(calculator, 'calculateXmlComplexity').and.callThrough();
             const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_sample.txt';
 
             // Action
             calculator.calculateKeyValueComplexity(filepath);
 
             // Verify
-            expect(jsonFlag).toBeFalsy();
-            expect(xmlFlag).toBeFalsy();
+            expect(calculator.calculateJsonComplexity).not.toHaveBeenCalled();
+            expect(calculator.calculateXmlComplexity).not.toHaveBeenCalled();
         });
     });
 });
