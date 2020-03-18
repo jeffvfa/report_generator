@@ -14,7 +14,7 @@ namespace report_generator {
 
     const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: string[] = []): void => {
         console.log('Iniciando Report Generator');
-        console.log('Parâmetros utilizados:\n\n');
+        console.log('\n\n**** Parâmetros utilizados ****:\n');
         console.log('Arquivo de log: ' + jsonFilepath);
         console.log('Lista de tasks: ' + taskListInput.join(', ') || '[]');
 
@@ -26,7 +26,7 @@ namespace report_generator {
         console.log('Parse realizado com sucesso!!!');
 
         console.log('\n\nbuilding task list');
-        const taskList = formatCommitsToTaskList(commits, retrieveCategoryFromFile);
+        const taskList = formatCommitsToTaskList(commits, retrieveCategoryFromFile, taskListInput);
         console.log('building Complete');
 
         console.log('\n\nAppying AddedVersusModified Rule to tasklist');
@@ -45,7 +45,5 @@ namespace report_generator {
     };
 
     const taskListInput = process.argv[2]?.split(',')?.map(el => el.trim()) || [];
-    console.log('task list: ' + taskListInput.join(', '));
-    main('output/gitlog0.json');
-
+    main('output/gitlog0.json', taskListInput);
 }
