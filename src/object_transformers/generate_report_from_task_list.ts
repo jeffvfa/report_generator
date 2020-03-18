@@ -72,23 +72,14 @@ const setDefaultStyleForWorkSheet = (sheet: Worksheet): void => {
     })
 };
 
-const generate_report = (calculatedTaskList: TTaskProperties, worksheetAttributes: TWorksheetAttributes) => {
-    let workbook: Workbook = new ExcelJS.Workbook();
-    let sheet = setDefaultConfigForWorkBookAndGetSheet(workbook);
-
+const buildExcelReport = (calculatedTaskList: TTaskProperties, sheet: ExcelJS.Worksheet, worksheetAttributes: TWorksheetAttributes): void => {
     let linecounter = 1;
     Object.keys(calculatedTaskList).forEach((k) => {
-
         const fileList = calculatedTaskList[k];
         const availableCategories = arrayUnique(fileList.map(el => el.category), (str1, str2) => str1 === str2);
-
         availableCategories.forEach(category => {
-            const availableComplexities = arrayUnique(
-                fileList.filter(file => file.category === category)
-                    .map(file => file.complexity!),
-                (cmp1, cmp2) => cmp1 === cmp2
-            );
-
+            const availableComplexities = arrayUnique(fileList.filter(file => file.category === category)
+                .map(file => file.complexity!), (cmp1, cmp2) => cmp1 === cmp2);
             availableComplexities.forEach(cmp => {
                 // Get all files created for this category and for this complexity for this task
                 const filesToPutTogether = fileList.filter(file => file.category === category && file.complexity === cmp && file.diffType === 'A');
@@ -112,7 +103,6 @@ const generate_report = (calculatedTaskList: TTaskProperties, worksheetAttribute
                     } as TWorksheetRow);
                 }
             });
-
             availableComplexities.forEach(cmp => {
                 // Get all files modified for this category and for this complexity for this task
                 const filesToPutTogether = fileList.filter(file => file.category === category && file.complexity === cmp && file.diffType === 'M');
@@ -138,6 +128,19 @@ const generate_report = (calculatedTaskList: TTaskProperties, worksheetAttribute
             });
         });
     });
+};
+
+const buildTxtReport = (calculatedTaskList: TTaskProperties): string => {
+
+    return "";
+}
+
+
+const generateReport = (calculatedTaskList: TTaskProperties, worksheetAttributes: TWorksheetAttributes) => {
+    const workbook: Workbook = new ExcelJS.Workbook();
+    const sheet = setDefaultConfigForWorkBookAndGetSheet(workbook);
+
+    buildExcelReport(calculatedTaskList, sheet, worksheetAttributes);
 
     setDefaultStyleForWorkSheet(sheet);
     workbook.xlsx.writeBuffer().then((buffer) => {
@@ -145,4 +148,5 @@ const generate_report = (calculatedTaskList: TTaskProperties, worksheetAttribute
     });
 };
 
-export default generate_report;
+export default generateReport;
+
