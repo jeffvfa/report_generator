@@ -147,8 +147,9 @@ runReportGenerator() {
 }
 
 # remove arquivos antigos que estejam no diretorio de output
+mkdir -p "$WORK_DIR"/output/
 rm -rf "$WORK_DIR"/output/*
-# task_list=\"$task_list\"
+
 
 if [[ $multiple_directories -eq 1 ]]; then
   getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output

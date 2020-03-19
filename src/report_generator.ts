@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import fse from 'fs-extra';
+import path from 'path';
 import complexityCalculator from './complexity_functions/all_complexities_calculator';
 import retrieveCategoryFromFile from './object_transformers/retrieve_category_from_file';
 import formatCommitsToTaskList from './object_transformers/format_commits_to_task_list';
@@ -12,16 +13,24 @@ import generateReport from './object_transformers/generate_report_from_task_list
 
 
 
-const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: string[] = []): void => {
+const main = (jsonFilesDirectory: string = 'output', taskListInput: string[] = []): void => {
     console.log('Iniciando Report Generator');
     console.log('\n\n**** Parâmetros utilizados ****:\n');
-    console.log('Arquivo de log: ' + jsonFilepath);
+    console.log('Arquivo de log: ' + jsonFilesDirectory);
     console.log('Lista de tasks: ' + taskListInput.join(', ') || '[]');
 
-    console.log('\n\nIniciando Parse Arquivo ' + jsonFilepath);
-    let rawdata = fs.readFileSync(jsonFilepath, 'utf8');
-    rawdata = rawdata.replace(/\s/g, ' ');
-    const commits: IGitLogOutput[] = JSON.parse(rawdata);
+    console.log('\n\nIniciando Parse dos Arquivos no diretorio ' + jsonFilesDirectory);
+
+    let commits: IGitLogOutput[] = [];
+    const files = fs.readdirSync(jsonFilesDirectory);
+    files.forEach(file => {
+        if (file.includes('gitlog')) {
+            let rawdata = fs.readFileSync(jsonFilesDirectory + '/' + file, 'utf8');
+            rawdata = rawdata.replace(/\s/g, ' ');
+            commits = commits.concat(JSON.parse(rawdata));
+        }
+    });
+
     console.log('Parse realizado com sucesso!!!');
 
     console.log('\n\nbuilding task list');
@@ -43,6 +52,6 @@ const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: strin
 };
 
 const taskListInputFromCommandLine = process.argv[2]?.split(',')?.map(el => el.trim()) || [];
-main('output/gitlog0.json', taskListInputFromCommandLine);
+main(path.join(__dirname, '../output'), taskListInputFromCommandLine);
 //main('gitlog_example.json', ['1227478', '1226939', '1225507']);
 
