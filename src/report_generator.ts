@@ -35,7 +35,7 @@ const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: strin
     console.log('\n\nAppying Complexity calculation to tasklist');
     const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
     console.log('Rule Appliance complete');
-    fse.outputFile('output/saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
+    fse.outputFile('output/filesWithCalculatedComplexities.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
 
     const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
     const worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
@@ -44,4 +44,5 @@ const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: strin
 
 const taskListInputFromCommandLine = process.argv[2]?.split(',')?.map(el => el.trim()) || [];
 main('output/gitlog0.json', taskListInputFromCommandLine);
+//main('gitlog_example.json', ['1227478', '1226939', '1225507']);
 
