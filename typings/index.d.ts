@@ -7,13 +7,13 @@ interface IGitLogOutput {
     files: string[];
 }
 
-type TFileComplexity = 'BAIXA' | 'MEDIA' | 'ALTA' | null;
+type TFileComplexity = 'BAIXA' | 'MEDIA' | 'ALTA';
 type TFileCategory = 'TEST' | 'JAVA' | 'JAVASCRIPT' | 'KEY_VALUE' | 'CSS' | 'HTML' | 'SCALA' | 'OUTRO';
 type TDiffType = 'M' | 'A';
 
 type TTxtArrayCell = {
     description: string;
-    fileList: string[];
+    fileList: { [key in TFileComplexity]?: string[] };
 };
 type TTxtStructure = {
     [key: string]: TTxtArrayCell;

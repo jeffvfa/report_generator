@@ -18,7 +18,7 @@ const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategor
                 diffType: elSplited[0],
                 filePath,
                 category: retrieveCategoryFromFile(filePath),
-                complexity: null
+                complexity: "BAIXA"
             } as TFileProperties
         });
 };

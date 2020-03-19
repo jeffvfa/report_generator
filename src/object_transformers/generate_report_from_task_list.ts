@@ -151,12 +151,15 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 
                     if (!fileStructure[fileStructureKey]) {
                         fileStructure[fileStructureKey] = {
-                            description: `${fileStructureKey} - ${fileCategoryDescription} - ${cmp}`,
-                            fileList: []
+                            description: `${fileStructureKey} - ${fileCategoryDescription}`,
+                            fileList: {}
                         };
                     }
 
-                    fileStructure[fileStructureKey].fileList = fileStructure[fileStructureKey].fileList.concat(filesToPutTogether);
+                    if (!fileStructure[fileStructureKey].fileList[cmp])
+                        fileStructure[fileStructureKey].fileList[cmp] = [];
+
+                    fileStructure[fileStructureKey].fileList[cmp] = fileStructure[fileStructureKey].fileList[cmp]!.concat(filesToPutTogether);
                 }
             });
 
@@ -173,12 +176,14 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 
                     if (!fileStructure[fileStructureKey]) {
                         fileStructure[fileStructureKey] = {
-                            description: `${fileStructureKey} - ${fileCategoryDescription} - ${cmp}`,
-                            fileList: []
+                            description: `${fileStructureKey} - ${fileCategoryDescription}`,
+                            fileList: {}
                         };
                     }
+                    if (!fileStructure[fileStructureKey].fileList[cmp])
+                        fileStructure[fileStructureKey].fileList[cmp] = [];
 
-                    fileStructure[fileStructureKey].fileList = fileStructure[fileStructureKey].fileList.concat(filesToPutTogether);
+                    fileStructure[fileStructureKey].fileList[cmp] = fileStructure[fileStructureKey].fileList[cmp]!.concat(filesToPutTogether);
                 }
             });
         })
@@ -186,8 +191,12 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 
     let fileOutput = "";
     Object.keys(fileStructure).sort().forEach(structureKey => {
-        fileOutput += fileStructure[structureKey].description + '\n';
-        fileOutput += fileStructure[structureKey].fileList.sort().join('\n') + '\n';
+        Object.keys(fileStructure[structureKey].fileList).sort().forEach(cmpKey => {
+            const k = cmpKey as TFileComplexity;
+            fileOutput += fileStructure[structureKey].description + ' - ' + cmpKey + '\n';
+            fileOutput += fileStructure[structureKey].fileList[k]?.join('\n') + '\n';
+        });
+
     });
     return fileOutput;
 }
