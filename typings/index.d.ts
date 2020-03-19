@@ -11,6 +11,13 @@ type TFileComplexity = 'BAIXA' | 'MEDIA' | 'ALTA' | null;
 type TFileCategory = 'TEST' | 'JAVA' | 'JAVASCRIPT' | 'KEY_VALUE' | 'CSS' | 'HTML' | 'SCALA' | 'OUTRO';
 type TDiffType = 'M' | 'A';
 
+type TTxtArrayCell = {
+    description: string;
+    fileList: string[];
+};
+type TTxtStructure = {
+    [key: string]: TTxtArrayCell;
+}
 type TWorksheetComplexityCell = {
     description: string;
     USTBB_A: number;
@@ -19,6 +26,8 @@ type TWorksheetComplexityCell = {
 type TWorksheetCell = {
     A: string;
     M: string;
+    TASK_NUMBER_A: string;
+    TASK_NUMBER_M: string;
     BAIXA: TWorksheetComplexityCell;
     MEDIA: TWorksheetComplexityCell;
     ALTA: TWorksheetComplexityCell;

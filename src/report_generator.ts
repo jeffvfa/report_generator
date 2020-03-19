@@ -8,42 +8,41 @@ import formatCommitsToTaskList from './object_transformers/format_commits_to_tas
 import applyAddedVersusModifiedRuleToTaskList
     from './object_transformers/apply_added_versus_modified_rule_to_task_list';
 import calculateComplexityForTaskList from './object_transformers/calculate_complexity_for_task_list';
-import generate_report from './object_transformers/generate_report_from_task_list';
+import generateReport from './object_transformers/generate_report_from_task_list';
 
-namespace report_generator {
 
-    const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: string[] = []): void => {
-        console.log('Iniciando Report Generator');
-        console.log('\n\n**** Parâmetros utilizados ****:\n');
-        console.log('Arquivo de log: ' + jsonFilepath);
-        console.log('Lista de tasks: ' + taskListInput.join(', ') || '[]');
 
-        // let rawdata = fs.readFileSync('output/gitlog0.json', 'utf8');
-        console.log('\n\nIniciando Parse Arquivo ' + jsonFilepath);
-        let rawdata = fs.readFileSync(jsonFilepath, 'utf8');
-        rawdata = rawdata.replace(/\s/g, ' ');
-        const commits: IGitLogOutput[] = JSON.parse(rawdata);
-        console.log('Parse realizado com sucesso!!!');
+const main = (jsonFilepath: string = 'gitlog_example.json', taskListInput: string[] = []): void => {
+    console.log('Iniciando Report Generator');
+    console.log('\n\n**** Parâmetros utilizados ****:\n');
+    console.log('Arquivo de log: ' + jsonFilepath);
+    console.log('Lista de tasks: ' + taskListInput.join(', ') || '[]');
 
-        console.log('\n\nbuilding task list');
-        const taskList = formatCommitsToTaskList(commits, retrieveCategoryFromFile, taskListInput);
-        console.log('building Complete');
+    console.log('\n\nIniciando Parse Arquivo ' + jsonFilepath);
+    let rawdata = fs.readFileSync(jsonFilepath, 'utf8');
+    rawdata = rawdata.replace(/\s/g, ' ');
+    const commits: IGitLogOutput[] = JSON.parse(rawdata);
+    console.log('Parse realizado com sucesso!!!');
 
-        console.log('\n\nAppying AddedVersusModified Rule to tasklist');
-        const ruledTaskList = applyAddedVersusModifiedRuleToTaskList(taskList);
-        console.log('Rule Appliance complete');
+    console.log('\n\nbuilding task list');
+    const taskList = formatCommitsToTaskList(commits, retrieveCategoryFromFile, taskListInput);
+    console.log('building Complete');
 
-        console.log('\n\nAppying Complexity calculation to tasklist');
-        const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
-        console.log('Rule Appliance complete');
-        fse.outputFile('output/saida1.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
+    console.log('\n\nAppying AddedVersusModified Rule to tasklist');
+    const ruledTaskList = applyAddedVersusModifiedRuleToTaskList(taskList);
+    console.log('Rule Appliance complete');
 
-        const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
-        let worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
-        generate_report(calculatedTaskList, worksheetAttributes);
+    console.log('\n\nAppying Complexity calculation to tasklist');
+    const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
+    console.log('Rule Appliance complete');
+    fse.outputFile('output/filesWithCalculatedComplexities.json', JSON.stringify(calculatedTaskList, null, '\t'), err => console.log(err));
 
-    };
+    const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
+    const worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
+    generateReport(calculatedTaskList, worksheetAttributes);
+};
 
-    const taskListInput = process.argv[2]?.split(',')?.map(el => el.trim()) || [];
-    main('output/gitlog0.json', taskListInput);
-}
+const taskListInputFromCommandLine = process.argv[2]?.split(',')?.map(el => el.trim()) || [];
+main('output/gitlog0.json', taskListInputFromCommandLine);
+//main('gitlog_example.json', ['1227478', '1226939', '1225507']);
+
