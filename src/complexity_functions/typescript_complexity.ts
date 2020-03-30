@@ -19,6 +19,8 @@ const calculateTypescriptComplexity = (filepath: string): TFileComplexity => {
             case ts.SyntaxKind.MethodDeclaration:
             case ts.SyntaxKind.GetAccessor:
             case ts.SyntaxKind.SetAccessor:
+            case ts.SyntaxKind.JsxElement:
+            case ts.SyntaxKind.JsxSelfClosingElement:
                 numOfFunctions += 1;
         }
         ts.forEachChild(node, delintNode);
@@ -26,18 +28,19 @@ const calculateTypescriptComplexity = (filepath: string): TFileComplexity => {
 
     // Esta linha eh somente para propositos de teste
     if (!fs.existsSync(filepath)) return 'BAIXA';
-    
+
     const sourceFile = ts.createSourceFile(
         filepath,
         fs.readFileSync(filepath).toString(),
         ts.ScriptTarget.ES2015,
-        true
+        true,
+        4 // JSX
     );
 
     delintNode(sourceFile);
 
-    if(numOfFunctions > 20) return 'ALTA';
-    if(numOfFunctions > 10) return 'MEDIA';
+    if (numOfFunctions > 20) return 'ALTA';
+    if (numOfFunctions > 10) return 'MEDIA';
     return 'BAIXA';
 };
 

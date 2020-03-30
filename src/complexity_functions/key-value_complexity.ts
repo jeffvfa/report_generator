@@ -48,11 +48,8 @@ export const calculateJsonComplexity = (filepath: string): TFileComplexity => {
     try {
         jsonFileObject = JSON.parse(jsonFileString);
     } catch (err) {
-        console.log(err);
+        console.log('=== Malformed json file ===');
         console.log('filepath: ' + filepath);
-        console.log('================================================================\n\n');
-        console.log(jsonFileString);
-        console.log('================================================================\n\n');
         return 'BAIXA';
     }
 

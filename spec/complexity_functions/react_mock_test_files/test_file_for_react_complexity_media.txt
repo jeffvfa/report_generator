@@ -1,0 +1,145 @@
+import { GamIcon } from 'gam-components';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Colors } from '../../constants';
+
+
+const ExibicaoProtocolo = (props) => {
+  const protocolNumber = props.navigation.getParam('protocolNumber') || 'NÃO GERADO';
+  return (
+    <View style={styles.screenContainer}>
+      <ScrollView style={styles.containerScroll} contentContainerStyle={{ alignItems: 'center' }}>
+        {/* Success Message */}
+        <View style={styles.item}>
+          <Text style={styles.textSuccess}>
+            Protocolo gerado com sucesso!
+          </Text>
+        </View>
+
+        {/* Protocol Number */}
+        <View style={styles.item}>
+          <View style={styles.protocolContainer}>
+            <Text style={styles.protocolText}>{protocolNumber}</Text>
+          </View>
+        </View>
+
+        {/* Button to previous screen */}
+        <View style={styles.item}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => props.navigation.replace('GeracaoProtocolo')}
+            >
+              <Text style={styles.buttonText}> Gerar novo protocolo </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    padding: 1,
+  },
+  containerScroll: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  item: {
+    flex: 1,
+    width: '100%',
+    marginVertical: 8,
+  },
+  textSuccess: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+  },
+  protocolContainer: {
+    flex: 1,
+    backgroundColor: Colors.BBBlue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingVertical: 5,
+    marginVertical: 3,
+  },
+  protocolText: {
+    textAlign: 'center',
+    fontSize: 23,
+    color: 'white',
+  },
+  textParagraphs: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 10,
+    overflow: 'hidden',
+    paddingVertical: 10,
+  },
+  button: {
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: Colors.BBBlue,
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+  },
+  headerContainerStyle: {
+    minHeight: 60,
+    maxHeight: 75,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: Colors.BBBlue,
+  },
+  headerTitleStyle: {
+    color: 'white',
+    fontSize: 17,
+    flexWrap: 'wrap',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+});
+
+ExibicaoProtocolo.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+    // replace: PropTypes.func,
+    setParams: PropTypes.func,
+    getParam: PropTypes.func,
+    replace: PropTypes.func,
+  }).isRequired,
+};
+
+ExibicaoProtocolo.navigationOptions = ({ navigation }) => ({
+  header: (
+    <View style={styles.headerContainerStyle}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => { }}>
+        <View style={{ marginHorizontal: 10 }}>
+          <GamIcon name="container-app" size={20} color="white" />
+        </View>
+      </TouchableOpacity>
+      <Text style={styles.headerTitleStyle}>{`${navigation.getParam('UF') || 'BR'} - Indisponibilidade de Sistema`}</Text>
+    </View>),
+});
+
+export default ExibicaoProtocolo;

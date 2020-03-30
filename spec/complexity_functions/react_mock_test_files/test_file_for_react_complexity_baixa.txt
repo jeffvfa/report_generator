@@ -1,0 +1,23 @@
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+const Teste = props => {
+    return (
+		<View style={styles.container}>
+			<Text>Teste</Text>
+			<Text>Teste</Text>
+			<Text>Teste</Text>
+            <Text>Teste</Text>
+            <Text>Teste</Text>
+            <Text>Teste</Text>
+            <Text>Teste</Text>
+            <TextInput />
+		</View>
+	);
+};
+
+const styles = StyleSheet.create({
+    container: {}
+});
+
+export default Teste;

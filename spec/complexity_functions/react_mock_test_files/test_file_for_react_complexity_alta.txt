@@ -1,0 +1,199 @@
+/* eslint-disable prefer-destructuring */
+import { GamIcon } from 'gam-components';
+import { EnvironmentInfo, SessionEvents } from 'gam-core-api';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { API_PATH, Colors, CPFMask, PhoneMask, validaCPF } from '../../constants';
+import ButaoGeracaoProtocolo from './ButaoGeracaoProtocolo';
+import InputCPF from './InputCPF';
+import InputNegocialCaixa from './InputNegocialCaixa';
+import InputTelefone from './InputTelefone';
+
+export default class GeracaoProtocolo extends Component {
+  constructor(props) {
+    super(props);
+    this.ambienteConstantes = {
+      HOST_NAME: '', HOST_NAME_PROVISIONAMENTO: '', LOGGED_USER_URI: '',
+    };
+
+    this.usuario = {
+      chaveSisbb: '', authAccount: '', tokenType: '', refresh_token: '', accessToken: '', mci: '', loginType: '', info: {},
+    };
+
+    this.state = {
+      cpf: '',
+      fone: '',
+      negocialChecked: true,
+      caixaChecked: false,
+      buttonActive: true,
+    };
+  }
+
+  async recuperarInformacoesUsuario() {
+    const endpoint = `${this.ambienteConstantes.HOST_NAME}${API_PATH}/v1/usuario_logado`;
+    const config = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const response = await fetch(endpoint, config);
+      const json = await response.json();
+      const { data } = json;
+      this.usuario.info = data;
+    } catch (error) {
+      this.usuario.info = null;
+    }
+  }
+
+  async componentWillMount() {
+    try {
+      await this.recuperaAmbienteConstantes();
+      await this.recuperarInformacoesUsuario();
+    } finally {
+      this.props.navigation.setParams({ UF: 'RJ' });
+    }
+  }
+
+  validaParametros() {
+    if (!validaCPF(this.state.cpf)) {
+      Alert.alert('Erro', 'CPF inválido');
+      return false;
+    }
+    if (this.state.fone && this.state.fone.replace(/\D/g, '').length < 11) {
+      Alert.alert('Erro', 'Número de telefone inválido');
+      return false;
+    }
+    return true;
+  }
+
+  async protocolGenerationHandle() {
+    if (!this.validaParametros()) return;
+    this.setState({ buttonActive: false });
+    // Retrieve Parameters
+    const { codDependencia } = this.usuario.info;
+    const cpf = this.state.cpf.replace(/\D/g, '');
+    // fone = this.state.fone.replace(/\D/g, '');
+    const tipoProtocolo = this.state.negocialChecked ? 1 : 2;
+    const endpoint = `${this.ambienteConstantes.HOST_NAME}${API_PATH}/gea/gerar_protocolo_atendimento_indisponibilidade/v1`;
+    const config = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        codigoCpfCgc: cpf,
+        codigoTipoProtocolo: tipoProtocolo,
+        codigoDependencia: codDependencia,
+        // numeroTelefone: fone
+      }),
+    };
+
+    try {
+      const response = await fetch(endpoint, config);
+      const json = await response.json();
+      const { data } = json;
+      this.props.navigation.navigate({ routeName: 'ExibicaoProtocolo', params: { protocolNumber: data.numeroProtocolo } });
+    } catch (error) {
+      Alert.alert('Erro', 'Problema na geração do protocolo');
+    } finally {
+      this.setState({ buttonActive: true });
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.screenContainer}>
+        <ScrollView style={styles.containerScroll} contentContainerStyle={{ alignItems: 'center' }}>
+
+          {/* CPF input group */}
+          <View style={styles.item}>
+            <InputCPF value={this.state.cpf} onChangeText={text => this.setState({ cpf: CPFMask(text) })} />
+          </View>
+
+          {/* cellphone input group */}
+          <View style={styles.item}>
+
+          </View>
+
+          {/* checkbox input group */}
+          <View style={styles.item}>
+            <InputNegocialCaixa
+              negocialChecked={this.state.negocialChecked}
+              onPressNegocial={() => this.setState({ negocialChecked: !this.state.negocialChecked, caixaChecked: this.state.negocialChecked })}
+
+              caixaChecked={this.state.caixaChecked}
+              onPressCaixa={() => this.setState({ caixaChecked: !this.state.caixaChecked, negocialChecked: this.state.caixaChecked })}
+            />
+
+          </View>
+
+          {/* generate protocol button */}
+          <View style={styles.item}>
+            <ButaoGeracaoProtocolo onPress={() => this.protocolGenerationHandle()} active={this.state.buttonActive} />
+          </View>
+
+        </ScrollView>
+      </View >
+    );
+  }
+
+  static propTypes = {
+    navigation: PropTypes.shape({ navigate: PropTypes.func, setParams: PropTypes.func }).isRequired,
+  };
+
+  static navigationOptions = ({ navigation }) => ({
+    header: (
+      <View style={styles.headerContainerStyle}>
+
+      </View>),
+  });
+}
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    padding: 1,
+  },
+  containerScroll: {
+    flex: 1,
+    padding: 10,
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  item: {
+    flex: 1,
+    width: '100%',
+    paddingVertical: 8,
+  },
+  textBold: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+  },
+  textNormal: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'black',
+  },
+  headerContainerStyle: {
+    minHeight: 60,
+    maxHeight: 75,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: Colors.BBBlue,
+  },
+  headerTitleStyle: {
+    color: 'white',
+    fontSize: 17,
+    flexWrap: 'wrap',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+});

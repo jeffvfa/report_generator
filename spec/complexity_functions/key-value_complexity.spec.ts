@@ -12,7 +12,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
     describe('=> calculateXmlComplexity', () => {
         it('-> Complexity should be BAIXA (Inexistent file, XML case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/nonExistentFile.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/nonExistentFile.txt';
 
             // Action
             const result = calculator.calculateXmlComplexity(filepath);
@@ -23,7 +23,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be BAIXA (XML case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_baixa.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_baixa.txt';
 
             // Action
             const result = calculator.calculateXmlComplexity(filepath);
@@ -34,7 +34,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be MEDIA (XML case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_media.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_media.txt';
 
             // Action
             const result = calculator.calculateXmlComplexity(filepath);
@@ -45,7 +45,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be ALTA (XML case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_alta.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_alta.txt';
 
             // Action
             const result = calculator.calculateXmlComplexity(filepath);
@@ -56,10 +56,21 @@ describe('=> Key-Value Complexity Test Suite', () => {
     });
 
     describe('=> calculateJsonComplexity', () => {
-        
+
         it('-> Complexity should be BAIXA (Inexistent file, JSON case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/nonExistentFile.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/nonExistentFile.txt';
+
+            // Action
+            const result = calculator.calculateJsonComplexity(filepath);
+
+            // Verify
+            expect(result).toBe('BAIXA');
+        });
+
+        it('-> Complexity should be BAIXA (Json with comments, JSON case)', () => {
+            // Setup
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_with_comments_baixa.txt';
 
             // Action
             const result = calculator.calculateJsonComplexity(filepath);
@@ -70,7 +81,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be BAIXA (JSON case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_baixa.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_baixa.txt';
 
             // Action
             const result = calculator.calculateJsonComplexity(filepath);
@@ -81,7 +92,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be MEDIA (JSON case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_media.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_media.txt';
 
             // Action
             const result = calculator.calculateJsonComplexity(filepath);
@@ -92,7 +103,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
 
         it('-> Complexity should be ALTA (JSON case)', () => {
             // Setup
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_alta.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_alta.txt';
 
             // Action
             const result = calculator.calculateJsonComplexity(filepath);
@@ -103,7 +114,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
     });
 
     describe('=> calculateKeyValueComplexity', () => {
-        
+
         it('-> Complexity should be BAIXA (Inexistent file, any case)', () => {
             // Setup
             const filepath = '';
@@ -118,7 +129,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
         it('-> Should call adequate function (XML case)', () => {
             // Setup
             spyOn(calculator, 'calculateXmlComplexity').and.callThrough;
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_sample.xml';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_xml_complexity_sample.xml';
 
             // Action
             calculator.calculateKeyValueComplexity(filepath);
@@ -130,7 +141,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
         it('-> Should call adequate function (JSON case)', () => {
             // Setup
             spyOn(calculator, 'calculateJsonComplexity').and.callThrough;
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_sample.json';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_sample.json';
 
             // Action
             calculator.calculateKeyValueComplexity(filepath);
@@ -143,7 +154,7 @@ describe('=> Key-Value Complexity Test Suite', () => {
             // Setup
             spyOn(calculator, 'calculateJsonComplexity').and.callThrough();
             spyOn(calculator, 'calculateXmlComplexity').and.callThrough();
-            const filepath = './tests/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_sample.txt';
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_sample.txt';
 
             // Action
             calculator.calculateKeyValueComplexity(filepath);
