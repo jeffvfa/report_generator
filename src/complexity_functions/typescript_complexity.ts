@@ -11,18 +11,18 @@ const calculateTypescriptComplexity = (filepath: string): TFileComplexity => {
     let numOfFunctions = 0;
     const delintNode = (node: ts.Node) => {
         switch (node.kind) {
-			case ts.SyntaxKind.FunctionDeclaration:
-			case ts.SyntaxKind.FunctionKeyword:
-			case ts.SyntaxKind.FunctionExpression:
-			case ts.SyntaxKind.ArrowFunction:
-			case ts.SyntaxKind.ClassDeclaration:
-			case ts.SyntaxKind.MethodDeclaration:
-			case ts.SyntaxKind.GetAccessor:
-			case ts.SyntaxKind.SetAccessor:
-			case ts.SyntaxKind.JsxElement:
-			case ts.SyntaxKind.JsxSelfClosingElement:
-				numOfFunctions += 1;
-		}
+            case ts.SyntaxKind.FunctionDeclaration:
+            case ts.SyntaxKind.FunctionKeyword:
+            case ts.SyntaxKind.FunctionExpression:
+            case ts.SyntaxKind.ArrowFunction:
+            case ts.SyntaxKind.ClassDeclaration:
+            case ts.SyntaxKind.MethodDeclaration:
+            case ts.SyntaxKind.GetAccessor:
+            case ts.SyntaxKind.SetAccessor:
+            case ts.SyntaxKind.JsxElement:
+            case ts.SyntaxKind.JsxSelfClosingElement:
+                numOfFunctions += 1;
+        }
         ts.forEachChild(node, delintNode);
     };
 
@@ -30,17 +30,17 @@ const calculateTypescriptComplexity = (filepath: string): TFileComplexity => {
     if (!fs.existsSync(filepath)) return 'BAIXA';
 
     const sourceFile = ts.createSourceFile(
-		filepath,
-		fs.readFileSync(filepath).toString(),
-		ts.ScriptTarget.ES2015,
-		true,
-		4 // JSX
-	);
+        filepath,
+        fs.readFileSync(filepath).toString(),
+        ts.ScriptTarget.ES2015,
+        true,
+        4 // JSX
+    );
 
     delintNode(sourceFile);
-    console.log('Number of functions: ' + numOfFunctions);
-    if(numOfFunctions > 20) return 'ALTA';
-    if(numOfFunctions > 10) return 'MEDIA';
+
+    if (numOfFunctions > 20) return 'ALTA';
+    if (numOfFunctions > 10) return 'MEDIA';
     return 'BAIXA';
 };
 

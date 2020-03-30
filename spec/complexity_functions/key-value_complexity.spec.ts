@@ -68,6 +68,17 @@ describe('=> Key-Value Complexity Test Suite', () => {
             expect(result).toBe('BAIXA');
         });
 
+        it('-> Complexity should be BAIXA (Json with comments, JSON case)', () => {
+            // Setup
+            const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_with_comments_baixa.txt';
+
+            // Action
+            const result = calculator.calculateJsonComplexity(filepath);
+
+            // Verify
+            expect(result).toBe('BAIXA');
+        });
+
         it('-> Complexity should be BAIXA (JSON case)', () => {
             // Setup
             const filepath = './spec/complexity_functions/key-velue_mock_test_files/test_file_for_json_complexity_baixa.txt';

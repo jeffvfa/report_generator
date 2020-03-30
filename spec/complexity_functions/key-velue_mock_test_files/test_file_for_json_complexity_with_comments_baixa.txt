@@ -1,0 +1,23 @@
+{
+    "LEVEL1":{
+        "HTML": {
+            "A": "Criação de tela HTML ou XHTML ou JSP ou XML ou VTL ou XSL",
+            "M": "Alteração de tela HTML ou XHTML ou JSP ou XML ou VTL ou XSL",
+            "BAIXA": {
+                "description": "Quantidade de até 20 dos itens de complexidade abaixo:\n\t- Aplicação de estilo (considerar evento único); - Aplicação de internacionalização (considerar evento único);\n\t- Variáveis tratadas (por variável); - Campos editáveis ou atualizáveis\n\tautomaticamente via JavaScript ou Integração\n\t(por campo);\n\t- Aplicações de eventos por elemento na página (por evento em cada elemento) (Ex: JavaScript para validações, formatações, conversores, carregamento de dados ou acionamento de eventos nativos);\n\t- Tabelas/listas (por tabela/lista - Conta-se apenas os eventos relacionados a quantidade de colunas, quando houver; e no caso de listas apenas um evento por lista);\n\t- Chamadas externas à tela (por chamada) (Ex: Links, botões, etc.).\n\t- Utilização de recursos nativos (Ex.:\n\tacionamento de câmera, localização via GPS, calendário, acionamento gravador de voz, etc.);\n\t",
+                "USTBB_A": 8.0,
+                "USTBB_M": 4.0
+            },
+            "MEDIA": { /* Introducing comments */
+                "description": "Quantidade acima de 50 dos itens de complexidade abaixo:\n\t- Aplicação de estilo (considerar evento único); - Aplicação de internacionalização (considerar evento único);\n\t- Variáveis tratadas (por variável); - Campos editáveis ou atualizáveis\n\tautomaticamente via JavaScript ou Integração\n\t(por campo);\n\t- Aplicações de eventos por elemento na página (por evento em cada elemento) (Ex: JavaScript para validações, formatações, conversores, carregamento de dados ou acionamento de eventos nativos);\n\t- Tabelas/listas (por tabela/lista - Conta-se apenas os eventos relacionados a quantidade de colunas, quando houver; e no caso de listas apenas um evento por lista);\n\t- Chamadas externas à tela (por chamada) (Ex: Links, botões, etc.).\n\t- Utilização de recursos nativos (Ex.:\n\tacionamento de câmera, localização via GPS, calendário, acionamento gravador de voz, etc.);\n\t",
+                "USTBB_A": 16.0,
+                "USTBB_M": 8.0
+            },
+            "ALTA": {
+                "description": "Quantidade acima de 50 dos itens de complexidade abaixo:\n\t- Aplicação de estilo (considerar evento único); - Aplicação de internacionalização (considerar evento único);\n\t- Variáveis tratadas (por variável); - Campos editáveis ou atualizáveis\n\tautomaticamente via JavaScript ou Integração\n\t(por campo);\n\t- Aplicações de eventos por elemento na página (por evento em cada elemento) (Ex: JavaScript para validações, formatações, conversores, carregamento de dados ou acionamento de eventos nativos);\n\t- Tabelas/listas (por tabela/lista - Conta-se apenas os eventos relacionados a quantidade de colunas, quando houver; e no caso de listas apenas um evento por lista);\n\t- Chamadas externas à tela (por chamada) (Ex: Links, botões, etc.).\n\t- Utilização de recursos nativos (Ex.:\n\tacionamento de câmera, localização via GPS, calendário, acionamento gravador de voz, etc.);\n\t",
+                "USTBB_A": 24.0,
+                "USTBB_M": 12.0
+            }
+        }
+    }
+}
