@@ -108,10 +108,13 @@ describe('=> Retrive Category From file Suite', () => {
     it('-> Category should be OUTRO', () => {
         // Setup
         const fileName = '/mockRootDirectory/mockSubDirectory/mockFileWithoutExtension';
+        const filename2 = '/mockRootDirectory/mockSubDirectory/InputCPF.test.js.snap';
         // Action
         const result = retrieveCategoryFromFile(fileName);
+        const result2 = retrieveCategoryFromFile(filename2);
         // Verify
         expect(result).toBe('OUTRO');
+        expect(result2).toBe('OUTRO');
     });
 
     it('-> Category should be undefined', () => {
