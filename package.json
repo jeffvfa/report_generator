@@ -1,41 +1,50 @@
 {
-  "name": "report_generator",
-  "version": "0.0.1",
-  "description": "Generates the monthly work reposts for the company Stefanini ",
-  "main": "dist/report_generator.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "tsc && node dist/report_generator.js",
-    "test": "jest --verbose",
-    "coverage": "jest --coverage --verbose"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/igorsodre/report_generator.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/igorsodre/report_generator/issues"
-  },
-  "homepage": "https://github.com/igorsodre/report_generator#readme",
-  "devDependencies": {
-    "@types/dom-parser": "^0.1.0",
-    "@types/fs-extra": "^8.1.0",
-    "@types/jest": "^25.1.3",
-    "@types/node": "^13.7.4",
-    "@types/xmldom": "^0.1.29",
-    "jest": "^25.1.0",
-    "jest-extended": "^0.11.5",
-    "ts-jest": "^25.2.1",
-    "ts-node": "^8.6.2",
-    "tslint": "^6.0.0",
-    "typescript-tslint-plugin": "^0.5.5"
-  },
-  "dependencies": {
-    "exceljs": "^3.8.0",
-    "fs-extra": "^8.1.0",
-    "typescript": "^3.8.3",
-    "xmldom": "^0.3.0"
-  }
+	"name": "report_generator",
+	"version": "0.0.1",
+	"description": "Generates the monthly work reposts for the company Stefanini ",
+	"main": "dist/report_generator.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "tsc && node dist/report_generator.js",
+		"test": "jest --verbose",
+		"coverage": "jest --coverage --verbose"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/igorsodre/report_generator.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/igorsodre/report_generator/issues"
+	},
+	"homepage": "https://github.com/igorsodre/report_generator#readme",
+	"devDependencies": {
+		"@types/dom-parser": "^0.1.0",
+		"@types/fs-extra": "^8.1.0",
+		"@types/jest": "^25.1.3",
+		"@types/node": "^13.7.4",
+		"@types/xmldom": "^0.1.29",
+		"jest": "^25.1.0",
+		"jest-extended": "^0.11.5",
+		"ts-jest": "^25.2.1",
+		"ts-node": "^8.6.2",
+		"tslint": "^6.0.0",
+		"typescript-tslint-plugin": "^0.5.5"
+	},
+	"dependencies": {
+		"exceljs": "^3.8.0",
+		"fs-extra": "^8.1.0",
+		"typescript": "^3.8.3",
+		"xmldom": "^0.3.0"
+	},
+	"prettier": {
+		"printWidth": 120,
+		"tabWidth": 4,
+		"semi": true,
+		"singleQuote": true,
+		"useTabs": true,
+		"trailingComma": "all",
+        "jsxBracketSameLine": true
+	}
 }

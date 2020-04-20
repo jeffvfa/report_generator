@@ -3,22 +3,25 @@
 import { arrayUnique } from "../helpers/Array.helper";
 
 const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategoryFromFile: (arg0: string) => TFileCategory | undefined): TFileProperties[] => {
+    const projectname = projectPath.split('/').filter(Boolean).pop();
     return (y.files || [])
         // remove renamed and deleted files
         .filter(el => {
             const differenceType = el.split(' ')[0][0];
             return differenceType !== 'R' && differenceType !== 'D'
-        }
+            }
         )
         // build file objects
         .map(el => {
             let elSplited = el.split(' ');
             const filePath = projectPath + elSplited[1];
+
             return {
                 diffType: elSplited[0],
                 filePath,
                 category: retrieveCategoryFromFile(filePath),
-                complexity: "BAIXA"
+                complexity: "BAIXA",
+                rootDirectory: projectPath.replace(projectname! + '/', '')
             } as TFileProperties
         });
 };

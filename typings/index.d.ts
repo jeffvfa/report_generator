@@ -63,6 +63,7 @@ type TFileProperties = {
     filePath: string;
     category: TFileCategory;
     complexity: TFileComplexity;
+    rootDirectory: string;
 };
 type TTaskProperties = {
     [key: string]: TFileProperties[];

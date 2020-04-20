@@ -92,7 +92,7 @@ getLogsFromDirectory() {
   # shellcheck disable=SC2164
   cd "$log_directory"
   log_format_string="%n{%n \"commit\": \"%H\",%n \"directory\":\"$(pwd)/\",%n \"author\": \"%an <%ae>\",%n \"date\": \"%ad\",%n \"message\": \"%f\":FILES:"
- 
+
   git log --name-status --max-count=1000 --author="$author_name" --date=short \
     --pretty=format:"$log_format_string"|
     perl -ne '
@@ -140,10 +140,11 @@ getLogsFromAllDirectories() {
 
 runReportGenerator() {
   local WORK_DIR=$1
-  local task_list=$2
+  local root_directory=$2
+  local task_list=$3
   cd "$WORK_DIR"
   npm run build
-  node ./dist/report_generator.js "$task_list"
+  node ./dist/report_generator.js "$root_directory" "$task_list"
 }
 
 # remove arquivos antigos que estejam no diretorio de output
@@ -153,7 +154,7 @@ rm -rf "$WORK_DIR"/output/*
 
 if [[ $multiple_directories -eq 1 ]]; then
   getLogsFromAllDirectories "$default_directory" "$author_name" "$WORK_DIR"/output
-  runReportGenerator $WORK_DIR "$task_list"
+  runReportGenerator $WORK_DIR "$default_directory" "$task_list"
 else
   getLogsFromDirectory "$default_directory" "$author_name" "$WORK_DIR"/output "0"
   runReportGenerator $WORK_DIR "$task_list"

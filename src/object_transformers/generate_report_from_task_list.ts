@@ -76,7 +76,7 @@ const buildExcelReport = (calculatedTaskList: TTaskProperties, sheet: ExcelJS.Wo
     let linecounter = 1;
     Object.keys(calculatedTaskList).forEach((k) => {
         const fileList = calculatedTaskList[k];
-        const availableCategories = arrayUnique(fileList.map(el => el.category), (str1, str2) => str1 === str2);
+        const availableCategories = arrayUnique(fileList.map(el => el.category), (str1, str2) => str1 === str2).filter(el => el !== 'OUTRO');
         availableCategories.forEach(category => {
             const availableComplexities = arrayUnique(fileList.filter(file => file.category === category)
                 .map(file => file.complexity!), (cmp1, cmp2) => cmp1 === cmp2);
@@ -84,7 +84,7 @@ const buildExcelReport = (calculatedTaskList: TTaskProperties, sheet: ExcelJS.Wo
                 // Get all files created for this category and for this complexity for this task
                 const filesToPutTogether = fileList.filter(file => file.category === category && file.complexity === cmp && file.diffType === 'A');
                 if (filesToPutTogether.length) {
-                    const fileNames = filesToPutTogether.map(f => f.filePath);
+                    const fileNames = filesToPutTogether.map(f => f.filePath.replace(f.rootDirectory, ''));
                     sheet.addRow({
                         index: linecounter,
                         Tarefa: '0.0.' + linecounter++,
@@ -107,7 +107,7 @@ const buildExcelReport = (calculatedTaskList: TTaskProperties, sheet: ExcelJS.Wo
                 // Get all files modified for this category and for this complexity for this task
                 const filesToPutTogether = fileList.filter(file => file.category === category && file.complexity === cmp && file.diffType === 'M');
                 if (filesToPutTogether.length) {
-                    const fileNames = filesToPutTogether.map(f => f.filePath);
+                    const fileNames = filesToPutTogether.map(f => f.filePath.replace(f.rootDirectory, ''));
                     sheet.addRow({
                         index: linecounter,
                         Tarefa: '0.0.' + linecounter++,
@@ -134,7 +134,7 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
     let fileStructure: TTxtStructure = {};
     Object.keys(calculatedTaskList).forEach((k) => {
         const fileList = calculatedTaskList[k];
-        const availableCategories = arrayUnique(fileList.map(el => el.category), (str1, str2) => str1 === str2);
+        const availableCategories = arrayUnique(fileList.map(el => el.category), (str1, str2) => str1 === str2).filter(el => el !== 'OUTRO');
         availableCategories.forEach(category => {
             const availableComplexities = arrayUnique(fileList.filter(file => file.category === category)
                 .map(file => file.complexity!), (cmp1, cmp2) => cmp1 === cmp2);
@@ -142,7 +142,7 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 
                 const filesToPutTogether = fileList
                     .filter(file => file.category === category && file.complexity === cmp && file.diffType === 'A')
-                    .map(el => el.filePath);
+                    .map(el => el.filePath.replace(el.rootDirectory, ''));
 
                 if (filesToPutTogether.length) {
 
@@ -167,7 +167,7 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 
                 const filesToPutTogether = fileList
                     .filter(file => file.category === category && file.complexity === cmp && file.diffType === 'M')
-                    .map(el => el.filePath);
+                    .map(el => el.filePath.replace(el.rootDirectory, ''));
 
                 if (filesToPutTogether.length) {
 
@@ -189,7 +189,7 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
         })
     });
 
-    let fileOutput = "";
+    let fileOutput = "5.17.6 - ritos\n{task1}\n{task2}\n";
     Object.keys(fileStructure).sort().forEach(structureKey => {
         Object.keys(fileStructure[structureKey].fileList).sort().forEach(cmpKey => {
             const k = cmpKey as TFileComplexity;
@@ -218,4 +218,3 @@ const generateReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 };
 
 export default generateReport;
-
