@@ -189,7 +189,7 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
         })
     });
 
-    let fileOutput = "5.17.6 - ritos\n{task1}\n{task2}\n";
+    let fileOutput = '5.17.6 - Participar em "ritos" de sala ágil\n{task1}\n{task2}\n';
     Object.keys(fileStructure).sort().forEach(structureKey => {
         Object.keys(fileStructure[structureKey].fileList).sort().forEach(cmpKey => {
             const k = cmpKey as TFileComplexity;
