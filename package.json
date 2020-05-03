@@ -45,6 +45,6 @@
 		"singleQuote": true,
 		"useTabs": true,
 		"trailingComma": "all",
-        "jsxBracketSameLine": true
+		"jsxBracketSameLine": true
 	}
 }

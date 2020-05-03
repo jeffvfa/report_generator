@@ -38,7 +38,7 @@
         "ALTA": {
             "description": "Acima de 60 diretivas/blocos implementados.",
             "USTBB_A": 24.0,
-            "USTBB_M": 16.0
+            "USTBB_M": 12.0
         }
     },
     "JAVASCRIPT": {
@@ -58,8 +58,8 @@
         },
         "ALTA": {
             "description": "Acima de 20 funções implementadas",
-            "USTBB_A": 16.0,
-            "USTBB_M": 8.0
+            "USTBB_A": 12.0,
+            "USTBB_M": 6.0
         }
     },
     "KEY_VALUE": {
