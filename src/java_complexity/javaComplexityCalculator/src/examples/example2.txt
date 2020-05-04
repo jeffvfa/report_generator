@@ -1,0 +1,120 @@
+package br.com.bb.gat.api.v1.atendimento.servicos;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import java.util.Map;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.AcaoAPPDescricao;
+import br.com.bb.gat.api.v1.atendimento.entidades.Atendimento;
+import br.com.bb.gat.api.v1.atendimento.entidades.EstadoAtendimento;
+import br.com.bb.gat.api.v1.atendimento.entidades.LocalDeAtendimento;
+import br.com.bb.gat.operacao.consultarEstatisticasAtendenteNoAtendimentoNegocialV3.bean.resposta.DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial;
+import br.com.bb.gaw.commons.utils.api.MessageType;
+import br.com.bb.gaw.commons.utils.api.ServiceMessage;
+import br.com.bb.gaw.commons.utils.api.ServiceResponse;
+import br.com.bb.gaw.commons.utils.exceptions.NegocioException;
+import br.com.bb.gaw.infra.utils.ResponseUtil;
+import br.com.bb.iib.exceptions.BBException;
+
+
+@Path("/v1/estado/atendimento")
+@RequestScoped
+@Api(value = "SERVICOS GAT - ANTIGOS")
+public class EstadoAtendimentoResource {
+
+
+	@Inject
+	private EstadoAtendimentoFacade atendimentoFacade;
+
+
+	@GET
+	@Path("/consultar/uor/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Retorna estado do atendimento simplificado", response = EstadoAtendimento.class, consumes = "codigo_uor")
+	public ServiceResponse<EstadoAtendimento> consultarEstadoAtendimento(@PathParam("codigo_uor") int codigoUOR) throws BBException {
+
+		EstadoAtendimento estadoAtendimento = this.atendimentoFacade.consultarEstadoAtendimento(codigoUOR);
+		return new ServiceResponse<EstadoAtendimento>(estadoAtendimento);
+	}
+
+	@GET
+	@Path("/local/uor/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Retorna o Local e Paineis de atendimento do atendente", response = LocalDeAtendimento.class, consumes = "codigo_uor")
+	public ServiceResponse<LocalDeAtendimento> consultarLocalDeAtendimento(@PathParam("codigo_uor") int codigoUor) throws BBException {
+
+		LocalDeAtendimento localDeAtendimento = this.atendimentoFacade.consultarLocalDeAtendimento(codigoUor);
+		return new ServiceResponse<LocalDeAtendimento>(localDeAtendimento);
+	}
+
+
+	@GET
+	@Path("/uor/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Devolve estado do atendimento", response = EstadoAtendimento.class, consumes = "codigo_uor")
+	public ServiceResponse<EstadoAtendimento> obterEstadoAtendimento(@PathParam("codigo_uor") int codigoUOR) throws  BBException {
+
+		EstadoAtendimento estadoAtendimento = atendimentoFacade.obterEstadoAtendimento(codigoUOR);
+		return new ServiceResponse<EstadoAtendimento>(estadoAtendimento);
+
+	}
+
+	@GET
+	@Path("/atendente/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Devolve estado do atendimento", response = EstadoAtendimento.class, consumes = "codigo_uor")
+	public ServiceResponse<DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial> obterEstadoAtendimentoAtendente(@PathParam("codigo_uor") int codigoOUR) throws  BBException {
+
+		DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial estadoAtendimento = atendimentoFacade.obterEstadoAtendente(codigoOUR);
+
+		return new ServiceResponse<DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial>(estadoAtendimento);
+
+	}
+
+
+	@POST
+	@Path("/uor/{codigo_uor}/{acao}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Atualiza o estado do atendimento", response = EstadoAtendimento.class, notes = "Este servico não trata as acoes que possuem APP relacionado")
+	public ServiceResponse<EstadoAtendimento> atualizarEstadoAtendimento(@PathParam("codigo_uor") int codigoOUR, @PathParam("acao") String acao,
+			Atendimento clienteAtendimento) throws  BBException, NegocioException {
+
+		EstadoAtendimento estadoAtendimento = atendimentoFacade.atenderAcaoUsuario(codigoOUR, clienteAtendimento, acao);
+		ServiceResponse<EstadoAtendimento> s = null;
+		if(estadoAtendimento.getMensagem() != null){
+		    s = new ServiceResponse<EstadoAtendimento>(new ServiceMessage(MessageType.INFO, estadoAtendimento.getMensagem()));
+		    s.setData(estadoAtendimento);
+		}else{
+		    s=new ServiceResponse<EstadoAtendimento>(estadoAtendimento);
+		}
+
+		return s;
+
+	}
+
+
+	@GET
+	@Path("/mapa/acoes")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Mapa de relacionamento das acoes com os APPs", notes = "Não deve ser acionado o serviço para as ações que possuem app relacionado. Ao voltar o sendDado do APP, atualizar o widget.")
+	public ServiceResponse<Map<String, AcaoAPPDescricao>> getListaAcoesAPP() throws  BBException {
+
+		Map<String, AcaoAPPDescricao> mapaAcoes = atendimentoFacade.montarMapaAcoesApp();
+
+		return new ServiceResponse<Map<String, AcaoAPPDescricao>>(mapaAcoes);
+	}
+
+
+
+}

@@ -1,0 +1,105 @@
+package br.com.bb.gat.api.v1.atendimento.servicos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.Ocorrencia;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoAbandonarSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoListarSolicitacoesQueAguardamAtendimentoNegocial;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoPriorizarSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoRecuperarSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoRetirarPrioridadeSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoTransferirAtendimentoCaixa;
+import br.com.bb.gat.api.v1.atendimento.operacoes.OperacaoTransferirAtendimentoNegocial;
+import br.com.bb.gat.api.v1.infra.entidades.abstratas.FacadeBase;
+import br.com.bb.gat.operacao.reiniciarSolicitacaoAtendimentoNegocialV2.bean.resposta.DadosRespostaReiniciarSolicitacaoAtendimentoNegocial;
+import br.com.bb.iib.exceptions.BBException;
+
+public class FilaAtendimentoFacade extends FacadeBase {
+
+	private static int CODIGO_ENCERRADO = 40;
+	private static int CODIGO_ABANDONADO = 30;
+	private static int TIPO_ESPACO_NEGOCIAL = 1;
+	private static int TIPO_ESPACO_CAIXA = 2;
+
+	@Inject
+	protected OperacaoListarSolicitacoesQueAguardamAtendimentoNegocial operacaoFilaNegocial;
+
+	@Inject
+	protected OperacaoPriorizarSolicitacaoAtendimentoNegocial operacaoPriorizar;
+
+	@Inject
+	protected OperacaoRetirarPrioridadeSolicitacaoAtendimentoNegocial operacaoRetirarPrioridade;
+
+	@Inject
+	protected OperacaoTransferirAtendimentoNegocial operacaoTransferirAtendimentoNegocial;
+
+	@Inject
+	protected OperacaoTransferirAtendimentoCaixa operacaoTransferirAtendimentoCaixa;
+
+	@Inject
+	protected OperacaoRecuperarSolicitacaoAtendimentoNegocial operacaoRecuperarSolicitacaoNegocial;
+
+	@Inject
+	protected OperacaoAbandonarSolicitacaoAtendimentoNegocial operacaoAbandonarSolicitacaoNegocial;
+
+	public List<Ocorrencia> obterSolicitacoesAtivasNegociaisAtendente(int our) throws BBException {
+		List<Ocorrencia> todasOcorrencias = operacaoFilaNegocial.obterFilaNegocialAtendente(our, getChaveUsuario());
+		List<Ocorrencia> ocorrenciasAtivas = new ArrayList<Ocorrencia>();
+
+		for (Ocorrencia o : todasOcorrencias) {
+			if (o.getCodigoEstadoAtendimento() != CODIGO_ENCERRADO
+					&& o.getCodigoEstadoAtendimento() != CODIGO_ABANDONADO) {
+				ocorrenciasAtivas.add(o);
+			}
+		}
+		return ocorrenciasAtivas;
+	}
+
+	public List<Ocorrencia> obterSolicitacoesInativasNegociaisAtendente(int our) throws BBException {
+		List<Ocorrencia> todasOcorrencias = operacaoFilaNegocial.obterFilaNegocialAtendente(our, getChaveUsuario());
+		List<Ocorrencia> ocorrenciasInativas = new ArrayList<Ocorrencia>();
+
+		for (Ocorrencia o : todasOcorrencias) {
+			if (o.getCodigoEstadoAtendimento() == CODIGO_ENCERRADO
+					|| o.getCodigoEstadoAtendimento() == CODIGO_ABANDONADO) {
+				ocorrenciasInativas.add(o);
+			}
+		}
+		return ocorrenciasInativas;
+	}
+
+	public void priorizarSolicitacao(int codigoDependencia, int protocolo, int codigoPrioridade) throws BBException {
+		operacaoPriorizar.priorizar(codigoDependencia, protocolo, codigoPrioridade, getChaveUsuario());
+	}
+
+	public void retirarPrioridadeSolicitacao(int codigoDependencia, int protocolo) throws BBException {
+		operacaoRetirarPrioridade.retirarPrioridade(codigoDependencia, protocolo, getChaveUsuario());
+	}
+
+	public DadosRespostaReiniciarSolicitacaoAtendimentoNegocial recuperarSolicitacao(int codigoDependencia, int protocolo) throws BBException {
+		return operacaoRecuperarSolicitacaoNegocial.recuperarAtendimento(codigoDependencia, protocolo, getChaveUsuario());
+	}
+
+	public void abandonarSolicitacao(int codigoDependencia, int protocolo) throws BBException {
+		operacaoAbandonarSolicitacaoNegocial.abandonarAtendimento(codigoDependencia, protocolo);
+	}
+
+	public void transferirSolicitacao(int codigoDependencia, int protocolo, int fila, int tipoEspaco)
+			throws BBException {
+
+		if (tipoEspaco == TIPO_ESPACO_NEGOCIAL) {
+			operacaoTransferirAtendimentoNegocial.transferir(codigoDependencia, protocolo, getChaveUsuario(),
+					tipoEspaco, fila);
+		} else if (tipoEspaco == TIPO_ESPACO_CAIXA) {
+			operacaoTransferirAtendimentoCaixa.transferir(codigoDependencia, protocolo, getChaveUsuario(), tipoEspaco,
+					fila);
+		} else {
+			throw new BBException("Tipo do espaço não definido");
+		}
+
+	}
+
+}

@@ -1,0 +1,84 @@
+package br.com.bb.gat.api.v1.atendimento.operacoes;
+
+import java.util.ArrayList;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.Atendimento;
+import br.com.bb.gat.api.v1.auxiliares.entidades.Cliente;
+import br.com.bb.gat.api.v1.infra.entidades.abstratas.OperacaoBase;
+import br.com.bb.gat.operacao.iniciarProximaSolicitacaoAtendimentoNegocialV2.ContextoIniciarProximaSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.operacao.iniciarProximaSolicitacaoAtendimentoNegocialV2.bean.resposta.DadosRespostaIniciarProximaSolicitacaoAtendimentoNegocial;
+import br.com.bb.gat.operacao.iniciarProximaSolicitacaoAtendimentoNegocialV2.bean.resposta.ListaOcorrenciaTitularidade;
+import br.com.bb.iib.exceptions.BBException;
+
+
+public class OperacaoChamarProximaSolicitacaoAtendimentoNegocial extends OperacaoBase {
+
+	public Atendimento obterProximoAtendimentoNegocial(int codigoDependencia, String chaveUsuario) throws  BBException {
+
+		ContextoIniciarProximaSolicitacaoAtendimentoNegocial
+		contexto = new ContextoIniciarProximaSolicitacaoAtendimentoNegocial(getComunicacao(), getSessao());
+		contexto.getRequisicao().setCodigoChaveAtendente(chaveUsuario);
+		contexto.getRequisicao().setCodigoUnidadeOrganizacionalSolicitacao(codigoDependencia);
+		contexto.getRequisicao().setNumeroUnidadeAtendimento(0);
+
+		contexto.executar();
+
+		return criarResposta(contexto.getResposta());
+	}
+
+	private Atendimento criarResposta(DadosRespostaIniciarProximaSolicitacaoAtendimentoNegocial dados) {
+
+		Atendimento clienteAtendimento = new Atendimento();
+
+		if (dados != null)
+		{
+			clienteAtendimento.setNumeroProtocoloAtendimento(dados.getNumeroProtocoloAtendimento());
+			clienteAtendimento.setNumeroSolicitacaoAtendimento(dados.getNumeroSolicitacaoAtendimento());
+			clienteAtendimento.setTextoSenhaAtendimento(dados.getCodigoSenhaAtendimento());
+			clienteAtendimento.setCodigoTipoServicoAtendimento(0);
+			clienteAtendimento.setTextoDescricaoTipoServico(dados.getNomeServico());
+			clienteAtendimento.getCliente().setCodigoAgenciaContaCorrente(dados.getCodigoDependenciaSolicitante());
+			clienteAtendimento.getCliente().setCodigoContaCorrenteCliente(dados.getCodigoContaCorrenteSolicitante());
+			clienteAtendimento.setCodigoPriorizacao(dados.getCodigoMotivoPrioridade());
+
+			if (dados.getListaOcorrenciaTitularidade() != null && !dados.getListaOcorrenciaTitularidade().isEmpty())
+			{
+				ArrayList<ListaOcorrenciaTitularidade> titulares = dados.getListaOcorrenciaTitularidade();
+
+				for (ListaOcorrenciaTitularidade titular : titulares)
+				{
+					clienteAtendimento.getListaCliente().add(new Cliente(titular.getCodigoCliente(), titular.getNomeSolicitanteAtendimento()));
+				}
+				clienteAtendimento.setQuantidadeCliente(clienteAtendimento.getListaCliente().size());
+			}
+			clienteAtendimento.setCliente(buscarPrimeiroTitular(dados));
+		}
+
+		return clienteAtendimento;
+	}
+
+	private Cliente buscarPrimeiroTitular(DadosRespostaIniciarProximaSolicitacaoAtendimentoNegocial dados)
+	{
+		Cliente cliente = new Cliente();
+
+		if (dados != null)
+		{
+			cliente.setCodigoAgenciaContaCorrente(dados.getCodigoDependenciaSolicitante());
+			cliente.setCodigoContaCorrenteCliente(dados.getCodigoContaCorrenteSolicitante());
+
+			if (dados.getListaOcorrenciaTitularidade() != null && !dados.getListaOcorrenciaTitularidade().isEmpty())
+			{
+				ListaOcorrenciaTitularidade primeiroTitular = dados.getListaOcorrenciaTitularidade().get(0);
+
+				if (primeiroTitular != null)
+				{
+					cliente.setCodigoCliente(primeiroTitular.getCodigoCliente());
+					cliente.setNomeCliente(primeiroTitular.getNomeSolicitanteAtendimento());
+				}
+			}
+		}
+		return cliente;
+	}
+
+
+}

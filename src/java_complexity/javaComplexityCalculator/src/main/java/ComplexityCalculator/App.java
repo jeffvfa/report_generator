@@ -18,7 +18,7 @@ public class App {
     public String testfieldDecl;
 
     public static void main(String[] args) throws IOException {
-        String testFileString = Files.readString(Paths.get("./javaComplexityCalculator/src/example.txt"),
+        String testFileString = Files.readString(Paths.get("./javaComplexityCalculator/src/examples/example.txt"),
                 StandardCharsets.UTF_8);
 
         CompilationUnit compilationUnit = StaticJavaParser.parse(testFileString);
