@@ -1,15 +1,15 @@
 import calculateCSSComplexity from './css_complexity';
-import calculateKarmaComplexity from './karma_complexity';
 import calculateTypescriptComplexity from './typescript_complexity';
 import calculateKeyValueComplexity from './key-value_complexity';
+import calculateJavaCompĺexity from './java_complexity';
 
 const unimplementedComplexity = (_: string): TFileComplexity => 'BAIXA';
 
 let complexityCalculator: TComplexityCalculator = {};
 
-complexityCalculator['TEST'] = calculateKarmaComplexity; // TODO: TEST can be either karma or java, so this line is incomplete
+complexityCalculator['TEST'] = unimplementedComplexity; // All tests are the same now
 
-complexityCalculator['JAVA'] = unimplementedComplexity;
+complexityCalculator['JAVA'] = calculateJavaCompĺexity;
 
 complexityCalculator['JAVASCRIPT'] = calculateTypescriptComplexity; // Works for both typescript and javascript
 

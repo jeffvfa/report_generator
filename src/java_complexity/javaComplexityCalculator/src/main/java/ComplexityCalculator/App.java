@@ -11,11 +11,6 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import com.github.javaparser.symbolsolver.resolution.typeinference.Instantiation;
-
-import org.checkerframework.common.reflection.qual.NewInstance;
-
-import javassist.expr.MethodCall;
 
 /**
  * App!
@@ -25,17 +20,18 @@ public class App {
     public String testfieldDecl;
 
     public static void main(String[] args) throws IOException {
-        String filePath = "./javaComplexityCalculator/src/examples/example5.txt";
+        String filePath = "./src/examples/example5.txt";
         calculateJavaComplexity(filePath);
     }
 
-    private static String calculateJavaComplexity(String filePath) throws IOException {
+    public static String calculateJavaComplexity(String filePath) throws IOException {
         String fileCode = null;
         try {
             fileCode = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
         } catch (Exception err) {
             System.out.println(err.getMessage());
-            return null;
+            System.out.println("File not found");
+            return "BAIXA";
         }
 
         // Parse code
@@ -65,6 +61,6 @@ public class App {
         System.out.println("Num of variables: " + numOfVariables);
         System.out.println("Num of API expositions: " + numOfApiExpositions);
         System.out.println("Num of IIB calls: " + numOfIIBCalls);
-        return null;
+        return "BAIXA";
     }
 }
