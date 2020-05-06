@@ -22,4 +22,4 @@ Generates the monthly work reports for the company Stefanini
 
 - open the terminal (ctrl + alt + t)
 - to generate reports for all git repositories within a given path: `$ generate-report -M -D="/path/to/my/projects/directory/" -A="c0000000" -T="0000000, 1111111, 2222222, 3333333, 4444444, 5555555, 6666666, 7777777"`
-- to generate report for a single git repository: (under development).
+- to generate report for a single git repository: `$ generate-report -D="/path/to/my/git/project/" -A="c0000000" -T="0000000, 1111111, 2222222, 3333333, 4444444, 5555555, 6666666, 7777777"`
