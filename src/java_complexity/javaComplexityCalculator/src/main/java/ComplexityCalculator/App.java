@@ -84,7 +84,7 @@ public class App {
 //        System.out.println("numOfApiExpositions: " + numOfApiExpositions);
 //        System.out.println("numOfIIBCalls: " + numOfIIBCalls);
 //        System.out.println("numOfOpenedFiles: " + numOfOpenedFiles);
-        System.out.println("File and Total complexity: " + filePath + " -> " + totalComplexity);
+//        System.out.println("File and Total complexity: " + filePath + " -> " + totalComplexity);
 
         if (totalComplexity <= 15)
             return "BAIXA";
