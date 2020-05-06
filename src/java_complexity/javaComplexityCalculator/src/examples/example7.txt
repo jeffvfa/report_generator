@@ -1,0 +1,198 @@
+package br.com.bb.gat.api.v1.entidades;
+
+import static org.junit.Assert.assertEquals;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.AcaoAPPDescricao;
+import br.com.bb.gaw.commons.utils.api.ServiceResponse;
+
+public class EntidadesTest {
+
+    @BeforeClass
+	public static void init() {
+		br.com.bb.gaw.infra.aplicacao.Constantes.MODO_TESTE = true;
+	}
+
+	@Test
+	public void testeGetterAndSetterApi() throws ClassNotFoundException {
+
+		List<Class> allClasses = new ArrayList<Class>();
+
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.AcaoAPPDescricao"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.Atendimento"));
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.EnumAcoesAtendente"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.EstadoAtendimento"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.LocalAtendimento"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.LocalDeAtendimento"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.Ocorrencia"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.Painel"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.atendimento.entidades.PainelIpDirecao"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.auxiliares.entidades.Carteira"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.auxiliares.entidades.Cliente"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.auxiliares.entidades.Dependencia"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.auxiliares.entidades.Servico"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.auxiliares.entidades.TelefoneCliente"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.carteira.entidades.CarteiraNegocial"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.cliente.entidades.DadosPerfilCliente"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.cliente.entidades.DadosPerfilPessoaJuridica"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.cliente.entidades.EmailPerfilPessoaJuridica"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_atendente.entidades.FilaAtendente"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_atendente.entidades.FilaPainel"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_atendente.entidades.FormConfAtendente"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_atendente.entidades.LocalFila"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_dependencia.entidades.Fila"));
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.conf_dependencia.entidades.TipoEspacoAtendimento"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.infra.entidades.CodigoDescricao"));
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.infra.entidades.CustomJacksonContextResolver"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.monitoracao.entidades.MonitoracaoMinhaFila"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.monitoracao.entidades.TemposLeiUOR"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.regraAtendimento.entidades.TipoCarteira"));
+
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.AbandonaSolicitacaoTelefone"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.Anotacao"));
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.EnumAcoesTelefone"));
+		//allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.EnumEstadosValidosTelefone"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.EstadoAtendimentoTelefonico"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.OcorrenciaTelefone"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.OcorrenciaTelefoneBasica"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.OcorrenciaTelefoneCompleta"));
+		allClasses.add(Class.forName("br.com.bb.gat.api.v1.telefone.entidades.VinculoDependencia"));
+
+
+		for (Class<?> cr : allClasses) {
+
+			System.out.println("Teste " + cr.getSimpleName());
+
+			try {
+				Map<String, Object> arrayObject = new HashMap<String, Object>();
+
+				Object ret = null;
+
+				Field fcr = null;
+				for (Field f : cr.getDeclaredFields()) {
+					fcr = f;
+				}
+				if (fcr == null)
+					break;
+
+				Object o = cr.getConstructor().newInstance();
+				Field field = cr.getDeclaredField(fcr.getName());
+				field.setAccessible(true);
+				//field.set(o, fcr.getType().getConstructor().newInstance());
+
+				//Setter
+				for (Method m : cr.getDeclaredMethods()) {
+
+					if(m.getName().contains("set")){
+
+						System.out.println("Iniciando:" + m.getName());
+
+						m.setAccessible(true);
+						ArrayList<Object> args = new ArrayList<Object>();
+
+						for (Class<?> t : m.getParameterTypes())
+						{
+							if (t.equals(int.class) || t.equals(long.class))
+							{
+								args.add(36);
+							}
+							else if (t.equals(short.class))
+							{
+								args.add(Short.parseShort("36"));
+							}
+							else if (t.equals(boolean.class))
+							{
+								args.add(true);
+							}
+							else if (t.equals(String.class))
+							{
+								args.add("teste");
+							}
+							else
+							{
+								try {
+									Object newInstance = t.getConstructor().newInstance();
+									arrayObject.put(m.getName().substring(3, m.getName().length()), newInstance);
+									args.add(newInstance);
+								}
+								catch (NoSuchMethodException e) {
+									args = null;
+									arrayObject.put(m.getName().substring(3, m.getName().length()), new ArrayList());
+								}
+							}
+						}
+						if (args != null)
+						{
+							ret = m.invoke(o, args.toArray());
+						}
+					}
+				}
+
+				//Getter
+				for (Method m : cr.getDeclaredMethods()) {
+
+					if(m.getName().contains("get")){
+
+						System.out.println("Checando:" + m.getName());
+						m.setAccessible(true);
+						ret = m.invoke(o);
+
+						Class<?> t = m.getReturnType();
+						if (t.equals(int.class))
+						{
+							assertEquals(36, ret);
+						}
+						else if (t.equals(long.class))
+						{
+							assertEquals(Long.parseLong("36"), ret);
+						}
+						else if (t.equals(short.class))
+						{
+							assertEquals(Short.parseShort("36"), ret);
+						}
+						else if (t.equals(boolean.class))
+						{
+							assertEquals(true, ret);
+						}
+						else if (t.equals(String.class))
+						{
+							assertEquals("teste", ret);
+						}
+						else
+						{
+							Assert.assertTrue((ret == null) ||
+							(ret.equals(arrayObject.get(m.getName().substring(3, m.getName().length())))));
+						}
+					}
+				}
+			}
+			catch ( SecurityException | InstantiationException | IllegalAccessException |
+					IllegalArgumentException | InvocationTargetException |
+					NoSuchFieldException | NoSuchMethodException e)
+			{
+				e.printStackTrace();
+				break;
+			}
+		}
+	}
+	/**/
+}

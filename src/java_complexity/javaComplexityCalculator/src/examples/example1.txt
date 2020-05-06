@@ -1,0 +1,454 @@
+package br.com.bb.gat.api.v1.atendimento.servicos;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.*;
+import br.com.bb.gat.api.v1.atendimento.operacoes.*;
+import br.com.bb.gat.api.v1.campanha.OperacaoConsultarCampanhaAtendimentoVirtual;
+import br.com.bb.gat.api.v1.conf_atendente.entidades.LocalFila;
+import br.com.bb.gat.api.v1.conf_atendente.servicos.AtendenteFacade;
+import br.com.bb.gat.api.v1.infra.entidades.abstratas.FacadeBase;
+import br.com.bb.gat.operacao.consultarApresentacaoComponentesChamadaAtendimentoNegocialV1.bean.resposta.ListaComponenteApresentacao;
+import br.com.bb.gat.operacao.consultarCampanhaAtendimentoVirtualV1.bean.requisicao.DadosRequisicaoConsultarCampanhaAtendimentoVirtual;
+import br.com.bb.gat.operacao.consultarCampanhaAtendimentoVirtualV1.bean.resposta.DadosRespostaConsultarCampanhaAtendimentoVirtual;
+import br.com.bb.gat.operacao.consultarEstatisticasAtendenteNoAtendimentoNegocialV3.bean.resposta.DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial;
+import br.com.bb.gat.operacao.consultarExistenciaClienteEmCampanhaAgenciaV1.bean.resposta.DadosRespostaConsultarExistenciaClienteEmCampanhaAgencia;
+import br.com.bb.gat.operacao.consultarQuantidadeClientesEmAtendimentoDependenciaV1.bean.resposta.DadosRespostaConsultarQuantidadeClientesEmAtendimentoDependencia;
+import br.com.bb.gat.operacao.listarTerminaisChamadaClientesDependenciaAtendenteNoAtendimentoNegocialV1.bean.resposta.ListaOcorrencia;
+import br.com.bb.gaw.commons.utils.exceptions.NegocioException;
+import br.com.bb.iib.exceptions.BBException;
+import org.apache.commons.lang.StringUtils;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class EstadoAtendimentoFacade extends FacadeBase {
+    private static final String ROLE_CAMPANHA = "GATR";
+    private static final int CODIGO_CHAMAR_PROXIMO = 1;
+    private static final int CODIGO_CHAMAR_CAMPANHA = 2;
+    private static String ATUALIZAR = EnumAcoesAtendente.ATUALIZAR.getId();
+    private static String REMANEJAR = EnumAcoesAtendente.REMANEJAR.getId();
+    private static String IDENTIFICAR = EnumAcoesAtendente.IDENTIFICAR.getId();
+    private static String RECHAMAR_SENHA = EnumAcoesAtendente.RECHAMAR_SENHA.getId();
+    private static String CHAMAR_PROXIMO = EnumAcoesAtendente.CHAMAR_PROXIMO.getId();
+    private static String CHAMAR_CAMPANHA = EnumAcoesAtendente.CHAMAR_CAMPANHA.getId();
+    private static String ABANDONAR_ATENDIMENTO = EnumAcoesAtendente.ABANDONAR_ATENDIMENTO.getId();
+    private static String AUSENTAR_SE_ATENDIMENTO = EnumAcoesAtendente.AUSENTAR_SE_ATENDIMENTO.getId();
+    private static String INICIAR_ATENDIMENTO_FILA = EnumAcoesAtendente.INICIAR_ATENDIMENTO_FILA.getId();
+    private static String ENCERRAR_E_CHAMAR_PROXIMO = EnumAcoesAtendente.ENCERRAR_E_CHAMAR_PROXIMO.getId();
+    private static String ABANDONAR_E_CHAMAR_PROXIMO = EnumAcoesAtendente.ABANDONAR_E_CHAMAR_PROXIMO.getId();
+    private static String CONFIGURAR_FILA_ATENDIMENTO = EnumAcoesAtendente.CONFIGURAR_FILA_ATENDIMENTO.getId();
+    private static String ENCERRAR_ATENDIMENTO_VIRTUAL = EnumAcoesAtendente.ENCERRAR_ATENDIMENTO_VIRTUAL.getId();
+    private static String ENCERRAR_ATENDIMENTO_CLIENTE = EnumAcoesAtendente.ENCERRAR_ATENDIMENTO_CLIENTE.getId();
+
+    @Inject
+    protected AtendenteFacade atendenteFacade;
+
+    @Inject
+    protected OperacaoIniciarAtendenteNegocial operacaoInicarAtendente;
+
+    @Inject
+    protected OperacaoConsultarEstadoAtendente operacaoConsultarEstadoAtendente;
+
+    @Inject
+    protected OperacaoListarTerminaisAtendente operacaoListarTerminaisAtendente;
+
+    @Inject
+    protected OperacaoSolicitarAtendimentoVirtual operacaoChamarProximoVirtual;
+
+    @Inject
+    protected OperacaoConsultarAtendimentoEmAndamento operacaoAtendimentoAndamento;
+
+    @Inject
+    protected OperacaoEncerrarSolicitacaoAtendimentoNegocial operacaoEncerrar;
+
+    @Inject
+    protected OperacaoAbandonarSolicitacaoAtendimentoNegocial operacaoAbandonar;
+
+    @Inject
+    protected OperacaoChamarProximaSolicitacaoAtendimentoNegocial operacaoChamarProximo;
+
+    @Inject
+    protected OperacaoConsultarExistenciaClienteEmCampanhaAgencia operacaoConsultarExistenciaCampanha;
+
+    @Inject
+    protected OperacaoConsultarCampanhaAtendimentoVirtual operacaoConsultarCampanhaAtendimentoVirtual;
+
+    @Inject
+    protected OperacaoEncerrarSolicitacaoAtendimentoVirtualNaoRealizado operacaoEncerrarAtendimentoVirtual;
+
+    @Inject
+    protected OperacaoConsultarQuantidadeClientesEmAtendimentoDependencia operacaoConsultarQuantidadeClientesEmAtendimentoDependencia;
+
+    @Inject
+    protected OperacaoConsultarApresentacaoComponentesAtentimentoNegocial operacaoConsultarApresentacaoComponentesAtentimentoNegocial;
+
+    public EstadoAtendimento atenderAcaoUsuario(int codigoUor, Atendimento clienteAtendimento, String acao)
+            throws BBException, NegocioException {
+        EnumAcoesAtendente acaoSelecionada = null;
+
+        for (EnumAcoesAtendente e : EnumAcoesAtendente.values()) {
+            if (e.getId().equalsIgnoreCase(acao)) {
+                acaoSelecionada = e;
+                break;
+            }
+        }
+
+        if (acaoSelecionada == null) {
+            throw new NegocioException("Identificador de ação incorreto");
+        }
+
+        Atendimento novoCliente = null;
+        boolean clienteCampanha = false;
+
+        String mensagem = null;
+
+        switch (acaoSelecionada) {
+            case ENCERRAR_ATENDIMENTO_CLIENTE:
+                encerrarAtendimento(clienteAtendimento, codigoUor);
+                mensagem = "O atendimento foi encerrado";
+                break;
+
+            case ENCERRAR_E_CHAMAR_PROXIMO:
+                if (clienteAtendimento != null && clienteAtendimento.getNumeroProtocoloAtendimento() > 0) {
+                    encerrarAtendimento(clienteAtendimento, codigoUor);
+                }
+                novoCliente = chamarProximo(codigoUor);
+                break;
+
+            case CHAMAR_PROXIMO:
+                novoCliente = chamarProximo(codigoUor);
+                break;
+
+            case ABANDONAR_ATENDIMENTO:
+                abandonarAtendimento(clienteAtendimento, codigoUor);
+                break;
+
+            case ABANDONAR_E_CHAMAR_PROXIMO:
+                abandonarAtendimento(clienteAtendimento, codigoUor);
+                novoCliente = chamarProximo(codigoUor);
+                break;
+
+            case INICIAR_ATENDIMENTO_FILA:
+                iniciarAtendimentoFila(codigoUor);
+                break;
+
+            case CHAMAR_CAMPANHA:
+                novoCliente = chamarCampanha(codigoUor);
+                clienteCampanha = true;
+                break;
+
+            case ENCERRAR_ATENDIMENTO_VIRTUAL:
+                encerrarAtendimentoVirtual(clienteAtendimento, codigoUor);
+                mensagem = "O atendimento foi encerrado";
+                break;
+
+            default:
+                novoCliente = clienteAtendimento;
+                break;
+        }
+
+        EstadoAtendimento
+                estadoAtendimento = obterEstadoAtendimento(codigoUor, novoCliente, clienteCampanha);
+        estadoAtendimento.setDadosClienteEmAtendimento(novoCliente);
+        estadoAtendimento.setMensagem(mensagem);
+
+        return estadoAtendimento;
+    }
+
+    private void iniciarAtendimentoFila(int codigoUor) throws BBException {
+        operacaoInicarAtendente.iniciarAtendente(codigoUor, getChaveUsuario());
+    }
+
+    private void abandonarAtendimento(Atendimento clienteAtendimento, int codigoUor) throws BBException {
+        operacaoAbandonar.abandonarAtendimento(codigoUor, clienteAtendimento.getNumeroProtocoloAtendimento());
+    }
+
+    private Atendimento chamarCampanha(int codigoUor) throws BBException {
+        return this.operacaoChamarProximoVirtual.obterProximoAtendimentoVirtual(codigoUor);
+    }
+
+    private Atendimento chamarProximo(int codigoDependencia) throws BBException {
+        return operacaoChamarProximo.obterProximoAtendimentoNegocial(codigoDependencia, getChaveUsuario());
+    }
+
+    private void encerrarAtendimento(Atendimento clienteAtendimento, int codigoUor) throws BBException {
+        operacaoEncerrar.encerrarAtendimento(codigoUor, getChaveUsuario(), clienteAtendimento.getNumeroProtocoloAtendimento());
+    }
+
+    private void encerrarAtendimentoVirtual(Atendimento clienteAtendimento, int codigoUor) throws BBException {
+        this.operacaoEncerrarAtendimentoVirtual.encerrarAtendimentoVirtual(codigoUor, clienteAtendimento.getNumeroProtocoloAtendimento());
+    }
+
+    /**
+     * @param codigouor
+     * @return EstadoAtendimento
+     * @throws BBException
+     */
+    public EstadoAtendimento consultarEstadoAtendimento(int codigouor) throws BBException {
+
+        DadosRespostaConsultarQuantidadeClientesEmAtendimentoDependencia respostaQtdeDep =
+                operacaoConsultarQuantidadeClientesEmAtendimentoDependencia.executarOperacao(codigouor, 0);
+
+        DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado =
+                operacaoConsultarEstadoAtendente.obterEstadoAtendente(codigouor, getChaveUsuario());
+
+        EstadoAtendimento estadoAtendimento = new EstadoAtendimento();
+        estadoAtendimento.setSituacaoFila(respostaEstado.getCodigoEstadoFilaAtendimento());
+        estadoAtendimento.setExisteFilaAtiva(respostaEstado.getQuantidadeFilaAtivo() > 0);
+        estadoAtendimento.setTempoMedioEsperaMinutos(respostaEstado.getQuantidadeMinutoMedioEspera());
+        estadoAtendimento.setQuantidadeClientesNaFila(respostaEstado.getQuantidadeClienteEsperaAtendimento());
+		estadoAtendimento.setQuantidadeAtendimento(respostaQtdeDep.getQuantidadeAtendimento());
+
+
+        // Op1813332-v2 - Consultar Solicitação Iniciada de Atendimento Negocial
+        consultarSolicitacaoAtdNegocial(codigouor, respostaEstado, estadoAtendimento);
+
+        // Op3805601-v1 - Consultar Campanha Atendimento Virtual v1
+        // verifica se existe campanha para agência
+        consultarCampanhaAtdVirtual(codigouor, respostaEstado, estadoAtendimento);
+
+        estadoAtendimento.setAcoesPossiveis(obterAcoesPossiveis(respostaEstado, estadoAtendimento, codigouor));
+
+        return estadoAtendimento;
+    }
+
+    /**
+     * @param codigoUor
+     * @return LocalDeAtendimento
+     * @throws BBException
+     */
+    public LocalDeAtendimento consultarLocalDeAtendimento(int codigoUor) throws BBException {
+        LocalDeAtendimento local = new LocalDeAtendimento();
+
+        ArrayList<ListaOcorrencia> terminais = operacaoListarTerminaisAtendente.obterTerminaisAtendente(codigoUor, super.getChaveUsuario());
+
+        ArrayList<PainelIpDirecao> paineis = new ArrayList<PainelIpDirecao>();
+
+        if (terminais != null && !terminais.isEmpty()) {
+            for (ListaOcorrencia t : terminais) {
+
+                PainelIpDirecao painelIpDirecao = new
+                        PainelIpDirecao(t.getNumeroIpTerminal(), t.getSimboloLocalizacaoTerminal().toUpperCase());
+
+                paineis.add(painelIpDirecao);
+            }
+            LocalFila lf = atendenteFacade.obterLocalAtendente(codigoUor);
+
+            if (lf != null) {
+                local.setNumeroMesaAtendente(lf.getNumeroLocalAtendimento());
+            }
+        }
+        local.setPaineis(paineis.toArray(new PainelIpDirecao[paineis.size()]));
+
+        return local;
+    }
+
+    public EstadoAtendimento obterEstadoAtendimento(int codigoOUR) throws BBException {
+        return obterEstadoAtendimento(codigoOUR, null, false);
+    }
+
+    public DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial obterEstadoAtendente(int codigoOUR) throws BBException {
+        return operacaoConsultarEstadoAtendente.obterEstadoAtendente(codigoOUR, getChaveUsuario());
+    }
+
+    public EstadoAtendimento obterEstadoAtendimento(int codigoUOR, Atendimento clienteAtual, boolean clienteCampanha) throws BBException {
+
+        DadosRespostaConsultarQuantidadeClientesEmAtendimentoDependencia respostaQtdeDep =
+                operacaoConsultarQuantidadeClientesEmAtendimentoDependencia.executarOperacao(codigoUOR, 0);
+
+        EstadoAtendimento estadoAtendimento = new EstadoAtendimento();
+
+        DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado =
+                operacaoConsultarEstadoAtendente.obterEstadoAtendente(codigoUOR, getChaveUsuario());
+
+        ArrayList<ListaOcorrencia> terminais = operacaoListarTerminaisAtendente.obterTerminaisAtendente(codigoUOR, super.getChaveUsuario());
+        ArrayList<PainelIpDirecao> paineis = new ArrayList<PainelIpDirecao>();
+
+        if (terminais != null && terminais.size() != 0) {
+            for (ListaOcorrencia t : terminais) {
+                paineis.add(
+                        new PainelIpDirecao(
+                                t.getNumeroIpTerminal(),
+                                t.getSimboloLocalizacaoTerminal().toUpperCase()
+                        )
+                );
+            }
+            LocalFila lf = atendenteFacade.obterLocalAtendente(codigoUOR);
+
+            if (lf != null) {
+                estadoAtendimento.setNumeroMesaAtendente(lf.getNumeroLocalAtendimento());
+            }
+        }
+        estadoAtendimento.setPaineis(paineis.toArray(new PainelIpDirecao[paineis.size()]));
+        estadoAtendimento.setSituacaoFila(respostaEstado.getCodigoEstadoFilaAtendimento());
+        estadoAtendimento.setExisteFilaAtiva(respostaEstado.getQuantidadeFilaAtivo() > 0);
+        estadoAtendimento.setTempoMedioEsperaMinutos(respostaEstado.getQuantidadeMinutoMedioEspera());
+        estadoAtendimento.setQuantidadeClientesNaFila(respostaEstado.getQuantidadeClienteEsperaAtendimento());
+        estadoAtendimento.setQuantidadeAtendimento(respostaQtdeDep.getQuantidadeAtendimento());
+
+        if (respostaEstado.getNumeroProtocoloAtendimentoAtual() > 0) {
+            if (clienteAtual == null || respostaEstado.getNumeroProtocoloAtendimentoAtual() != clienteAtual.getNumeroProtocoloAtendimento()) {
+                estadoAtendimento.setDadosClienteEmAtendimento(operacaoAtendimentoAndamento.obterAtendimentoEmAndamento(codigoUOR, respostaEstado.getNumeroProtocoloAtendimentoAtual()));
+            } else {
+                estadoAtendimento.setDadosClienteEmAtendimento(clienteAtual);
+            }
+
+            if (clienteCampanha) {
+                estadoAtendimento.setIndicadorClienteCampanha(clienteCampanha);
+            } else if (
+                    estadoAtendimento != null &&
+                            estadoAtendimento.getDadosClienteEmAtendimento() != null &&
+                            estadoAtendimento.getDadosClienteEmAtendimento().getCodigoTipoServicoAtendimento() == 59) {
+                estadoAtendimento.setIndicadorClienteCampanha(true);
+            }
+        }
+
+        // verifica se existe campanha de atendimento virtual, caso a fila de atendimento estiver sem clientes
+        if (podeChamarCampanha(respostaEstado.getNumeroProtocoloAtendimentoAtual(), estadoAtendimento.getQuantidadeAtendimento() == 0)) {
+            DadosRespostaConsultarExistenciaClienteEmCampanhaAgencia campanha = this.operacaoConsultarExistenciaCampanha.consultar(codigoUOR);
+
+            if (campanha != null && StringUtils.isNotBlank(campanha.getIndicadorClienteCampanha())) {
+
+                estadoAtendimento.setIndicadorClienteCampanha("S".equalsIgnoreCase(campanha.getIndicadorClienteCampanha()));
+            }
+        }
+        estadoAtendimento.setAcoesPossiveis(obterAcoesPossiveis(respostaEstado, estadoAtendimento, codigoUOR));
+
+        return estadoAtendimento;
+    }
+
+    private List<String> obterAcoesPossiveis(
+            DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado,
+            EstadoAtendimento estadoAtendimento,
+            int codigoUOR) throws BBException {
+        List<String> acoes = new ArrayList<String>();
+
+        if (adicionarIdentificar(respostaEstado, estadoAtendimento)) {
+            acoes.add(IDENTIFICAR);
+        }
+
+        if (respostaEstado.getQuantidadeFilaAtivo() == 0) {
+            // não possui filas configuradas
+            acoes.add(CONFIGURAR_FILA_ATENDIMENTO);
+        } else if (!("S").equalsIgnoreCase(respostaEstado.getIndicadorAtendenteIniciado())) {
+            // possui filas configuradas mas não iniciou o atendimento
+            acoes.add(INICIAR_ATENDIMENTO_FILA);
+        } else if (respostaEstado.getNumeroProtocoloAtendimentoAtual() == 0) {
+            // ja iniciou o atendimento mas não tem cliente em atendimento
+            if (adicionarAcaoChamarProximo(respostaEstado.getQuantidadeClienteEsperaAtendimento(), codigoUOR)) {
+                acoes.add(CHAMAR_PROXIMO);
+            } else if (podeChamarCampanha(estadoAtendimento.getQuantidadeAtendimento(), estadoAtendimento.isIndicadorClienteCampanha())) {
+                acoes.add(CHAMAR_CAMPANHA);
+            }
+
+            // questoes de 'delay campanha'
+            if (apresentarBotao(codigoUOR, CODIGO_CHAMAR_CAMPANHA) && !(acoes.contains(CHAMAR_CAMPANHA)) && isPossuiPermissao(ROLE_CAMPANHA)) {
+                acoes.add(CHAMAR_CAMPANHA);
+            }
+
+            acoes.add(ATUALIZAR);
+            acoes.add(AUSENTAR_SE_ATENDIMENTO);
+        } else if (respostaEstado.getNumeroProtocoloAtendimentoAtual() > 0) {
+            // com cliente em atendimento
+            if (estadoAtendimento.isIndicadorClienteCampanha()) {
+                acoes.add(ENCERRAR_ATENDIMENTO_CLIENTE);
+                acoes.add(ENCERRAR_ATENDIMENTO_VIRTUAL);
+
+            } else {
+                acoes.add(ENCERRAR_ATENDIMENTO_CLIENTE);
+                if (respostaEstado.getQuantidadeClienteEsperaAtendimento() > 0) {
+                    acoes.add(ABANDONAR_E_CHAMAR_PROXIMO);
+                }
+                acoes.add(ABANDONAR_ATENDIMENTO);
+                acoes.add(RECHAMAR_SENHA);
+                acoes.add(REMANEJAR);
+            }
+        }
+        return acoes;
+    }
+
+    public Map<String, AcaoAPPDescricao> montarMapaAcoesApp() {
+        Map<String, AcaoAPPDescricao> acoesAPP = new HashMap<String, AcaoAPPDescricao>();
+
+        for (EnumAcoesAtendente acao : EnumAcoesAtendente.values()) {
+            acoesAPP.put(acao.getId(), new AcaoAPPDescricao(acao.getMostrarAPP(), acao.getDescricao()));
+        }
+        return acoesAPP;
+    }
+
+    public Map<String, String> montarMapaAcoesDescricao() {
+        Map<String, String> acoesDescricao = new HashMap<String, String>();
+
+        for (EnumAcoesAtendente acao : EnumAcoesAtendente.values()) {
+            acoesDescricao.put(acao.getId(), acao.getDescricao());
+        }
+        return acoesDescricao;
+    }
+
+    private void consultarCampanhaAtdVirtual(int codigouor, DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado, EstadoAtendimento estadoAtendimento) throws BBException {
+        if (respostaEstado.getNumeroProtocoloAtendimentoAtual() == 0 &&
+                respostaEstado.getQuantidadeClienteEsperaAtendimento() == 0 &&
+                estadoAtendimento.getQuantidadeAtendimento() == 0 &&
+                isPossuiPermissao(ROLE_CAMPANHA)) {
+            DadosRequisicaoConsultarCampanhaAtendimentoVirtual requisicao = new
+                    DadosRequisicaoConsultarCampanhaAtendimentoVirtual();
+            requisicao.setCodigoUnidadeOrganizacional(codigouor);
+
+            DadosRespostaConsultarCampanhaAtendimentoVirtual respostaConsultarCampanha =
+                    this.operacaoConsultarCampanhaAtendimentoVirtual.executarOperacao(requisicao, 0);
+
+            // Op3810023-v1 - Consultar Existência de Cliente em Campanha por Agência
+            // Verifica se existe cliente para campanha da agência
+            if (respostaConsultarCampanha != null && respostaConsultarCampanha.getCodigoCampanha() != 0) {
+                DadosRespostaConsultarExistenciaClienteEmCampanhaAgencia campanha =
+                        this.operacaoConsultarExistenciaCampanha.consultar(codigouor);
+
+                if (campanha != null && StringUtils.isNotBlank(campanha.getIndicadorClienteCampanha())) {
+                    estadoAtendimento.setIndicadorClienteCampanha("S".equalsIgnoreCase(campanha.getIndicadorClienteCampanha()));
+                }
+            }
+        }
+    }
+
+    private void consultarSolicitacaoAtdNegocial(int codigouor, DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado, EstadoAtendimento estadoAtendimento) throws BBException {
+        if (respostaEstado.getNumeroProtocoloAtendimentoAtual() > 0) {
+            Atendimento emAndamento = this.operacaoAtendimentoAndamento.obterAtendimentoEmAndamento(codigouor, respostaEstado.getNumeroProtocoloAtendimentoAtual());
+
+            estadoAtendimento.setDadosClienteEmAtendimento(emAndamento);
+
+            if (estadoAtendimento.getDadosClienteEmAtendimento() != null &&
+                    estadoAtendimento.getDadosClienteEmAtendimento().getCodigoTipoServicoAtendimento() == 59) {
+                estadoAtendimento.setIndicadorClienteCampanha(true);
+            }
+        }
+    }
+
+    private boolean adicionarIdentificar(DadosRespostaConsultarEstatisticasAtendenteNoAtendimentoNegocial respostaEstado, EstadoAtendimento estadoAtendimento) {
+        return respostaEstado.getNumeroProtocoloAtendimentoAtual() > 0 &&
+                estadoAtendimento.getDadosClienteEmAtendimento() != null
+                &&
+                (estadoAtendimento.getDadosClienteEmAtendimento().getCliente() == null ||
+                        estadoAtendimento.getDadosClienteEmAtendimento().getCliente().getCodigoCliente() == 0
+                );
+    }
+
+    private boolean apresentarBotao(int codigoUor, int codigoBotao) throws BBException {
+        ArrayList<ListaComponenteApresentacao> lista = operacaoConsultarApresentacaoComponentesAtentimentoNegocial.executarOperacao(codigoUor);
+
+        return lista
+                .stream()
+                .anyMatch(botao -> botao.getCodigoComponenteApresentacao() == codigoBotao
+                        &&
+                        botao.getIndicadorComponenteApresentacaoDisponivel().equals("S"));
+    }
+
+    private boolean podeChamarCampanha(int quantidadeAtendimento, boolean indicadorClienteCampanha) {
+        return quantidadeAtendimento == 0 && indicadorClienteCampanha && isPossuiPermissao(ROLE_CAMPANHA);
+    }
+
+    private boolean adicionarAcaoChamarProximo(int clienteEspera, int codigoUor) throws BBException {
+        return clienteEspera > 0 || apresentarBotao(codigoUor, CODIGO_CHAMAR_PROXIMO);
+    }
+}

@@ -22,6 +22,7 @@
 	"devDependencies": {
 		"@types/dom-parser": "^0.1.0",
 		"@types/fs-extra": "^8.1.0",
+		"@types/java": "^0.9.0",
 		"@types/jest": "^25.1.3",
 		"@types/node": "^13.7.4",
 		"@types/xmldom": "^0.1.29",
@@ -35,6 +36,7 @@
 	"dependencies": {
 		"exceljs": "^3.8.0",
 		"fs-extra": "^8.1.0",
+		"java": "^0.12.1",
 		"typescript": "^3.8.3",
 		"xmldom": "^0.3.0"
 	},
@@ -45,6 +47,6 @@
 		"singleQuote": true,
 		"useTabs": true,
 		"trailingComma": "all",
-        "jsxBracketSameLine": true
+		"jsxBracketSameLine": true
 	}
 }

@@ -158,5 +158,5 @@ if [[ $multiple_directories -eq 1 ]]; then
   runReportGenerator $WORK_DIR "$default_directory" "$task_list"
 else
   getLogsFromDirectory "$default_directory" "$author_name" "$WORK_DIR"/output "0"
-  runReportGenerator $WORK_DIR "$task_list"
+  runReportGenerator $WORK_DIR "$default_directory" "$task_list"
 fi

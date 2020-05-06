@@ -1,0 +1,110 @@
+package br.com.bb.gat.api.v1.atendimento.servicos;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
+import br.com.bb.gat.api.v1.atendimento.entidades.Ocorrencia;
+import br.com.bb.gat.operacao.reiniciarSolicitacaoAtendimentoNegocialV2.bean.resposta.DadosRespostaReiniciarSolicitacaoAtendimentoNegocial;
+import br.com.bb.gaw.commons.utils.api.ServiceResponse;
+import br.com.bb.gaw.infra.utils.ResponseUtil;
+import br.com.bb.iib.exceptions.BBException;
+
+@Path("/v1/fila/atendimento")
+@RequestScoped
+@Api(value = "SERVICOS GAT - ANTIGOS")
+public class FilaAtendimentoResource {
+
+	@Inject
+	private FilaAtendimentoFacade filaNegocialFacade;
+
+
+	@GET
+	@Path("/solicitacoes/ativas/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Obtem a lista de clientes aguardando atendimento", response = Ocorrencia.class, consumes = "codigo_uor")
+	public ServiceResponse<List<Ocorrencia>> getSolicitacoesAtivasNegociaisAtendente(@PathParam("codigo_uor") int codigoOUR) throws  BBException {
+		return new ServiceResponse<List<Ocorrencia>>(filaNegocialFacade.obterSolicitacoesAtivasNegociaisAtendente(codigoOUR));
+	}
+
+
+	@GET
+	@Path("/solicitacoes/inativas/{codigo_uor}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@ApiOperation(value = "Obtem a lista de clientes aguardando atendimento", response = Ocorrencia.class, consumes = "codigo_uor")
+	public ServiceResponse<List<Ocorrencia>> getSolicitacoesInativasNegociaisAtendente(@PathParam("codigo_uor") int codigoOUR) throws  BBException {
+		return new ServiceResponse<List<Ocorrencia>>(filaNegocialFacade.obterSolicitacoesInativasNegociaisAtendente(codigoOUR));
+	}
+
+	@POST
+	@Path("/priorizar/{codigo_uor}/{protocolo}/{codigo_prioridade}")
+	@Produces(ResponseUtil.PRODUCES_TYPE)
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Alterar a solicitação para prioritário", consumes = "codigo_uor, protocolo, codigo_prioridade")
+	public ServiceResponse<?> priorizar(@PathParam("codigo_uor") int codigoDependencia, @PathParam("protocolo") int protocolo,
+			@PathParam("codigo_prioridade") int codigoPrioridade) throws  BBException {
+
+		filaNegocialFacade.priorizarSolicitacao(codigoDependencia, protocolo, codigoPrioridade);
+
+		return ResponseUtil.gerarInfo("Solicitação priorizada.");
+	}
+
+
+	@POST
+	@Path("/retirar_prioridade/{codigo_uor}/{protocolo}")
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Alterar a solicitação para normal", consumes = "codigo_uor, protocolo")
+	public ServiceResponse<?> retirarPrioridade(@PathParam("codigo_uor") int codigoDependencia, @PathParam("protocolo") int protocolo) throws
+			BBException {
+
+		filaNegocialFacade.retirarPrioridadeSolicitacao(codigoDependencia, protocolo);
+
+		return ResponseUtil.gerarInfo("Solicitação alterada com sucesso.");
+	}
+
+
+	@POST
+	@Path("/remanejar/{codigo_uor}/{protocolo}/{codigo_fila}/{tipo_espaco}")
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Remanejar a solicitação para outra fila", consumes = "codigo_uor, protocolo")
+	public ServiceResponse<?> remanejar(@PathParam("codigo_uor") int codigoDependencia, @PathParam("protocolo") int protocolo,
+			@PathParam("codigo_fila") int fila, @PathParam("tipo_espaco") int tipoEspaco) throws  BBException {
+		filaNegocialFacade.transferirSolicitacao(codigoDependencia,protocolo,fila,tipoEspaco);
+
+		return ResponseUtil.gerarInfo("Solicitação alterada com sucesso.");
+
+	}
+
+	@POST
+	@Path("/recuperar/{codigo_uor}/{protocolo}")
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Recuperar a solicitacao", consumes = "codigo_uor, protocolo", response= DadosRespostaReiniciarSolicitacaoAtendimentoNegocial.class)
+	public ServiceResponse<DadosRespostaReiniciarSolicitacaoAtendimentoNegocial> recuperar(@PathParam("codigo_uor") int codigoDependencia,
+										@PathParam("protocolo") int protocolo) throws  BBException {
+
+		DadosRespostaReiniciarSolicitacaoAtendimentoNegocial dados = filaNegocialFacade.recuperarSolicitacao(codigoDependencia, protocolo);
+		return new ServiceResponse<DadosRespostaReiniciarSolicitacaoAtendimentoNegocial>(dados);
+	}
+
+
+	@POST
+	@Path("/abandonar/{codigo_uor}/{protocolo}")
+	@Consumes(ResponseUtil.CONSUMES_TYPE)
+	@ApiOperation(value = "Abandonar a solicitação", consumes = "codigo_uor, protocolo")
+	public ServiceResponse<?> abandonar(@PathParam("codigo_uor") int codigoDependencia,
+										@PathParam("protocolo") int protocolo) throws  BBException {
+			filaNegocialFacade.abandonarSolicitacao(codigoDependencia, protocolo);
+		return ResponseUtil.gerarInfo("Solicitação abandonada.");
+
+	}
+}

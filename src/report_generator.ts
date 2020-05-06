@@ -10,7 +10,7 @@ import applyAddedVersusModifiedRuleToTaskList from './object_transformers/apply_
 import calculateComplexityForTaskList from './object_transformers/calculate_complexity_for_task_list';
 import generateReport from './object_transformers/generate_report_from_task_list';
 
-const main = (jsonFilesDirectory: string = 'output', rootDirectory: string, taskListInput: string[] = []): void => {
+export const main = (jsonFilesDirectory: string = 'output', rootDirectory: string, taskListInput: string[] = []): void => {
 	console.log('Iniciando Report Generator');
 	console.log('\n\n**** Parâmetros utilizados ****:\n');
 	console.log('Arquivo de log: ' + jsonFilesDirectory);
@@ -63,4 +63,3 @@ const main = (jsonFilesDirectory: string = 'output', rootDirectory: string, task
 const rootDirectory = process.argv[2];
 const taskListInputFromCommandLine = process.argv[3]?.split(',')?.map((el) => el.trim()) || [];
 main(path.join(__dirname, '../output'), rootDirectory, taskListInputFromCommandLine);
-// main('gitlog_example.json', ['1227478', '1226939', '1225507']);

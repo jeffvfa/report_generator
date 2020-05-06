@@ -1,0 +1,123 @@
+package br.com.bb.gat.api.v1.atendimento.entidades;
+
+import java.io.Serializable;
+
+public class Ocorrencia implements Serializable {
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2054180017412803289L;
+
+	private Atendimento atendimento = new Atendimento();
+	private String textoTempoEsperaAtendimento;
+	private int codigoEstadoAtendimento;
+	private String textoDescricaoEstadoAtendimento;
+	private int codigoTipoCarteira;
+	private String textoDescricaoTipoCarteira;
+	private int codigoMotivoPrioridade;
+	private String nomeMotivoPrioridade;
+	private String chaveAtentende;
+	private String chaveAdministradorCarteira;
+	private int codigoAgencia;
+	private long codigoConta;
+
+	public Atendimento getAtendimento() {
+		return atendimento;
+	}
+
+	public void setAtendimento(Atendimento atendimento) {
+		this.atendimento = atendimento;
+	}
+
+	public String getTextoTempoEsperaAtendimento() {
+		return textoTempoEsperaAtendimento;
+	}
+
+	public void setTextoTempoEsperaAtendimento(
+			String textoTempoEsperaAtendimento) {
+		this.textoTempoEsperaAtendimento = textoTempoEsperaAtendimento;
+	}
+
+	public int getCodigoEstadoAtendimento() {
+		return codigoEstadoAtendimento;
+	}
+
+	public void setCodigoEstadoAtendimento(int codigoEstadoAtendimento) {
+		this.codigoEstadoAtendimento = codigoEstadoAtendimento;
+	}
+
+	public String getTextoDescricaoEstadoAtendimento() {
+		return textoDescricaoEstadoAtendimento;
+	}
+
+	public void setTextoDescricaoEstadoAtendimento(
+			String textoDescricaoEstadoAtendimento) {
+		this.textoDescricaoEstadoAtendimento = textoDescricaoEstadoAtendimento;
+	}
+
+	public int getCodigoTipoCarteira() {
+		return codigoTipoCarteira;
+	}
+
+	public void setCodigoTipoCarteira(int codigoTipoCarteira) {
+		this.codigoTipoCarteira = codigoTipoCarteira;
+	}
+
+	public String getTextoDescricaoTipoCarteira() {
+		return textoDescricaoTipoCarteira;
+	}
+
+	public void setTextoDescricaoTipoCarteira(String textoDescricaoTipoCarteira) {
+		this.textoDescricaoTipoCarteira = textoDescricaoTipoCarteira;
+	}
+
+	public int getCodigoMotivoPrioridade() {
+		return codigoMotivoPrioridade;
+	}
+
+	public void setCodigoMotivoPrioridade(int codigoMotivoPrioridade) {
+		this.codigoMotivoPrioridade = codigoMotivoPrioridade;
+	}
+
+	public String getNomeMotivoPrioridade() {
+		return nomeMotivoPrioridade;
+	}
+
+	public void setNomeMotivoPrioridade(String nomeMotivoPrioridade) {
+		this.nomeMotivoPrioridade = nomeMotivoPrioridade;
+	}
+
+	public String getChaveAtentende() {
+		return chaveAtentende;
+	}
+
+	public void setChaveAtentende(String chaveAtentende) {
+		this.chaveAtentende = chaveAtentende;
+	}
+
+	public String getChaveAdministradorCarteira() {
+		return chaveAdministradorCarteira;
+	}
+
+	public void setChaveAdministradorCarteira(String chaveAdministradorCarteira) {
+		this.chaveAdministradorCarteira = chaveAdministradorCarteira;
+	}
+
+	public int getCodigoAgencia() {
+		return codigoAgencia;
+	}
+
+	public void setCodigoAgencia(int codigoAgencia) {
+		this.codigoAgencia = codigoAgencia;
+	}
+
+	public long getCodigoConta() {
+		return codigoConta;
+	}
+
+	public void setCodigoConta(long codigoConta) {
+		this.codigoConta = codigoConta;
+	}
+
+}
