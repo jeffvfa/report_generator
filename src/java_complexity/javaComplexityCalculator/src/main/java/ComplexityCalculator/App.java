@@ -14,23 +14,18 @@ import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 
 /**
  * App!
- *
  */
 public class App {
-    public String testfieldDecl;
-
     public static void main(String[] args) throws IOException {
         String filePath = "./src/examples/example5.txt";
         calculateJavaComplexity(filePath);
     }
 
-    public static String calculateJavaComplexity(String filePath) throws IOException {
+    public static String calculateJavaComplexity(String filePath) {
         String fileCode = null;
         try {
             fileCode = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
         } catch (Exception err) {
-            System.out.println(err.getMessage());
-            System.out.println("File not found");
             return "BAIXA";
         }
 
@@ -39,6 +34,7 @@ public class App {
         long numOfVariables = 0;
         long numOfApiExpositions = 0;
         long numOfIIBCalls = 0;
+        long numOfOpenedFiles = 0;
 
         // Count number of variables
         numOfVariables += compilationUnit.findAll(VariableDeclarationExpr.class).stream().count();
@@ -51,16 +47,28 @@ public class App {
                 numOfApiExpositions++;
         }
 
-        // Count Object IIB calls
+        // Count Object IIB calls and Files
         for (MethodCallExpr m : compilationUnit.findAll(MethodCallExpr.class)) {
             String dlc = m.toString();
             if (dlc.toUpperCase().contains("GETRESPOSTA()"))
                 numOfIIBCalls++;
+            if (dlc.toUpperCase().contains("FILES")
+                || dlc.toUpperCase().contains("NEW FILE")
+                || dlc.toUpperCase().contains("NEW FILEINPUTSTREAM")
+                || dlc.toUpperCase().contains("NEW FILEREADER")
+                || dlc.toUpperCase().contains("NEW RANDOMACCESSFILE"))
+                numOfOpenedFiles++;
         }
 
-        System.out.println("Num of variables: " + numOfVariables);
-        System.out.println("Num of API expositions: " + numOfApiExpositions);
-        System.out.println("Num of IIB calls: " + numOfIIBCalls);
-        return "BAIXA";
+        long totalComplexity = (numOfVariables / 5) + numOfApiExpositions + numOfIIBCalls + numOfOpenedFiles;
+        System.out.println("File and Total complexity: " + filePath + " -> " + totalComplexity);
+
+        if (totalComplexity <= 15)
+            return "BAIXA";
+        if (totalComplexity <= 30)
+            return "MEDIA";
+        if (totalComplexity <= 50)
+            return "ALTA";
+        return "MUITO ALTA";
     }
 }

@@ -9,6 +9,6 @@ dist
 coverage
 
 tags
-src/java_complexity/javaComplexityCalculator/target/classes
-src/java_complexity/javaComplexityCalculator/target/test-classes
+
+src/java_complexity/javaComplexityCalculator/target
 **/.vscode

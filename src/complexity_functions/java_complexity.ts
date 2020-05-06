@@ -10,11 +10,20 @@ const fullClassPath = path
 	.replace('dist', 'src');
 
 java.classpath.push(fullClassPath);
-const App: { calculateJavaComplexitySync(filepath: string): TFileComplexity } = java.import('ComplexityCalculator.App');
+let App: { calculateJavaComplexitySync(filepath: string): TFileComplexity } | null = null;
+try {
+	App = java.import('ComplexityCalculator.App');
+} catch (err) {
+	console.log(err);
+}
 const calculateJavaCompĺexity = (filepath: string): TFileComplexity => {
-	const result = App.calculateJavaComplexitySync(filepath);
+	try {
+		const result = App?.calculateJavaComplexitySync(filepath);
 
-	return result;
+		return result || 'BAIXA';
+	} catch (err) {
+		return 'BAIXA';
+	}
 };
 
 export default calculateJavaCompĺexity;
