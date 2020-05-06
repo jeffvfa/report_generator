@@ -1,0 +1,39 @@
+package br.com.bb.gatMonitoracao.api.v1.Atendimento.servicos;
+
+import br.com.bb.gatMonitoracao.api.v1.Atendimento.Entidades.UnidadeSubordinada;
+import br.com.bb.gatMonitoracao.api.v1.Atendimento.operacoes.OperacaoListarUnidadesVinculadas;
+import br.com.bb.iib.exceptions.BBException;
+import br.com.bb.mst.operacao.listarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacionalV1.bean.requisicao.DadosRequisicaoListarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacional;
+import br.com.bb.mst.operacao.listarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacionalV1.bean.resposta.DadosRespostaListarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacional;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AtendimentoFacade  {
+
+    @Inject
+    private OperacaoListarUnidadesVinculadas operacaoListarUnidadesVinculadas;
+
+    public List<UnidadeSubordinada> listarUnidadesSubordinadas(int codigoUor) throws BBException {
+        DadosRequisicaoListarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacional request = new DadosRequisicaoListarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacional();
+
+        request.setCodigoCombinacaoEstado(13);
+        request.setIndicadorOrdemLeitura("A");
+        request.setCodigoUorVinculador(codigoUor);
+
+        List<UnidadeSubordinada> listUnidadesSubordinadas = new ArrayList<>();
+        DadosRespostaListarVinculosHierarquicosInferioresUnidadeCodigoUnidadeOganizacional resposta = operacaoListarUnidadesVinculadas.listarUnidadesSubordinadas(request, 0);
+        resposta.getListaUorJurisdicionado().forEach((el) -> {
+            if (el.getCodigoItemArquiteturaVinculado() == 59) {
+                UnidadeSubordinada unidade = new UnidadeSubordinada();
+                unidade.setCodigoUor(el.getCodigoUorVinculado());
+                unidade.setCodigoDependencia(el.getCodigoPrefixoVinculado());
+                unidade.setNomeReduzido(el.getNomeUorReduzidoVinculado());
+                unidade.setCodigoSubordinada(el.getNumeroSubordinadoVinculado());
+                listUnidadesSubordinadas.add(unidade);
+            }
+        });
+        return listUnidadesSubordinadas;
+    }
+}
