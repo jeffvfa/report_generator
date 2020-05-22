@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -22,11 +23,25 @@ public class App {
         String filePath = "src/examples/example8.txt";
         calculateJavaComplexity(filePath);
     }
+    private static String readLineByLineJava8(String filePath)
+    {
+        StringBuilder contentBuilder = new StringBuilder();
 
+        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
+        {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return contentBuilder.toString();
+    }
     public static String calculateJavaComplexity(String filePath) {
         String fileCode = null;
         try {
-            fileCode = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+            fileCode = readLineByLineJava8(filePath);
         } catch (Exception err) {
             return "BAIXA";
         }
