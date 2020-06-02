@@ -145,7 +145,7 @@ runReportGenerator() {
   cd "$WORK_DIR"
   npm run build;
   node ./dist/report_generator.js "$root_directory" "$task_list";
-  xdg-open ./output ;
+  xdg-open ./output || gio open ./output || gnome-open ./output;
 }
 
 # remove arquivos antigos que estejam no diretorio de output
