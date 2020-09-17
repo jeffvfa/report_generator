@@ -31,7 +31,7 @@ const formatCommitsToTaskList = (commits: IGitLogOutput[], retrieveCategoryFromF
     let initialTaskList: TTaskProperties = {};
     taskListinput.length > 0 && taskListinput.forEach(el => initialTaskList[el] = []);
     return commits.reduce<TTaskProperties>((acc, y) => {
-        let task = y.message.substr(5, 7);
+        let task = (y.message.substr(5, 7).match(/\d+/g) || [])[0] || "";
         const projectPath = y.directory || '';
 
         if (taskListinput.length > 0) {
