@@ -111,23 +111,23 @@
     },
     "TEST": {
         "A": "Criação de objeto de teste automatizado",
-        "M": "Criação de objeto de teste automatizado",
+        "M": "Alteração de objeto de teste automatizado",
         "TASK_NUMBER_A": "5.10.18",
-        "TASK_NUMBER_M": "5.10.18",
+        "TASK_NUMBER_M": "5.10.21",
         "BAIXA": {
             "description": "N/A",
             "USTBB_A": 8.0,
-            "USTBB_M": 8.0
+            "USTBB_M": 4.0
         },
         "MEDIA": {
             "description": "N/A",
             "USTBB_A": 8.0,
-            "USTBB_M": 8.0
+            "USTBB_M": 4.0
         },
         "ALTA": {
             "description": "N/A",
             "USTBB_A": 8.0,
-            "USTBB_M": 8.0
+            "USTBB_M": 4.0
         }
     },
     "OUTRO": {
