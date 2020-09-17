@@ -38,4 +38,10 @@ To use report_generator your commit messages must be written on the format bello
 OBS.: Your path must contain '/' in the end.
 Wrong path "/kdi/git"
 Correct path "/kdi/git/"
+
+Wrong path /home/myuser/Documents/Projects
+Correct path path /home/myuser/Documents/Projects/
+
+Wrong path /home/myuser/meus_repositorios
+Correct path path /home/myuser/meus_repositorios/
 ```
