@@ -13,7 +13,7 @@ Generates the monthly work reports for the company Stefanini
 ### How to install
 
 ```
-$ sudo apt instal build-essential
+$ sudo apt install build-essential
 $ git clone https://github.com/igorsodre/report_generator.git
 $ cd report_generator
 $ npm install
