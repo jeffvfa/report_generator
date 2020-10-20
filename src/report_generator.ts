@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import fse from 'fs-extra';
+import 'colors';
 import path from 'path';
 import complexityCalculator from './complexity_functions/all_complexities_calculator';
 import retrieveCategoryFromFile from './object_transformers/retrieve_category_from_file';
@@ -10,14 +11,19 @@ import applyAddedVersusModifiedRuleToTaskList from './object_transformers/apply_
 import calculateComplexityForTaskList from './object_transformers/calculate_complexity_for_task_list';
 import generateReport from './object_transformers/generate_report_from_task_list';
 
-export const main = (jsonFilesDirectory: string = 'output', rootDirectory: string, taskListInput: string[] = []): void => {
+export const main = (
+	jsonFilesDirectory: string = 'output',
+	rootDirectory: string,
+	taskListInput: string[] = [],
+): void => {
 	console.log('Iniciando Report Generator');
 	console.log('\n\n**** Parâmetros utilizados ****:\n');
 	console.log('Arquivo de log: ' + jsonFilesDirectory);
 	console.log('Root directory: ' + rootDirectory);
 	console.log('Lista de tasks: ' + taskListInput.join(', ') || '[]');
 
-	console.log('\n\nIniciando Parse dos Arquivos no diretorio ' + jsonFilesDirectory);
+	// console.log('\n\nIniciando Parse dos Arquivos no diretorio ' + jsonFilesDirectory + '\n');
+	console.log(`\n\nIniciando Parse dos Arquivos no diretorio: ${jsonFilesDirectory}\n`.bgGreen);
 
 	let commits: IGitLogOutput[] = [];
 	const files = fs.readdirSync(jsonFilesDirectory);
@@ -36,28 +42,32 @@ export const main = (jsonFilesDirectory: string = 'output', rootDirectory: strin
 		}
 	});
 
-	console.log('Parse realizado com sucesso!!!');
+	console.log('Parse finalizado!');
 
-	console.log('\n\nbuilding task list');
+	console.log('\n\nbuilding task list...');
 	const taskList = formatCommitsToTaskList(commits, retrieveCategoryFromFile, taskListInput);
 	console.log('building Complete');
 
-	console.log('\n\nAppying AddedVersusModified Rule to tasklist');
+	console.log('\n\nAppying AddedVersusModified Rule to tasklist...');
 	const ruledTaskList = applyAddedVersusModifiedRuleToTaskList(taskList);
 	console.log('Rule Appliance complete');
 
-	console.log('\n\nAppying Complexity calculation to tasklist');
+	console.log('\n\nAppying Complexity calculation to tasklist...');
 	const calculatedTaskList = calculateComplexityForTaskList(ruledTaskList, complexityCalculator);
 	console.log('Rule Appliance complete');
 	fse.outputFile(
 		'output/filesWithCalculatedComplexities.json',
 		JSON.stringify(calculatedTaskList, null, '\t'),
-		(err) => console.log(err),
+		(err) => err && console.log(err),
 	);
 
 	const attributesRawData = fs.readFileSync('src/attribute_values.json', 'utf8');
+	const customCellsRawData = fs.readFileSync('src/additional_tasks.json', 'utf8');
 	const worksheetAttributes: TWorksheetAttributes = JSON.parse(attributesRawData);
-	generateReport(calculatedTaskList, worksheetAttributes);
+	const additionalTasks: TCustomCell[] = JSON.parse(customCellsRawData);
+
+	console.log('\n\nGenerating excel and txt files...');
+	generateReport(calculatedTaskList, worksheetAttributes, additionalTasks);
 };
 
 const rootDirectory = process.argv[2];

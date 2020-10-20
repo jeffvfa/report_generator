@@ -1,0 +1,47 @@
+[
+	{
+		"task": "5.17.6",
+		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
+		"atividade": "Tarefas correlacionadas à Implementação",
+		"descricao": "Participar em \"ritos\" de sala ágil",
+		"plataforma": "N/A",
+		"complexidade": "N/A",
+		"componente": "N/A",
+		"unidadeMedida": "Por participante em sprint quinzenal",
+		"descricaoComplexidade": "Atuar e colaborar em time ágil de forma sistemática, participando em atividades de planejamento e revisão de trabalhos, retrospectiva e apresentação de resultados.",
+		"qtd": 2,
+		"nomeArtefato": "task {0000000}; task {1111111}",
+		"ustibb": 19,
+		"ustibbTotal": 38
+	},
+	{
+		"task": "5.17.7",
+		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
+		"atividade": "Tarefas correlacionadas à Implementação",
+		"descricao": "Realizar refinamento de requisitos (sprint em andamento)",
+		"plataforma": "N/A",
+		"complexidade": "N/A",
+		"componente": "N/A",
+		"unidadeMedida": "Por participante em sprint quinzenal",
+		"descricaoComplexidade": "Executar atividades tais como pesquisas, estudos e discussões que consolidem requisitos, regras de negócio e/ou refinamento de história (s) referente (s) à sprint em andamento. Entrega: \"História(s) de Usuário\" e detalhamento de sua evolução registrados no ALM ou recurso similar.",
+		"qtd": 2,
+		"nomeArtefato": "task {0000000}; task {1111111}",
+		"ustibb": 17,
+		"ustibbTotal": 34
+	},
+	{
+		"task": "5.17.8",
+		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
+		"atividade": "Tarefas correlacionadas à Implementação",
+		"descricao": "Realizar refinamento de história(s) (próxima sprint)",
+		"plataforma": "N/A",
+		"complexidade": "N/A",
+		"componente": "N/A",
+		"unidadeMedida": "Por participante em sprint quinzenal",
+		"descricaoComplexidade": "Executar atividades tais como pesquisas, estudos e discussões que consolidem requisitos, regras de negócio e/ou refinamento de história (s) referente (s) à próxima sprint. Entrega: \"História(s) de Usuário\" e detalhamento de sua evolução registrados no ALM ou recurso similar",
+		"qtd": 2,
+		"nomeArtefato": "task {0000000}; task {1111111}",
+		"ustibb": 9,
+		"ustibbTotal": 18
+	}
+]

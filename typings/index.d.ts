@@ -1,10 +1,10 @@
 interface IGitLogOutput {
-    commit: string;
-    directory: string;
-    author: string;
-    date: string;
-    message: string;
-    files: string[];
+	commit: string;
+	directory: string;
+	author: string;
+	date: string;
+	message: string;
+	files: string[];
 }
 
 type TFileComplexity = 'BAIXA' | 'MEDIA' | 'ALTA';
@@ -12,59 +12,74 @@ type TFileCategory = 'TEST' | 'JAVA' | 'JAVASCRIPT' | 'KEY_VALUE' | 'CSS' | 'HTM
 type TDiffType = 'M' | 'A';
 
 type TTxtArrayCell = {
-    description: string;
-    fileList: { [key in TFileComplexity]?: string[] };
+	description: string;
+	fileList: { [key in TFileComplexity]?: string[] };
 };
 type TTxtStructure = {
-    [key: string]: TTxtArrayCell;
-}
+	[key: string]: TTxtArrayCell;
+};
 type TWorksheetComplexityCell = {
-    description: string;
-    USTBB_A: number;
-    USTBB_M: number;
+	description: string;
+	USTBB_A: number;
+	USTBB_M: number;
 };
 type TWorksheetCell = {
-    A: string;
-    M: string;
-    TASK_NUMBER_A: string;
-    TASK_NUMBER_M: string;
-    BAIXA: TWorksheetComplexityCell;
-    MEDIA: TWorksheetComplexityCell;
-    ALTA: TWorksheetComplexityCell;
+	A: string;
+	M: string;
+	TASK_NUMBER_A: string;
+	TASK_NUMBER_M: string;
+	BAIXA: TWorksheetComplexityCell;
+	MEDIA: TWorksheetComplexityCell;
+	ALTA: TWorksheetComplexityCell;
+};
+type TCustomCell = {
+	task: string;
+	disciplina: string;
+	atividade: string;
+	descricao: string;
+	plataforma: string;
+	complexidade: string;
+	componente: string;
+	unidadeMedida: string;
+	descricaoComplexidade: string;
+	qtd: number;
+	nomeArtefato: string;
+	ustibb: number;
+	ustibbTotal: number;
 };
 type TWorksheetAttributes = {
-    [key in TFileCategory]?: TWorksheetCell;
+	[key in TFileCategory]?: TWorksheetCell;
 };
 type TWorksheetHeader =
-    'index'
-    | 'Tarefa'
-    | 'Disciplina'
-    | 'Atividade'
-    | 'Descricao/Artefato'
-    | 'Plataforma'
-    | 'Complexidade'
-    | 'Componente/Item'
-    | 'Unidade de medida'
-    | 'Descricao da complexidade'
-    | 'Qtd'
-    | 'Nome do Artefato/Objeto'
-    | 'USTIBB'
-    | 'USTIBB Total';
+	| 'index'
+	| 'Tarefa'
+	| 'Disciplina'
+	| 'Atividade'
+	| 'Descricao/Artefato'
+	| 'Plataforma'
+	| 'Complexidade'
+	| 'Componente/Item'
+	| 'Unidade de medida'
+	| 'Descricao da complexidade'
+	| 'Qtd'
+	| 'Nome do Artefato/Objeto'
+	| 'USTIBB'
+	| 'USTIBB Total';
 type TWorksheetRow = {
-    [key in TWorksheetHeader]: any;
+	[key in TWorksheetHeader]: any;
 };
 
 type TComplexityCalculator = {
-    [key in TFileCategory]?: (arg0: string) => TFileComplexity;
-}
+	[key in TFileCategory]?: (arg0: string) => TFileComplexity;
+};
 
 type TFileProperties = {
-    diffType: TDiffType;
-    filePath: string;
-    category: TFileCategory;
-    complexity: TFileComplexity;
-    rootDirectory: string;
+	diffType: TDiffType;
+	filePath: string;
+	category: TFileCategory;
+	complexity: TFileComplexity;
+	rootDirectory: string;
 };
 type TTaskProperties = {
-    [key: string]: TFileProperties[];
+	[key: string]: TFileProperties[];
 };

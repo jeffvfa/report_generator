@@ -35,6 +35,7 @@
 		"typescript-tslint-plugin": "^0.5.5"
 	},
 	"dependencies": {
+		"colors": "^1.4.0",
 		"css": "^3.0.0",
 		"exceljs": "^3.8.0",
 		"fs-extra": "^8.1.0",

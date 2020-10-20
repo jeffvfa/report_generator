@@ -51,6 +51,41 @@ const setDefaultConfigForWorkBookAndGetSheet = (workbook: Workbook): Worksheet =
 	return sheet;
 };
 
+const addRowToSheet = (
+	s: Worksheet,
+	index: number,
+	task: string,
+	disciplina: string,
+	atividade: string,
+	artefatoText: string,
+	plataforma: string,
+	comp: string,
+	item: string,
+	unidadeMedida: string,
+	compText: string,
+	qtd: number | string,
+	nomeObj: string,
+	ustibb: number | string,
+	totalUstibb: any,
+) => {
+	s.addRow({
+		index: index,
+		Tarefa: task,
+		Disciplina: disciplina,
+		Atividade: atividade,
+		'Descricao/Artefato': artefatoText,
+		Plataforma: plataforma,
+		Complexidade: comp,
+		'Componente/Item': item,
+		'Unidade de medida': unidadeMedida,
+		'Descricao da complexidade': compText,
+		Qtd: qtd,
+		'Nome do Artefato/Objeto': nomeObj,
+		USTIBB: ustibb,
+		'USTIBB Total': totalUstibb,
+	} as TWorksheetRow);
+};
+
 const setDefaultStyleForWorkSheet = (sheet: Worksheet): void => {
 	const defaultAlignment: Partial<Alignment> = { vertical: 'middle', horizontal: 'center', wrapText: true };
 	const defaultBlueCell: Fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '205696' } };
@@ -84,6 +119,7 @@ const buildExcelReport = (
 	calculatedTaskList: TTaskProperties,
 	sheet: ExcelJS.Worksheet,
 	worksheetAttributes: TWorksheetAttributes,
+	additionalTasks: TCustomCell[],
 ): void => {
 	let linecounter = 1;
 	let totalPoints = 0;
@@ -154,42 +190,38 @@ const buildExcelReport = (
 			});
 		});
 	});
-	sheet.addRow({
-		index: linecounter++,
-		Tarefa: '5.17.6',
-		Disciplina: 'IMPLEMENTAÇÃO DE SOFTWARE',
-		Atividade: 'Tarefas correlacionadas à Implementação',
-		'Descricao/Artefato': 'Participar em "ritos" de sala ágil',
-		Plataforma: 'N/A',
-		Complexidade: 'N/A',
-		'Componente/Item': 'N/A',
-		'Unidade de medida': 'Por participante em sprint quinzenal',
-		'Descricao da complexidade':
-			'Atuar e colaborar em time ágil de forma sistemática, participando em atividades de planejamento e revisão de trabalhos, retrospectiva e apresentação de resultados. ',
-		Qtd: 2,
-		'Nome do Artefato/Objeto': `task {0000000}; task {1111111}`,
-		USTIBB: 19,
-		'USTIBB Total': 38,
-	} as TWorksheetRow);
-	sheet.addRow({
-		index: '',
-		Tarefa: '',
-		Disciplina: '',
-		Atividade: '',
-		'Descricao/Artefato': '',
-		Plataforma: '',
-		Complexidade: '',
-		'Componente/Item': '',
-		'Unidade de medida': '',
-		'Descricao da complexidade': '',
-		Qtd: '',
-		'Nome do Artefato/Objeto': ``,
-		USTIBB: 'Total (USTIBB)',
-		'USTIBB Total': { formula: `=SUM(N1:N${linecounter})`, result: totalPoints + 38 },
-	} as TWorksheetRow);
+	additionalTasks.forEach((t) => {
+		addRowToSheet(
+			sheet,
+			linecounter++,
+			t.task,
+			t.disciplina,
+			t.atividade,
+			t.descricao,
+			t.plataforma,
+			t.complexidade,
+			t.componente,
+			t.unidadeMedida,
+			t.descricaoComplexidade,
+			t.qtd,
+			t.nomeArtefato,
+			t.ustibb,
+			t.ustibbTotal,
+		);
+		totalPoints += t.ustibbTotal;
+	});
+
+	addRowToSheet(sheet, linecounter, '', '', '', '', '', '', '', '', '', '', ``, 'Total (USTIBB)', {
+		formula: `=SUM(N1:N${linecounter})`,
+		result: totalPoints,
+	});
 };
 
-const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes: TWorksheetAttributes): string => {
+const buildTxtReport = (
+	calculatedTaskList: TTaskProperties,
+	worksheetAttributes: TWorksheetAttributes,
+	additionalTasks: TCustomCell[],
+): string => {
 	let fileStructure: TTxtStructure = {};
 	Object.keys(calculatedTaskList).forEach((k) => {
 		const fileList = calculatedTaskList[k];
@@ -252,8 +284,8 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 			});
 		});
 	});
-
-	let fileOutput = '5.17.6 - Participar em "ritos" de sala ágil\n{task1}\n{task2}\n\n';
+	// let fileOutput = '5.17.6 - Participar em "ritos" de sala ágil\n{task1}\n{task2}\n\n';
+	let fileOutput = additionalTasks.map((t) => `${t.task} - ${t.descricao} \n${t.nomeArtefato}\n\n`).join('');
 	Object.keys(fileStructure)
 		.sort()
 		.forEach((structureKey) => {
@@ -268,21 +300,31 @@ const buildTxtReport = (calculatedTaskList: TTaskProperties, worksheetAttributes
 	return fileOutput;
 };
 
-const generateReport = (calculatedTaskList: TTaskProperties, worksheetAttributes: TWorksheetAttributes) => {
+const generateReport = (
+	calculatedTaskList: TTaskProperties,
+	worksheetAttributes: TWorksheetAttributes,
+	additionalTasks: TCustomCell[] = [],
+) => {
 	const workbook: Workbook = new ExcelJS.Workbook();
 	const sheet = setDefaultConfigForWorkBookAndGetSheet(workbook);
 
-	buildExcelReport(calculatedTaskList, sheet, worksheetAttributes);
+	buildExcelReport(calculatedTaskList, sheet, worksheetAttributes, additionalTasks);
+	const txtReport = buildTxtReport(calculatedTaskList, worksheetAttributes, additionalTasks);
 
 	setDefaultStyleForWorkSheet(sheet);
 	workbook.xlsx
 		.writeBuffer()
 		.then((buffer) => {
-			fse.outputFile('output/OF_MES_NOME_SOBRENOME.xlsx', buffer, (err) => console.log(err));
+			fse.outputFile('output/OF_MES_NOME_SOBRENOME.xlsx', buffer, (err) => {
+				err && console.log(err);
+				!err && console.log('Excel file generated');
+			});
 		})
 		.then(() => {
-			const txtReport = buildTxtReport(calculatedTaskList, worksheetAttributes);
-			fse.outputFile('output/OF_MES_NOME_SOBRENOME.txt', txtReport, (err) => console.log(err));
+			fse.outputFile('output/OF_MES_NOME_SOBRENOME.txt', txtReport, (err) => {
+				err && console.log(err);
+				!err && console.log('Txt file generated');
+			});
 		});
 };
 
