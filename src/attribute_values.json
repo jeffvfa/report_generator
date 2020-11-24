@@ -47,19 +47,19 @@
         "TASK_NUMBER_A": "5.10.5",
         "TASK_NUMBER_M": "5.10.6",
         "BAIXA": {
-            "description": "Até 10 funções implementadas.",
-            "USTBB_A": 4.0,
-            "USTBB_M": 2.0
+            "description": " - ",
+            "USTBB_A": 5,
+            "USTBB_M": 3.5
         },
         "MEDIA": {
-            "description": "De 11 até 20 funções implementadas",
-            "USTBB_A": 8.0,
-            "USTBB_M": 4.0
+            "description": " - ",
+            "USTBB_A": 5,
+            "USTBB_M": 3.5
         },
         "ALTA": {
-            "description": "Acima de 20 funções implementadas",
-            "USTBB_A": 12.0,
-            "USTBB_M": 6.0
+            "description": " - ",
+            "USTBB_A": 5,
+            "USTBB_M": 3.5
         }
     },
     "KEY_VALUE": {
@@ -68,19 +68,19 @@
         "TASK_NUMBER_A": "5.10.7",
         "TASK_NUMBER_M": "5.10.8",
         "BAIXA": {
-            "description": "Até 100 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 2.0,
-            "USTBB_M": 1.0
+            "description": " - ",
+            "USTBB_A": 2.5,
+            "USTBB_M": 1.5
         },
         "MEDIA": {
-            "description": "De 101 até 300 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 4.0,
-            "USTBB_M": 2.0
+            "description": " - ",
+            "USTBB_A": 2.5,
+            "USTBB_M": 1.5
         },
         "ALTA": {
-            "description": "Acima de 300 pares de chaves/valores ou por tag de xml.",
-            "USTBB_A": 6.0,
-            "USTBB_M": 3.0
+            "description": " - ",
+            "USTBB_A": 2.5,
+            "USTBB_M": 1.5
         }
     },
     "JAVA": {
@@ -89,24 +89,24 @@
         "TASK_NUMBER_A": "5.10.9",
         "TASK_NUMBER_M": "5.10.10",
         "BAIXA": {
-            "description": "Quantidade até 15 dos itens de complexidade elencados abaixo:\n- Grupos de até 5 variáveis de entrada/saída para validação (por grupo de variáveis);\n- Exposição de API Rest (por exposição);\n- Chamadas externas ao objeto (IIB, GTR, WS, BD, JMS, Socket, HTTP Client, API Rest , LDAP, Tibco Rendezvous, Apache Kafka) (por chamada);\n- Tratamento de arquivos (por arquivo);\n- Instruções SQL (DML - Data Manipulation Language) ou chamadas de Frameworks ou APIs que abstraem estas instruções, tais como JPA, Hibernate, etc.(por instrução ou chamada);\n- Codificações de threads (por thread).\n - Criação e configuração de módulos de autenticação para gerenciadores de acesso (por módulo).",
-            "USTBB_A": 4,
-            "USTBB_M": 2
+            "description": " - ",
+            "USTBB_A": 5.5,
+            "USTBB_M": 3.5
         },
         "MEDIA": {
-            "description": "Quantidade entre 15 e 30 dos itens de complexidade elencados abaixo:\n- Grupos de até 5 variáveis de entrada/saída para validação (por grupo de variáveis);\n- Exposição de API Rest (por exposição);\n- Chamadas externas ao objeto (IIB, GTR, WS, BD, JMS, Socket, HTTP Client, API Rest , LDAP, Tibco Rendezvous, Apache Kafka) (por chamada);\n- Tratamento de arquivos (por arquivo);\n- Instruções SQL (DML - Data Manipulation Language) ou chamadas de Frameworks ou APIs que abstraem estas instruções, tais como JPA, Hibernate, etc.(por instrução ou chamada);\n- Codificações de threads (por thread).\n - Criação e configuração de módulos de autenticação para gerenciadores de acesso (por módulo).",
-            "USTBB_A": 12,
-            "USTBB_M": 6
+            "description": " - ",
+            "USTBB_A": 5.5,
+            "USTBB_M": 3.5
         },
         "ALTA": {
-            "description": "Quantidade entre 30 e 50 dos itens de complexidade elencados abaixo:\n- Grupos de até 5 variáveis de entrada/saída para validação (por grupo de variáveis);\n- Exposição de API Rest (por exposição);\n- Chamadas externas ao objeto (IIB, GTR, WS, BD, JMS, Socket, HTTP Client, API Rest , LDAP, Tibco Rendezvous, Apache Kafka) (por chamada);\n- Tratamento de arquivos (por arquivo);\n- Instruções SQL (DML - Data Manipulation Language) ou chamadas de Frameworks ou APIs que abstraem estas instruções, tais como JPA, Hibernate, etc.(por instrução ou chamada);\n- Codificações de threads (por thread).\n - Criação e configuração de módulos de autenticação para gerenciadores de acesso (por módulo).",
-            "USTBB_A": 20,
-            "USTBB_M": 10
+            "description": " - ",
+            "USTBB_A": 5.5,
+            "USTBB_M": 3.5
         },
         "MUITO ALTA": {
-            "description": "Quantidade acima de 50 dos itens de complexidade elencados abaixo:\n- Grupos de até 5 variáveis de entrada/saída para validação (por grupo de variáveis);\n- Exposição de API Rest (por exposição);\n- Chamadas externas ao objeto (IIB, GTR, WS, BD, JMS, Socket, HTTP Client, API Rest , LDAP, Tibco Rendezvous, Apache Kafka) (por chamada);\n- Tratamento de arquivos (por arquivo);\n- Instruções SQL (DML - Data Manipulation Language) ou chamadas de Frameworks ou APIs que abstraem estas instruções, tais como JPA, Hibernate, etc.(por instrução ou chamada);\n- Codificações de threads (por thread).\n - Criação e configuração de módulos de autenticação para gerenciadores de acesso (por módulo).",
-            "USTBB_A": 20,
-            "USTBB_M": 10
+            "description": " - ",
+            "USTBB_A": 5.5,
+            "USTBB_M": 3.5
         }
     },
     "TEST": {

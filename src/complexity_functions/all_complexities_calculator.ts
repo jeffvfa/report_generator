@@ -9,11 +9,11 @@ let complexityCalculator: TComplexityCalculator = {};
 
 complexityCalculator['TEST'] = unimplementedComplexity; // All tests are the same now
 
-complexityCalculator['JAVA'] = calculateJavaCompĺexity;
+complexityCalculator['JAVA'] = unimplementedComplexity;
 
-complexityCalculator['JAVASCRIPT'] = calculateTypescriptComplexity; // Works for both typescript and javascript
+complexityCalculator['JAVASCRIPT'] = unimplementedComplexity; // Works for both typescript and javascript
 
-complexityCalculator['KEY_VALUE'] = calculateKeyValueComplexity; // Workd for both XML and JSON
+complexityCalculator['KEY_VALUE'] = unimplementedComplexity; // Workd for both XML and JSON
 
 complexityCalculator['CSS'] = calculateCSSComplexity;
 
