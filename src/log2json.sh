@@ -93,7 +93,7 @@ getLogsFromDirectory() {
   cd "$log_directory"
   log_format_string="%n{%n \"commit\": \"%H\",%n \"directory\":\"$(pwd)/\",%n \"author\": \"%an <%ae>\",%n \"date\": \"%ad\",%n \"message\": \"%f\":FILES:"
 
-  git log --name-status --max-count=1000 --author="$author_name" --date=short \
+  git log --name-status --max-count=1000 --author="$author_name" --date=short --since="3 months ago" \
     --pretty=format:"$log_format_string"|
     perl -ne '
           BEGIN{print "["};
