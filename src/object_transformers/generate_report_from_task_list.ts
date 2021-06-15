@@ -140,7 +140,7 @@ const buildExcelReport = (
 					(file) => file.category === category && file.complexity === cmp && file.diffType === 'A',
 				);
 				if (filesToPutTogether.length) {
-					const fileNames = filesToPutTogether.map((f) => f.filePath.replace(f.rootDirectory, ''));
+					const fileNames = filesToPutTogether.map((f) => f.filePath.split('#')[0].replace(f.rootDirectory, ''));
 					const points = worksheetAttributes[category]![cmp].USTBB_A * fileNames.length;
 					totalPoints += points;
 					sheet.addRow({
