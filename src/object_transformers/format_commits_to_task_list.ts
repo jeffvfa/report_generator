@@ -14,7 +14,7 @@ const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategor
         // build file objects
         .map(el => {
             let elSplited = el.split(' ');
-            const filePath = projectPath + elSplited[1];
+            const filePath = projectPath + elSplited[1] + '#' + y.commit;
 
             return {
                 diffType: elSplited[0],
