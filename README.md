@@ -7,6 +7,7 @@ Generates the monthly work reports for the company Stefanini
 - Node.js version 12 or above;
 - perl verions 5 or above
 - jdk 8 or above
+- varible JAVA_HOME configure -$ sudo apt install openjdk-8-jdk-headless
 - git
 - bash
 
@@ -14,7 +15,7 @@ Generates the monthly work reports for the company Stefanini
 
 ```
 $ sudo apt install build-essential
-$ git clone https://github.com/igorsodre/report_generator.git
+$ git clone https://github.com/jeffvfa/report_generator
 $ cd report_generator
 $ npm install
 $ chmod u+x generate-report
