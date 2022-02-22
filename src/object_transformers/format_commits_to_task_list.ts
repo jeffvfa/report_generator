@@ -4,6 +4,9 @@ import { arrayUnique } from "../helpers/Array.helper";
 
 const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategoryFromFile: (arg0: string) => TFileCategory | undefined): TFileProperties[] => {
     const projectname = projectPath.split('/').filter(Boolean).pop();
+
+    console.log('IGitLogOutput', y);
+    
     return (y.files || [])
         // remove renamed and deleted files
         .filter(el => {
@@ -14,7 +17,10 @@ const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategor
         // build file objects
         .map(el => {
             let elSplited = el.split(' ');
-            const filePath = projectPath + elSplited[1] + '#' + y.commit.slice(0,10);
+            let task = (y.message.substr(5, 7).match(/\d+/g) || [])[0] || "";
+            console.log('IGitLogOutput recuperada', task);
+
+            const filePath =  'Task: '+ task +' '+ projectPath + elSplited[1] + '#' + y.commit.slice(0,10);
 
             return {
                 diffType: elSplited[0],
@@ -32,6 +38,7 @@ const formatCommitsToTaskList = (commits: IGitLogOutput[], retrieveCategoryFromF
     taskListinput.length > 0 && taskListinput.forEach(el => initialTaskList[el] = []);
     return commits.reduce<TTaskProperties>((acc, y) => {
         let task = (y.message.substr(5, 7).match(/\d+/g) || [])[0] || "";
+
         const projectPath = y.directory || '';
 
         if (taskListinput.length > 0) {

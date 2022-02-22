@@ -48,4 +48,6 @@ Correct path: "/home/myuser/Documents/Projects/"
 
 Wrong path: "/home/myuser/meus_repositorios"
 Correct path: "/home/myuser/meus_repositorios/"
+
+Include number task begin log for line
 ```
