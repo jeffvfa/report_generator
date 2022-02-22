@@ -4,9 +4,7 @@ import { arrayUnique } from "../helpers/Array.helper";
 
 const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategoryFromFile: (arg0: string) => TFileCategory | undefined): TFileProperties[] => {
     const projectname = projectPath.split('/').filter(Boolean).pop();
-
-    console.log('IGitLogOutput', y);
-    
+   
     return (y.files || [])
         // remove renamed and deleted files
         .filter(el => {
@@ -18,7 +16,6 @@ const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategor
         .map(el => {
             let elSplited = el.split(' ');
             let task = (y.message.substr(5, 7).match(/\d+/g) || [])[0] || "";
-            console.log('IGitLogOutput recuperada', task);
 
             const filePath =  'Task: '+ task +' '+ projectPath + elSplited[1] + '#' + y.commit.slice(0,10);
 
