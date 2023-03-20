@@ -17,7 +17,7 @@ const buildFileObjects = (y: IGitLogOutput, projectPath: string, retrieveCategor
             let elSplited = el.split(' ');
             let task = (y.message.substr(5, 7).match(/\d+/g) || [])[0] || "";
 
-            const filePath =  'Task: '+ task +' '+ projectPath + elSplited[1] + '#' + y.commit.slice(0,10);
+            const filePath = projectPath + elSplited[1] + '#' + y.commit.slice(0,10);
 
             return {
                 diffType: elSplited[0],
