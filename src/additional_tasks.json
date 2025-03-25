@@ -1,6 +1,6 @@
 [
 	{
-		"task": "5.17.6",
+		"task": "5.31.1",
 		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
 		"atividade": "Tarefas correlacionadas à Implementação",
 		"descricao": "Participar em \"ritos\" de sala ágil",
@@ -15,7 +15,7 @@
 		"ustibbTotal": 38
 	},
 	{
-		"task": "5.17.7",
+		"task": "5.31.2",
 		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
 		"atividade": "Tarefas correlacionadas à Implementação",
 		"descricao": "Realizar refinamento de requisitos (sprint em andamento)",
@@ -30,7 +30,7 @@
 		"ustibbTotal": 34
 	},
 	{
-		"task": "5.17.8",
+		"task": "5.31.3",
 		"disciplina": "IMPLEMENTAÇÃO DE SOFTWARE",
 		"atividade": "Tarefas correlacionadas à Implementação",
 		"descricao": "Realizar refinamento de história(s) (próxima sprint)",
